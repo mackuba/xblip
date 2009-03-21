@@ -8,9 +8,12 @@
 
 #import "XBlipViewController.h"
 
+@interface XBlipViewController ()
+- (void) sendMessage;
+- (void) scrollTextViewToBottom;
+@end
+
 @implementation XBlipViewController
-
-
 
 /*
 // The designated initializer. Override to perform setup that is required before the view is loaded.
@@ -45,6 +48,27 @@
 }
 */
 
+- (IBAction) blipButtonClicked {
+  [self sendMessage];
+}
+
+- (BOOL) textFieldShouldReturn: (UITextField *) textField {
+  [self sendMessage];
+  return YES;
+}
+
+- (void) sendMessage {
+  // TODO: send message
+  [newMessageField resignFirstResponder];
+  NSString *message = newMessageField.text;
+  messageLog.text = [messageLog.text stringByAppendingFormat: @"%@\n", message];
+  newMessageField.text = @"";
+  [self scrollTextViewToBottom];
+}
+
+- (void) scrollTextViewToBottom {
+  [messageLog scrollRangeToVisible: NSMakeRange(messageLog.text.length, 0)];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning]; // Releases the view if it doesn't have a superview
