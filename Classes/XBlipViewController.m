@@ -7,6 +7,7 @@
 //
 
 #import "XBlipViewController.h"
+#import "BlipConnection.h"
 
 @interface XBlipViewController ()
 - (void) sendMessage;
@@ -14,6 +15,11 @@
 @end
 
 @implementation XBlipViewController
+
+- (void) awakeFromNib {
+  // TODO: take password from a dialog
+  blip = [[BlipConnection alloc] initWithUsername: @"xblip" password: @"....." delegate: self];
+}
 
 /*
 // The designated initializer. Override to perform setup that is required before the view is loaded.
@@ -31,14 +37,10 @@
 }
 */
 
-
-/*
-// Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
-- (void)viewDidLoad {
-    [super viewDidLoad];
+- (void) viewDidLoad {
+  [super viewDidLoad];
+  [blip getDashboard];
 }
-*/
-
 
 /*
 // Override to allow orientations other than the default portrait orientation.
@@ -70,14 +72,40 @@
   [messageLog scrollRangeToVisible: NSMakeRange(messageLog.text.length, 0)];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning]; // Releases the view if it doesn't have a superview
-    // Release anything that's not essential, such as cached data
+- (void) didReceiveMemoryWarning {
+  [super didReceiveMemoryWarning]; // Releases the view if it doesn't have a superview
+  // Release anything that's not essential, such as cached data
 }
 
+- (void) requestFinishedWithResponse: (NSURLResponse *) response text: (NSString *) text {
+  messageLog.text = [messageLog.text stringByAppendingString: text];
+}
 
-- (void)dealloc {
-    [super dealloc];
+- (void) authenticationRequired {
+  UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"Login error"
+                                                  message: @"Invalid username or password."
+                                                 delegate: nil
+                                        cancelButtonTitle: @"OK"
+                                        otherButtonTitles: nil];
+  [alert show];
+  [alert release];
+}
+
+- (void) requestFailedWithError: (NSError *) error {
+  UIAlertView *alert = [[UIAlertView alloc] initWithTitle: [error localizedDescription]
+                                                  message: [error localizedFailureReason]
+                                                 delegate: nil
+                                        cancelButtonTitle: @"OK"
+                                        otherButtonTitles: nil];
+  [alert show];
+  [alert release];
+}
+
+- (void) dealloc {
+  [newMessageField dealloc];
+  [messageLog dealloc];
+  [blip dealloc];
+  [super dealloc];
 }
 
 @end

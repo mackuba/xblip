@@ -15,6 +15,8 @@
 		2899E5220DE3E06400AC0155 /* XBlipViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2899E5210DE3E06400AC0155 /* XBlipViewController.xib */; };
 		28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD733E0D9D9553002E5188 /* MainWindow.xib */; };
 		28D7ACF80DDB3853001CB0EB /* XBlipViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D7ACF70DDB3853001CB0EB /* XBlipViewController.m */; };
+		589AAC280F7561FA00E76C45 /* BlipConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 589AAC270F7561FA00E76C45 /* BlipConnection.m */; };
+		589AAC2D0F7572C500E76C45 /* NSDataMBBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = 589AAC2C0F7572C500E76C45 /* NSDataMBBase64.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +32,10 @@
 		28D7ACF70DDB3853001CB0EB /* XBlipViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XBlipViewController.m; sourceTree = "<group>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		32CA4F630368D1EE00C91783 /* XBlip_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XBlip_Prefix.pch; sourceTree = "<group>"; };
+		589AAC260F7561FA00E76C45 /* BlipConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlipConnection.h; sourceTree = "<group>"; };
+		589AAC270F7561FA00E76C45 /* BlipConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlipConnection.m; sourceTree = "<group>"; };
+		589AAC2B0F7572C500E76C45 /* NSDataMBBase64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSDataMBBase64.h; sourceTree = "<group>"; };
+		589AAC2C0F7572C500E76C45 /* NSDataMBBase64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSDataMBBase64.m; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -54,6 +60,10 @@
 				1D3623250D0F684500981E51 /* XBlipAppDelegate.m */,
 				28D7ACF60DDB3853001CB0EB /* XBlipViewController.h */,
 				28D7ACF70DDB3853001CB0EB /* XBlipViewController.m */,
+				589AAC260F7561FA00E76C45 /* BlipConnection.h */,
+				589AAC270F7561FA00E76C45 /* BlipConnection.m */,
+				589AAC2B0F7572C500E76C45 /* NSDataMBBase64.h */,
+				589AAC2C0F7572C500E76C45 /* NSDataMBBase64.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -164,6 +174,8 @@
 				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
 				1D3623260D0F684500981E51 /* XBlipAppDelegate.m in Sources */,
 				28D7ACF80DDB3853001CB0EB /* XBlipViewController.m in Sources */,
+				589AAC280F7561FA00E76C45 /* BlipConnection.m in Sources */,
+				589AAC2D0F7572C500E76C45 /* NSDataMBBase64.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

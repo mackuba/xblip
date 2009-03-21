@@ -8,12 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
+@class BlipConnection;
+
 @interface XBlipViewController : UIViewController <UITextFieldDelegate> {
   IBOutlet UITextField *newMessageField;
   IBOutlet UITextView *messageLog;
+  BlipConnection *blip;
 }
 
 - (IBAction) blipButtonClicked;
 
 @end
-

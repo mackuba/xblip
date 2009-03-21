@@ -1,15 +1,43 @@
 // !$*UTF8*$!
 {
+	1D3623250D0F684500981E51 /* XBlipAppDelegate.m */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {877, 685}}";
+			sepNavSelRange = "{0, 0}";
+			sepNavVisRange = "{0, 608}";
+			sepNavWindowFrame = "{{742, 215}, {924, 813}}";
+		};
+	};
 	1D6058900D05DD3D006BFB54 /* XBlip */ = {
 		activeExec = 0;
 		executables = (
 			589AAC030F7553D600E76C45 /* XBlip */,
 		);
 	};
+	28D7ACF60DDB3853001CB0EB /* XBlipViewController.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {877, 685}}";
+			sepNavSelRange = "{319, 0}";
+			sepNavVisRange = "{0, 362}";
+			sepNavWindowFrame = "{{84, 147}, {924, 813}}";
+		};
+	};
+	28D7ACF70DDB3853001CB0EB /* XBlipViewController.m */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {877, 1184}}";
+			sepNavSelRange = "{1369, 0}";
+			sepNavVisRange = "{718, 918}";
+			sepNavWindowFrame = "{{680, 166}, {924, 813}}";
+		};
+	};
 	29B97313FDCFA39411CA2CEA /* Project object */ = {
 		activeBuildConfigurationName = Debug;
 		activeExecutable = 589AAC030F7553D600E76C45 /* XBlip */;
+		activeSDKPreference = iphonesimulator2.2;
 		activeTarget = 1D6058900D05DD3D006BFB54 /* XBlip */;
+		addToTargets = (
+			1D6058900D05DD3D006BFB54 /* XBlip */,
+		);
 		codeSenseManager = 589AAC0E0F7553D900E76C45 /* Code sense */;
 		executables = (
 			589AAC030F7553D600E76C45 /* XBlip */,
@@ -20,9 +48,9 @@
 				PBXFileTableDataSourceColumnSortingKey = PBXFileDataSource_Filename_ColumnID;
 				PBXFileTableDataSourceColumnWidthsKey = (
 					20,
-					364,
+					138,
 					20,
-					48.16259765625,
+					48,
 					43,
 					43,
 					20,
@@ -37,8 +65,8 @@
 					PBXFileDataSource_Target_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 259347414;
-			PBXWorkspaceStateSaveDate = 259347414;
+			PBXPerProjectTemplateStateSaveDate = 259359497;
+			PBXWorkspaceStateSaveDate = 259359497;
 		};
 		sourceControlManager = 589AAC0D0F7553D900E76C45 /* Source Control */;
 		userBuildSettings = {
@@ -51,12 +79,13 @@
 		argumentStrings = (
 		);
 		autoAttachOnCrash = 1;
-		breakpointsEnabled = 1;
+		breakpointsEnabled = 0;
 		configStateDict = {
 		};
 		customDataFormattersEnabled = 1;
 		debuggerPlugin = GDBDebugging;
 		disassemblyDisplayState = 0;
+		dylibVariantSuffix = "";
 		enableDebugStr = 1;
 		environmentEntries = (
 		);
@@ -64,6 +93,8 @@
 		executableUserSymbolLevel = 0;
 		libgmallocEnabled = 0;
 		name = XBlip;
+		savedGlobals = {
+		};
 		sourceDirectories = (
 		);
 	};
