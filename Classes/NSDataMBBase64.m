@@ -1,9 +1,7 @@
 //
-//  NSDataMBBase64.m
-//  XBlip
-//
 // Downloaded from http://www.cocoadev.com/index.pl?BaseSixtyFour
 // Created by MiloBird - http://www.milobird.com/
+//
 
 #import "NSDataMBBase64.h"
 
