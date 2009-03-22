@@ -21,30 +21,45 @@
 - (NSString *) generateAuthenticationStringFromUsername: (NSString *) username password: (NSString *) password;
 @end
 
+
 @implementation BlipConnection
 
-@synthesize username;
+@synthesize username, delegate;
+
+- (id) init {
+  return [self initWithUsername: nil password: nil delegate: nil];
+}
 
 - (id) initWithUsername: (NSString *) aUsername
                password: (NSString *) aPassword
                delegate: (id) aDelegate {
   self = [super init];
   if (self) {
-    username = [aUsername copy];
-    password = [aPassword copy];
+    [self setUsername: aUsername password: aPassword];
     delegate = [aDelegate retain];
-    authenticationString = [[self generateAuthenticationStringFromUsername: username password: password] retain];
     lastMessageId = -1;
   }
   return self;
 }
 
+- (void) setUsername: (NSString *) aUsername password: (NSString *) aPassword {
+  [username autorelease];
+  [password autorelease];
+  username = [aUsername copy];
+  password = [aPassword copy];
+  authenticationString = [[self generateAuthenticationStringFromUsername: username password: password] retain];
+}
+
 - (NSString *) generateAuthenticationStringFromUsername: (NSString *) aUsername password: (NSString *) aPassword {
-  NSString *authString = [[NSString alloc] initWithFormat: @"%@:%@", aUsername, aPassword];
-  NSData *data = [authString dataUsingEncoding: NSUTF8StringEncoding];
-  NSString *encoded = [[NSString alloc] initWithFormat: @"Basic %@", [data base64Encoding]];
-  [authString release];
-  return encoded;
+  if (aUsername && aPassword) {
+    NSString *authString = [[NSString alloc] initWithFormat: @"%@:%@", aUsername, aPassword];
+    NSData *data = [authString dataUsingEncoding: NSUTF8StringEncoding];
+    NSString *encoded = [[NSString alloc] initWithFormat: @"Basic %@", [data base64Encoding]];
+    [authString release];
+    return encoded;
+  } else {
+    return nil;
+  }
 }
 
 - (void) getDashboard {
@@ -103,11 +118,13 @@
   request = [[NSMutableURLRequest alloc] initWithURL: url
                                          cachePolicy: NSURLRequestReloadIgnoringLocalCacheData
                                          timeoutInterval: 15];
+  [request setHTTPMethod: method];
   [request setValue: BLIP_API_VERSION forHTTPHeaderField: @"X-Blip-API"];
   [request setValue: USER_AGENT forHTTPHeaderField: @"User-Agent"];
   [request setValue: @"application/json" forHTTPHeaderField: @"Accept"];
-  [request setValue: authenticationString forHTTPHeaderField: @"Authorization"];
-  [request setHTTPMethod: method];
+  if (authenticationString) {
+    [request setValue: authenticationString forHTTPHeaderField: @"Authorization"];
+  }
   if (text && text.length > 0) {
     [request setHTTPBody: [text dataUsingEncoding: NSUTF8StringEncoding]];
     [request setValue: @"application/json" forHTTPHeaderField: @"Content-Type"];

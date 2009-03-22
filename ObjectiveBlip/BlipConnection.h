@@ -27,8 +27,10 @@
   NSTimer *monitorTimer;
 }
 
-@property (nonatomic, copy) NSString *username;
+@property (nonatomic, copy, readonly) NSString *username;
+@property (nonatomic, retain) id delegate;
 
+- (id) init;
 - (id) initWithUsername: (NSString *) username
                password: (NSString *) password
                delegate: (id) delegate;
