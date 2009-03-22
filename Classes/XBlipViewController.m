@@ -107,7 +107,6 @@
 }
 
 - (void) requestFinishedWithResponse: (NSURLResponse *) response text: (NSString *) text {
-  // TODO: refactor BlipConnection so that it knows which response matches which request
   NSArray *messages = [NSArray arrayWithJSONString: text];
   if (messages && messages.count > 0) {
     for (NSDictionary *object in [messages reverseObjectEnumerator]) {

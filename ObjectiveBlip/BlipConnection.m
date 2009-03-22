@@ -11,6 +11,11 @@
 #import "NSDictionary+BSJSONAdditions.h"
 #import "NSArray+BSJSONAdditions.h"
 
+
+// TODO: make classes for updates, users etc.
+// TODO: handle requests better - BlipConnection should remember which request matches which response
+//       and should return more meaningful results, e.g. an NSArray of Messages instead of a JSON string
+
 @interface BlipConnection ()
 - (void) sendRequestTo: (NSString *) path;
 - (void) sendPostRequestTo: (NSString *) path withText: (NSString *) text;
@@ -90,7 +95,6 @@
 }
 
 - (void) sendMessage: (NSString *) message {
-  // TODO: make classes for updates, users etc.
   NSLog(@"sending message: '%@'", message);
   NSDictionary *update = [[NSDictionary alloc] initWithObjectsAndKeys: message, @"body", nil];
   NSDictionary *content = [[NSDictionary alloc] initWithObjectsAndKeys: update, @"update", nil];
