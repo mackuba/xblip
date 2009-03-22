@@ -60,11 +60,12 @@
 }
 
 - (void) sendMessage {
-  // TODO: send message
   [newMessageField resignFirstResponder];
-  NSString *message = newMessageField.text;
+  [blip sendMessage: newMessageField.text];
+}
+
+- (void) appendMessageToLog: (NSString *) message {
   messageLog.text = [messageLog.text stringByAppendingFormat: @"%@\n", message];
-  newMessageField.text = @"";
   [self scrollTextViewToBottom];
 }
 
@@ -78,7 +79,15 @@
 }
 
 - (void) requestFinishedWithResponse: (NSURLResponse *) response text: (NSString *) text {
-  messageLog.text = [messageLog.text stringByAppendingString: text];
+  NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
+  // TODO: refactor BlipConnection so that it knows which response matches which request
+  if ([httpResponse statusCode] == 201) { // Created
+    [self appendMessageToLog: [NSString stringWithFormat: @"%@: %@", blip.username, newMessageField.text]];
+    newMessageField.text = @"";
+  } else {
+    [self appendMessageToLog: text];
+  }
+  [self scrollTextViewToBottom];
 }
 
 - (void) authenticationRequired {

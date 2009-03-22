@@ -10,12 +10,18 @@
 #import "NSDataMBBase64.h"
 
 @interface BlipConnection ()
-- (void) sendRequest: (NSString *) path;
+- (void) sendRequestTo: (NSString *) path;
+- (void) sendPostRequestTo: (NSString *) path withText: (NSString *) text;
+- (void) sendRequestTo: (NSString *) path
+                method: (NSString *) method
+              withText: (NSString *) text;
 - (void) closeCurrentConnection;
 - (NSString *) generateAuthenticationStringFromUsername: (NSString *) username password: (NSString *) password;
 @end
 
 @implementation BlipConnection
+
+@synthesize username;
 
 - (id) initWithUsername: (NSString *) aUsername
                password: (NSString *) aPassword
@@ -44,11 +50,29 @@
   if (lastMessageId > 0) {
     [path appendFormat: @"/since/%d", lastMessageId];
   }
-  [self sendRequest: path];
+  [self sendRequestTo: path];
   [path release];
 }
 
-- (void) sendRequest: (NSString *) path {
+- (void) sendMessage: (NSString *) message {
+  // TODO: use JSON encoding function
+  NSLog(@"sending message: '%@'", message);
+  NSString *content = [[NSString alloc] initWithFormat: @"{\"update\": {\"body\": \"%@\"}}", message];
+  [self sendPostRequestTo: @"/updates" withText: content];
+  [content release];
+}
+
+- (void) sendRequestTo: (NSString *) path {
+  [self sendRequestTo: path method: @"GET" withText: nil];
+}
+
+- (void) sendPostRequestTo: (NSString *) path withText: (NSString *) text {
+  [self sendRequestTo: path method: @"POST" withText: text];
+}
+
+- (void) sendRequestTo: (NSString *) path
+                method: (NSString *) method
+              withText: (NSString *) text {
   [self closeCurrentConnection];
   
   NSString *urlString = [BLIP_API_HOST stringByAppendingString: path];
@@ -64,6 +88,11 @@
   [request setValue: USER_AGENT forHTTPHeaderField: @"User-Agent"];
   [request setValue: @"application/json" forHTTPHeaderField: @"Accept"];
   [request setValue: authenticationString forHTTPHeaderField: @"Authorization"];
+  [request setHTTPMethod: method];
+  if (text && text.length > 0) {
+    [request setHTTPBody: [text dataUsingEncoding: NSUTF8StringEncoding]];
+    [request setValue: @"application/json" forHTTPHeaderField: @"Content-Type"];
+  }
 
   currentConnection = [[NSURLConnection alloc] initWithRequest: request delegate: self];
   if (currentText) {
@@ -79,7 +108,7 @@
 - (void) connection: (NSURLConnection *) connection didReceiveResponse: (NSURLResponse *) response {
   NSLog(@"received response");
   [currentResponse release];
-  currentResponse = response;
+  currentResponse = [response retain];
 }
 
 - (void) connection: (NSURLConnection *) connection didReceiveData: (NSData *) data {
@@ -94,6 +123,8 @@
   if ([delegate respondsToSelector: @selector(requestFinishedWithResponse:text:)]) {
     [delegate requestFinishedWithResponse: currentResponse text: currentText];
   }
+  [currentResponse release];
+  currentResponse = nil;
 }
 
 - (void) connection: (NSURLConnection *) connection didFailWithError: (NSError *) error {

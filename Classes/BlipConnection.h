@@ -26,10 +26,13 @@
   NSMutableString *currentText;
 }
 
+@property (nonatomic, copy) NSString *username;
+
 - (id) initWithUsername: (NSString *) username
                password: (NSString *) password
                delegate: (id) delegate;
 
 - (void) getDashboard;
+- (void) sendMessage: (NSString *) message;
 
 @end
