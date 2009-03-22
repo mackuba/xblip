@@ -88,6 +88,14 @@
 			sepNavWindowFrame = "{{752, 77}, {924, 813}}";
 		};
 	};
+	5828530D0F76CBC1003559EE /* LoginDialogController.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {877, 685}}";
+			sepNavSelRange = "{580, 0}";
+			sepNavVisRange = "{0, 688}";
+			sepNavWindowFrame = "{{15, 210}, {924, 813}}";
+		};
+	};
 	589AAC030F7553D600E76C45 /* XBlip */ = {
 		isa = PBXExecutable;
 		activeArgIndices = (

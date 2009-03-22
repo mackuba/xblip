@@ -16,6 +16,7 @@
 // TODO: get app version from configuration
 
 @interface BlipConnection : NSObject {
+  BOOL loggedIn;
   NSString *username;
   NSString *password;
   NSString *authenticationString;
@@ -29,14 +30,18 @@
 
 @property (nonatomic, copy, readonly) NSString *username;
 @property (nonatomic, retain) id delegate;
+@property (nonatomic) BOOL loggedIn;
+// TODO: BlipConnection should set the loggedIn variable itself
 
 - (id) init;
 - (id) initWithUsername: (NSString *) username
                password: (NSString *) password
                delegate: (id) delegate;
 
+- (void) authenticate;
 - (void) getDashboard;
 - (void) startMonitoringDashboard;
 - (void) sendMessage: (NSString *) message;
+- (void) setUsername: (NSString *) aUsername password: (NSString *) aPassword;
 
 @end

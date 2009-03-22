@@ -24,7 +24,7 @@
 
 @implementation BlipConnection
 
-@synthesize username, delegate;
+@synthesize username, delegate, loggedIn;
 
 - (id) init {
   return [self initWithUsername: nil password: nil delegate: nil];
@@ -33,11 +33,11 @@
 - (id) initWithUsername: (NSString *) aUsername
                password: (NSString *) aPassword
                delegate: (id) aDelegate {
-  self = [super init];
-  if (self) {
+  if (self = [super init]) {
     [self setUsername: aUsername password: aPassword];
     delegate = [aDelegate retain];
     lastMessageId = -1;
+    loggedIn = NO;
   }
   return self;
 }
@@ -60,6 +60,10 @@
   } else {
     return nil;
   }
+}
+
+- (void) authenticate {
+  [self sendRequestTo: @"/login"];
 }
 
 - (void) getDashboard {
@@ -167,6 +171,22 @@
   currentResponse = nil;
 }
 
+- (NSURLRequest *) connection: (NSURLConnection *) connection
+              willSendRequest: (NSURLRequest *) request
+             redirectResponse: (NSURLResponse *) response {
+  if (response) {
+    // don't follow redirects - just let the delegate know
+    NSLog(@"redirect");
+    if ([delegate respondsToSelector: @selector(requestRedirected)]) {
+      [delegate requestRedirected];
+    }
+    return nil;
+  } else {
+    // it's the request we're just sending, let it go
+    return request;
+  }
+}
+
 - (void) connection: (NSURLConnection *) connection didFailWithError: (NSError *) error {
   NSLog(@"error");
   if ([delegate respondsToSelector: @selector(requestFailedWithError:)]) {
@@ -178,8 +198,8 @@
 didReceiveAuthenticationChallenge: (NSURLAuthenticationChallenge *) challenge {
   NSLog(@"auth plz");
   // TODO: get rid of warnings on delegate methods
-  if ([delegate respondsToSelector: @selector(authenticationRequired)]) {
-    [delegate authenticationRequired];
+  if ([delegate respondsToSelector: @selector(authenticationRequired:)]) {
+    [delegate authenticationRequired: challenge];
   }
 }
 

@@ -7,6 +7,7 @@
 // ---------------------------------------------------------------------------------------
 
 #import "XBlipViewController.h"
+#import "LoginDialogController.h"
 #import "BlipConnection.h"
 #import "HTTPStatusCodes.h"
 #import "NSArray+BSJSONAdditions.h"
@@ -14,14 +15,16 @@
 @interface XBlipViewController ()
 - (void) prependMessageToLog: (NSString *) message;
 - (void) sendMessage;
+- (void) showLoginDialog;
 - (void) scrollTextViewToTop;
 @end
 
 @implementation XBlipViewController
 
 - (void) awakeFromNib {
-  // TODO: take password from a dialog
-  blip = [[BlipConnection alloc] initWithUsername: @"xblip" password: @"....." delegate: self];
+  // TODO: read login&password from a file, if possible
+  blip = [[BlipConnection alloc] init];
+  //blip = [[BlipConnection alloc] initWithUsername: @"xblip" password: @"....." delegate: self];
 }
 
 /*
@@ -40,10 +43,10 @@
 }
 */
 
-- (void) viewDidLoad {
-  [super viewDidLoad];
-  [blip getDashboard];
-  [blip startMonitoringDashboard];
+- (void) viewDidAppear: (BOOL) animated {
+  if (!blip.loggedIn) {
+    [self showLoginDialog];
+  }
 }
 
 /*
@@ -53,6 +56,24 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 */
+
+- (void) showLoginDialog {
+  loginController = [[LoginDialogController alloc] initWithNibName: @"LoginDialog"
+                                                            bundle: [NSBundle mainBundle]
+                                                              blip: blip
+                                                    mainController: self];
+  [self presentModalViewController: loginController animated: YES];
+}
+
+- (void) loginSuccessful {
+  [loginController dismissModalViewControllerAnimated: YES];
+  [loginController release];
+  loginController = nil;
+  blip.delegate = self;
+  blip.loggedIn = true;
+  [blip getDashboard];
+  [blip startMonitoringDashboard];
+}
 
 - (IBAction) blipButtonClicked {
   [self sendMessage];
@@ -101,7 +122,7 @@
   }
 }
 
-- (void) authenticationRequired {
+- (void) authenticationRequired: (NSURLAuthenticationChallenge *) challenge {
   UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"Login error"
                                                   message: @"Invalid username or password."
                                                  delegate: nil
@@ -109,6 +130,8 @@
                                         otherButtonTitles: nil];
   [alert show];
   [alert release];
+  [[challenge sender] cancelAuthenticationChallenge: challenge];
+  // TODO: show login dialog again?
 }
 
 - (void) requestFailedWithError: (NSError *) error {
@@ -122,9 +145,10 @@
 }
 
 - (void) dealloc {
-  [newMessageField dealloc];
-  [messageLog dealloc];
-  [blip dealloc];
+  [loginController release];
+  [newMessageField release];
+  [messageLog release];
+  [blip release];
   [super dealloc];
 }
 

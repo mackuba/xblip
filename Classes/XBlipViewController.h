@@ -9,13 +9,16 @@
 #import <UIKit/UIKit.h>
 
 @class BlipConnection;
+@class LoginDialogController;
 
 @interface XBlipViewController : UIViewController <UITextFieldDelegate> {
   IBOutlet UITextField *newMessageField;
   IBOutlet UITextView *messageLog;
   BlipConnection *blip;
+  LoginDialogController *loginController;
 }
 
 - (IBAction) blipButtonClicked;
+- (void) loginSuccessful;
 
 @end
