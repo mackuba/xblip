@@ -36,6 +36,7 @@
 		activeSDKPreference = iphonesimulator2.2;
 		activeTarget = 1D6058900D05DD3D006BFB54 /* XBlip */;
 		addToTargets = (
+			1D6058900D05DD3D006BFB54 /* XBlip */,
 		);
 		codeSenseManager = 589AAC0E0F7553D900E76C45 /* Code sense */;
 		executables = (

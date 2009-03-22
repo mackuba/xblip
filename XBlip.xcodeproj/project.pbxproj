@@ -15,6 +15,8 @@
 		2899E5220DE3E06400AC0155 /* XBlipViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2899E5210DE3E06400AC0155 /* XBlipViewController.xib */; };
 		28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD733E0D9D9553002E5188 /* MainWindow.xib */; };
 		28D7ACF80DDB3853001CB0EB /* XBlipViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D7ACF70DDB3853001CB0EB /* XBlipViewController.m */; };
+		582852390F767ABB003559EE /* NSDictionary+BSJSONAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 582852360F767ABB003559EE /* NSDictionary+BSJSONAdditions.m */; };
+		5828523A0F767ABB003559EE /* NSScanner+BSJSONAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 582852380F767ABB003559EE /* NSScanner+BSJSONAdditions.m */; };
 		589AAC280F7561FA00E76C45 /* BlipConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 589AAC270F7561FA00E76C45 /* BlipConnection.m */; };
 		589AAC2D0F7572C500E76C45 /* NSDataMBBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = 589AAC2C0F7572C500E76C45 /* NSDataMBBase64.m */; };
 /* End PBXBuildFile section */
@@ -33,6 +35,10 @@
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		32CA4F630368D1EE00C91783 /* XBlip_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XBlip_Prefix.pch; sourceTree = "<group>"; };
 		582851F80F76577A003559EE /* HTTPStatusCodes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTTPStatusCodes.h; sourceTree = "<group>"; };
+		582852350F767ABB003559EE /* NSDictionary+BSJSONAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+BSJSONAdditions.h"; sourceTree = "<group>"; };
+		582852360F767ABB003559EE /* NSDictionary+BSJSONAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+BSJSONAdditions.m"; sourceTree = "<group>"; };
+		582852370F767ABB003559EE /* NSScanner+BSJSONAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSScanner+BSJSONAdditions.h"; sourceTree = "<group>"; };
+		582852380F767ABB003559EE /* NSScanner+BSJSONAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSScanner+BSJSONAdditions.m"; sourceTree = "<group>"; };
 		589AAC260F7561FA00E76C45 /* BlipConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlipConnection.h; sourceTree = "<group>"; };
 		589AAC270F7561FA00E76C45 /* BlipConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlipConnection.m; sourceTree = "<group>"; };
 		589AAC2B0F7572C500E76C45 /* NSDataMBBase64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSDataMBBase64.h; sourceTree = "<group>"; };
@@ -81,6 +87,7 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				582852340F767A2A003559EE /* BSJSONAdditions */,
 				080E96DDFE201D6D7F000001 /* Classes */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
@@ -117,6 +124,17 @@
 				288765A40DF7441C002DB57D /* CoreGraphics.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		582852340F767A2A003559EE /* BSJSONAdditions */ = {
+			isa = PBXGroup;
+			children = (
+				582852350F767ABB003559EE /* NSDictionary+BSJSONAdditions.h */,
+				582852360F767ABB003559EE /* NSDictionary+BSJSONAdditions.m */,
+				582852370F767ABB003559EE /* NSScanner+BSJSONAdditions.h */,
+				582852380F767ABB003559EE /* NSScanner+BSJSONAdditions.m */,
+			);
+			path = BSJSONAdditions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -178,6 +196,8 @@
 				28D7ACF80DDB3853001CB0EB /* XBlipViewController.m in Sources */,
 				589AAC280F7561FA00E76C45 /* BlipConnection.m in Sources */,
 				589AAC2D0F7572C500E76C45 /* NSDataMBBase64.m in Sources */,
+				582852390F767ABB003559EE /* NSDictionary+BSJSONAdditions.m in Sources */,
+				5828523A0F767ABB003559EE /* NSScanner+BSJSONAdditions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
