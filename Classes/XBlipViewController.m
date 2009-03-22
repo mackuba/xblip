@@ -8,6 +8,7 @@
 
 #import "XBlipViewController.h"
 #import "BlipConnection.h"
+#import "HTTPStatusCodes.h"
 
 @interface XBlipViewController ()
 - (void) sendMessage;
@@ -81,7 +82,7 @@
 - (void) requestFinishedWithResponse: (NSURLResponse *) response text: (NSString *) text {
   NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
   // TODO: refactor BlipConnection so that it knows which response matches which request
-  if ([httpResponse statusCode] == 201) { // Created
+  if ([httpResponse statusCode] == HTTP_STATUS_CREATED) { // Created
     [self appendMessageToLog: [NSString stringWithFormat: @"%@: %@", blip.username, newMessageField.text]];
     newMessageField.text = @"";
   } else {
