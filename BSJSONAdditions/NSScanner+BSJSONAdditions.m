@@ -125,12 +125,11 @@ NSString *jsonNullString = @"null";
 					[chars appendString:@"\\"]; // debugger shows result as having two slashes, but final output is correct. Possible debugger error?
 					[self setScanLocation:([self scanLocation] + 2)];
 					break;
-				/* TODO: json.org docs mention this seq, so does yahoo, but not recognized here by xcode, note from crockford: not a required escape
-				case '\/':
-					[chars appendString:@"\/"];
+				// TODO: json.org docs mention this seq, so does yahoo, but not recognized here by xcode, note from crockford: not a required escape
+				case '/':
+					[chars appendString:@"/"];
 					[self setScanLocation:([self scanLocation] + 2)];
 					break;
-				*/
 				case 'b':
 					[chars appendString:@"\b"];
 					[self setScanLocation:([self scanLocation] + 2)];
@@ -157,7 +156,7 @@ NSString *jsonNullString = @"null";
 					/* START Updated code modified from code fix submitted by Bill Garrison - March 28, 2006 - http://www.standardorbit.net */
                     NSScanner *hexScanner = [NSScanner scannerWithString:digits];
                     NSString *verifiedHexDigits;
-                    NSCharacterSet *hexDigitSet = [NSCharacterSet characterSetWithCharactersInString:@"0123456789ABCDEF"];
+                    NSCharacterSet *hexDigitSet = [NSCharacterSet characterSetWithCharactersInString:@"0123456789ABCDEFabcdef"];
 					if (NO == [hexScanner scanCharactersFromSet:hexDigitSet intoString:&verifiedHexDigits])
                         return NO;
                     if (4 != [verifiedHexDigits length])
