@@ -9,6 +9,7 @@
 #import "XBlipViewController.h"
 #import "BlipConnection.h"
 #import "HTTPStatusCodes.h"
+#import "NSArray+BSJSONAdditions.h"
 
 @interface XBlipViewController ()
 - (void) sendMessage;
@@ -68,6 +69,7 @@
 - (void) appendMessageToLog: (NSString *) message {
   messageLog.text = [messageLog.text stringByAppendingFormat: @"%@\n", message];
   [self scrollTextViewToBottom];
+  // TODO: there's something wrong with scrolling to bottom if multiple messages are added at the same time
 }
 
 - (void) scrollTextViewToBottom {
@@ -86,9 +88,16 @@
     [self appendMessageToLog: [NSString stringWithFormat: @"%@: %@", blip.username, newMessageField.text]];
     newMessageField.text = @"";
   } else {
-    [self appendMessageToLog: text];
+    NSArray *messages = [NSArray arrayWithJSONString: text];
+    for (NSDictionary *object in messages) {
+      NSString *userPath = [object objectForKey: @"user_path"];
+      NSString *userName = [[userPath componentsSeparatedByString: @"/"] objectAtIndex: 2];
+      NSString *body = [object objectForKey: @"body"];
+      NSString *message = [[NSString alloc] initWithFormat: @"%@: %@", userName, body];
+      [self appendMessageToLog: message];
+      [message release];
+    }
   }
-  [self scrollTextViewToBottom];
 }
 
 - (void) authenticationRequired {
