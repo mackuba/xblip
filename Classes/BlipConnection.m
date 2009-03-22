@@ -8,6 +8,7 @@
 
 #import "BlipConnection.h"
 #import "NSDataMBBase64.h"
+#import "NSDictionary+BSJSONAdditions.h"
 
 @interface BlipConnection ()
 - (void) sendRequestTo: (NSString *) path;
@@ -55,11 +56,14 @@
 }
 
 - (void) sendMessage: (NSString *) message {
-  // TODO: use JSON encoding function
+  // TODO: make classes for updates, users etc.
   NSLog(@"sending message: '%@'", message);
-  NSString *content = [[NSString alloc] initWithFormat: @"{\"update\": {\"body\": \"%@\"}}", message];
-  [self sendPostRequestTo: @"/updates" withText: content];
+  NSDictionary *update = [[NSDictionary alloc] initWithObjectsAndKeys: message, @"body", nil];
+  NSDictionary *content = [[NSDictionary alloc] initWithObjectsAndKeys: update, @"update", nil];
+  NSLog(@"content string: '%@'", [content jsonStringValue]);
+  [self sendPostRequestTo: @"/updates" withText: [content jsonStringValue]];
   [content release];
+  [update release];
 }
 
 - (void) sendRequestTo: (NSString *) path {
