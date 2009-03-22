@@ -12,8 +12,10 @@
 #import "NSArray+BSJSONAdditions.h"
 
 @interface XBlipViewController ()
+- (void) appendMessageToLog: (NSString *) message;
+- (void) prependMessageToLog: (NSString *) message;
 - (void) sendMessage;
-- (void) scrollTextViewToBottom;
+- (void) scrollTextViewToTop;
 @end
 
 @implementation XBlipViewController
@@ -68,14 +70,17 @@
   }    
 }
 
-- (void) appendMessageToLog: (NSString *) message {
-  messageLog.text = [messageLog.text stringByAppendingFormat: @"%@\n", message];
-  [self scrollTextViewToBottom];
-  // TODO: there's something wrong with scrolling to bottom if multiple messages are added at the same time
+- (void) prependMessageToLog: (NSString *) message {
+  // TODO: is there a way to append a line without copying the whole contents of the view?
+  messageLog.text = [NSString stringWithFormat: @"%@\n%@", message, messageLog.text];
 }
 
-- (void) scrollTextViewToBottom {
-  [messageLog scrollRangeToVisible: NSMakeRange(messageLog.text.length, 0)];
+- (void) appendMessageToLog: (NSString *) message {
+  messageLog.text = [messageLog.text stringByAppendingFormat: @"%@\n", message];
+}
+
+- (void) scrollTextViewToTop {
+  [messageLog scrollRangeToVisible: NSMakeRange(0, 0)];
 }
 
 - (void) didReceiveMemoryWarning {
@@ -87,8 +92,9 @@
   NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
   // TODO: refactor BlipConnection so that it knows which response matches which request
   if ([httpResponse statusCode] == HTTP_STATUS_CREATED) { // Created
-    [self appendMessageToLog: [NSString stringWithFormat: @"%@: %@", blip.username, newMessageField.text]];
+    [self prependMessageToLog: [NSString stringWithFormat: @"%@: %@", blip.username, newMessageField.text]];
     newMessageField.text = @"";
+    [self scrollTextViewToTop];
   } else {
     NSArray *messages = [NSArray arrayWithJSONString: text];
     for (NSDictionary *object in messages) {
@@ -99,6 +105,7 @@
       [self appendMessageToLog: message];
       [message release];
     }
+    [self scrollTextViewToTop];
   }
 }
 
