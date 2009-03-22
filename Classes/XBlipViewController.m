@@ -63,7 +63,9 @@
 
 - (void) sendMessage {
   [newMessageField resignFirstResponder];
-  [blip sendMessage: newMessageField.text];
+  if (newMessageField.text.length > 0) {
+    [blip sendMessage: newMessageField.text];
+  }    
 }
 
 - (void) appendMessageToLog: (NSString *) message {
