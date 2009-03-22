@@ -22,7 +22,7 @@
 //  code useful. You can reach me at blakeseely@mac.com
 //
 
-#import <Cocoa/Cocoa.h>
+#import <UIKit/UIKit.h>
 
 extern NSString *jsonObjectStartString;
 extern NSString *jsonObjectEndString;
