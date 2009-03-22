@@ -48,7 +48,7 @@
 				PBXFileTableDataSourceColumnSortingKey = PBXFileDataSource_Filename_ColumnID;
 				PBXFileTableDataSourceColumnWidthsKey = (
 					20,
-					138,
+					421,
 					20,
 					48,
 					43,
@@ -70,6 +70,14 @@
 		};
 		sourceControlManager = 589AAC0D0F7553D900E76C45 /* Source Control */;
 		userBuildSettings = {
+		};
+	};
+	582852700F7687E1003559EE /* README.txt */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {877, 662}}";
+			sepNavSelRange = "{739, 0}";
+			sepNavVisRange = "{0, 739}";
+			sepNavWindowFrame = "{{752, 77}, {924, 813}}";
 		};
 	};
 	589AAC030F7553D600E76C45 /* XBlip */ = {

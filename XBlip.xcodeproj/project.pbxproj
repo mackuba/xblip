@@ -20,8 +20,8 @@
 		582852590F767E84003559EE /* NSArray+BSJSONAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 582852580F767E84003559EE /* NSArray+BSJSONAdditions.m */; };
 		582852710F7687E1003559EE /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = 582852700F7687E1003559EE /* README.txt */; };
 		582852730F7687EF003559EE /* GPL-LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = 582852720F7687EF003559EE /* GPL-LICENSE.txt */; };
-		589AAC280F7561FA00E76C45 /* BlipConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 589AAC270F7561FA00E76C45 /* BlipConnection.m */; };
-		589AAC2D0F7572C500E76C45 /* NSDataMBBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = 589AAC2C0F7572C500E76C45 /* NSDataMBBase64.m */; };
+		582852D50F769DB1003559EE /* BlipConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 582852D10F769DB1003559EE /* BlipConnection.m */; };
+		582852D60F769DB1003559EE /* NSDataMBBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = 582852D40F769DB1003559EE /* NSDataMBBase64.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,7 +37,6 @@
 		28D7ACF70DDB3853001CB0EB /* XBlipViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XBlipViewController.m; sourceTree = "<group>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		32CA4F630368D1EE00C91783 /* XBlip_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XBlip_Prefix.pch; sourceTree = "<group>"; };
-		582851F80F76577A003559EE /* HTTPStatusCodes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTTPStatusCodes.h; sourceTree = "<group>"; };
 		582852350F767ABB003559EE /* NSDictionary+BSJSONAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+BSJSONAdditions.h"; sourceTree = "<group>"; };
 		582852360F767ABB003559EE /* NSDictionary+BSJSONAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+BSJSONAdditions.m"; sourceTree = "<group>"; };
 		582852370F767ABB003559EE /* NSScanner+BSJSONAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSScanner+BSJSONAdditions.h"; sourceTree = "<group>"; };
@@ -46,10 +45,11 @@
 		582852580F767E84003559EE /* NSArray+BSJSONAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+BSJSONAdditions.m"; sourceTree = "<group>"; };
 		582852700F7687E1003559EE /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
 		582852720F7687EF003559EE /* GPL-LICENSE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "GPL-LICENSE.txt"; sourceTree = "<group>"; };
-		589AAC260F7561FA00E76C45 /* BlipConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlipConnection.h; sourceTree = "<group>"; };
-		589AAC270F7561FA00E76C45 /* BlipConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlipConnection.m; sourceTree = "<group>"; };
-		589AAC2B0F7572C500E76C45 /* NSDataMBBase64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSDataMBBase64.h; sourceTree = "<group>"; };
-		589AAC2C0F7572C500E76C45 /* NSDataMBBase64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSDataMBBase64.m; sourceTree = "<group>"; };
+		582852D00F769DB1003559EE /* BlipConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlipConnection.h; sourceTree = "<group>"; };
+		582852D10F769DB1003559EE /* BlipConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlipConnection.m; sourceTree = "<group>"; };
+		582852D20F769DB1003559EE /* HTTPStatusCodes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTTPStatusCodes.h; sourceTree = "<group>"; };
+		582852D30F769DB1003559EE /* NSDataMBBase64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSDataMBBase64.h; sourceTree = "<group>"; };
+		582852D40F769DB1003559EE /* NSDataMBBase64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSDataMBBase64.m; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -74,11 +74,6 @@
 				1D3623250D0F684500981E51 /* XBlipAppDelegate.m */,
 				28D7ACF60DDB3853001CB0EB /* XBlipViewController.h */,
 				28D7ACF70DDB3853001CB0EB /* XBlipViewController.m */,
-				589AAC260F7561FA00E76C45 /* BlipConnection.h */,
-				589AAC270F7561FA00E76C45 /* BlipConnection.m */,
-				589AAC2B0F7572C500E76C45 /* NSDataMBBase64.h */,
-				589AAC2C0F7572C500E76C45 /* NSDataMBBase64.m */,
-				582851F80F76577A003559EE /* HTTPStatusCodes.h */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -94,6 +89,7 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				582852CA0F769D2C003559EE /* ObjectiveBlip */,
 				582852340F767A2A003559EE /* BSJSONAdditions */,
 				080E96DDFE201D6D7F000001 /* Classes */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
@@ -146,6 +142,18 @@
 				582852580F767E84003559EE /* NSArray+BSJSONAdditions.m */,
 			);
 			path = BSJSONAdditions;
+			sourceTree = "<group>";
+		};
+		582852CA0F769D2C003559EE /* ObjectiveBlip */ = {
+			isa = PBXGroup;
+			children = (
+				582852D00F769DB1003559EE /* BlipConnection.h */,
+				582852D10F769DB1003559EE /* BlipConnection.m */,
+				582852D20F769DB1003559EE /* HTTPStatusCodes.h */,
+				582852D30F769DB1003559EE /* NSDataMBBase64.h */,
+				582852D40F769DB1003559EE /* NSDataMBBase64.m */,
+			);
+			path = ObjectiveBlip;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -207,11 +215,11 @@
 				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
 				1D3623260D0F684500981E51 /* XBlipAppDelegate.m in Sources */,
 				28D7ACF80DDB3853001CB0EB /* XBlipViewController.m in Sources */,
-				589AAC280F7561FA00E76C45 /* BlipConnection.m in Sources */,
-				589AAC2D0F7572C500E76C45 /* NSDataMBBase64.m in Sources */,
 				582852390F767ABB003559EE /* NSDictionary+BSJSONAdditions.m in Sources */,
 				5828523A0F767ABB003559EE /* NSScanner+BSJSONAdditions.m in Sources */,
 				582852590F767E84003559EE /* NSArray+BSJSONAdditions.m in Sources */,
+				582852D50F769DB1003559EE /* BlipConnection.m in Sources */,
+				582852D60F769DB1003559EE /* NSDataMBBase64.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
