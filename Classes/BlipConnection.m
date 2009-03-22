@@ -1,10 +1,10 @@
-// ---------------------------------------------------------------------------------------
-// Copyright by Jakub Suder (2009)
-//
-// xBlip is free software: you can redistribute it and/or modify it under the terms of the
-// GNU General Public License as published by the Free Software Foundation, either version
-// 2 of the License, or (at your option) any later version.
-// ---------------------------------------------------------------------------------------
+// -------------------------------------------------------------------------------------------
+// "THE BEER-WARE LICENSE" (Revision 42):
+// Jakub Suder <jakub.suder@gmail.com> wrote this file. As long as you retain this notice
+// you can do whatever you want with this stuff. If we meet some day, and you think this
+// stuff is worth it, you can buy me a beer in return.
+// (License text originally created by Poul-Henning Kamp, http://people.freebsd.org/~phk/)
+// -------------------------------------------------------------------------------------------
 
 #import "BlipConnection.h"
 #import "NSDataMBBase64.h"
