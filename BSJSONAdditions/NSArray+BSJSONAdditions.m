@@ -28,10 +28,14 @@
 
 + (NSArray *) arrayWithJSONString: (NSString *) jsonString {
 	NSScanner *scanner = [[NSScanner alloc] initWithString: jsonString];
-	NSArray *array = nil;
-	[scanner scanJSONArray: &array];
+	id array = nil;
+	[scanner scanJSONValue: &array];
 	[scanner release];
-	return array;
+  if ([array isKindOfClass: [NSArray class]]) {
+    return array;
+  } else {
+    return nil;
+  }
 }
 
 @end
