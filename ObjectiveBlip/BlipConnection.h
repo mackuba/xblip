@@ -24,6 +24,7 @@
   NSURLConnection *currentConnection;
   NSURLResponse *currentResponse;
   NSMutableString *currentText;
+  NSTimer *monitorTimer;
 }
 
 @property (nonatomic, copy) NSString *username;
@@ -33,6 +34,7 @@
                delegate: (id) delegate;
 
 - (void) getDashboard;
+- (void) startMonitoringDashboard;
 - (void) sendMessage: (NSString *) message;
 
 @end

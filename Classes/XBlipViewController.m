@@ -12,7 +12,6 @@
 #import "NSArray+BSJSONAdditions.h"
 
 @interface XBlipViewController ()
-- (void) appendMessageToLog: (NSString *) message;
 - (void) prependMessageToLog: (NSString *) message;
 - (void) sendMessage;
 - (void) scrollTextViewToTop;
@@ -44,6 +43,7 @@
 - (void) viewDidLoad {
   [super viewDidLoad];
   [blip getDashboard];
+  [blip startMonitoringDashboard];
 }
 
 /*
@@ -68,15 +68,12 @@
   if (newMessageField.text.length > 0) {
     [blip sendMessage: newMessageField.text];
   }    
+  newMessageField.text = @"";
 }
 
 - (void) prependMessageToLog: (NSString *) message {
   // TODO: is there a way to append a line without copying the whole contents of the view?
   messageLog.text = [NSString stringWithFormat: @"%@\n%@", message, messageLog.text];
-}
-
-- (void) appendMessageToLog: (NSString *) message {
-  messageLog.text = [messageLog.text stringByAppendingFormat: @"%@\n", message];
 }
 
 - (void) scrollTextViewToTop {
@@ -89,20 +86,15 @@
 }
 
 - (void) requestFinishedWithResponse: (NSURLResponse *) response text: (NSString *) text {
-  NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
   // TODO: refactor BlipConnection so that it knows which response matches which request
-  if ([httpResponse statusCode] == HTTP_STATUS_CREATED) { // Created
-    [self prependMessageToLog: [NSString stringWithFormat: @"%@: %@", blip.username, newMessageField.text]];
-    newMessageField.text = @"";
-    [self scrollTextViewToTop];
-  } else {
-    NSArray *messages = [NSArray arrayWithJSONString: text];
-    for (NSDictionary *object in messages) {
+  NSArray *messages = [NSArray arrayWithJSONString: text];
+  if (messages && messages.count > 0) {
+    for (NSDictionary *object in [messages reverseObjectEnumerator]) {
       NSString *userPath = [object objectForKey: @"user_path"];
       NSString *userName = [[userPath componentsSeparatedByString: @"/"] objectAtIndex: 2];
       NSString *body = [object objectForKey: @"body"];
       NSString *message = [[NSString alloc] initWithFormat: @"%@: %@", userName, body];
-      [self appendMessageToLog: message];
+      [self prependMessageToLog: message];
       [message release];
     }
     [self scrollTextViewToTop];

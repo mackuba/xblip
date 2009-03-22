@@ -72,6 +72,14 @@
 		userBuildSettings = {
 		};
 	};
+	582852380F767ABB003559EE /* NSScanner+BSJSONAdditions.m */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {964, 5056}}";
+			sepNavSelRange = "{4769, 0}";
+			sepNavVisRange = "{3849, 1795}";
+			sepNavWindowFrame = "{{153, 84}, {924, 813}}";
+		};
+	};
 	582852700F7687E1003559EE /* README.txt */ = {
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {877, 662}}";

@@ -9,6 +9,7 @@
 #import "BlipConnection.h"
 #import "NSDataMBBase64.h"
 #import "NSDictionary+BSJSONAdditions.h"
+#import "NSArray+BSJSONAdditions.h"
 
 @interface BlipConnection ()
 - (void) sendRequestTo: (NSString *) path;
@@ -53,6 +54,20 @@
   }
   [self sendRequestTo: path];
   [path release];
+}
+
+- (void) dashboardTimerFired: (NSTimer *) timer {
+  [self getDashboard];
+}
+
+- (void) startMonitoringDashboard {
+  [monitorTimer invalidate];
+  monitorTimer = [NSTimer scheduledTimerWithTimeInterval: 10
+                                                  target: self
+                                                selector: @selector(dashboardTimerFired:)
+                                                userInfo: nil
+                                                 repeats: YES];
+  [monitorTimer retain];
 }
 
 - (void) sendMessage: (NSString *) message {
@@ -125,6 +140,10 @@
 - (void) connectionDidFinishLoading: (NSURLConnection *) connection {
   NSLog(@"finished");
   if ([delegate respondsToSelector: @selector(requestFinishedWithResponse:text:)]) {
+    NSArray *messages = [NSArray arrayWithJSONString: currentText];
+    if (messages && messages.count > 0) {
+      lastMessageId = [[[messages objectAtIndex: 0] objectForKey: @"id"] intValue];
+    }
     [delegate requestFinishedWithResponse: currentResponse text: currentText];
   }
   [currentResponse release];
@@ -141,6 +160,7 @@
 - (void) connection: (NSURLConnection *) connection
 didReceiveAuthenticationChallenge: (NSURLAuthenticationChallenge *) challenge {
   NSLog(@"auth plz");
+  // TODO: get rid of warnings on delegate methods
   if ([delegate respondsToSelector: @selector(authenticationRequired)]) {
     [delegate authenticationRequired];
   }
