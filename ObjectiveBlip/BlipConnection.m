@@ -10,6 +10,7 @@
 #import "NSDataMBBase64.h"
 #import "NSDictionary+BSJSONAdditions.h"
 #import "NSArray+BSJSONAdditions.h"
+#import "OBUtils.h"
 
 
 // TODO: make classes for updates, users etc.
@@ -164,9 +165,8 @@
 
 - (void) connectionDidFinishLoading: (NSURLConnection *) connection {
   NSLog(@"finished");
-  NSCharacterSet *whitespace = [NSCharacterSet whitespaceAndNewlineCharacterSet];
-  NSString *trimmed = [currentText stringByTrimmingCharactersInSet: whitespace];
-  if (trimmed.length > 0 && [trimmed characterAtIndex: 0] == '[') {
+  NSString *trimmed = [OBUtils trimmedString: currentText];
+  if ([OBUtils string: trimmed startsWithCharacter: '[']) {
     NSArray *messages = [NSArray arrayWithJSONString: trimmed];
     if (messages.count > 0) {
       lastMessageId = [[[messages objectAtIndex: 0] objectForKey: @"id"] intValue];

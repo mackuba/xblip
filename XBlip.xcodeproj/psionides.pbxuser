@@ -115,6 +115,9 @@
 			5841BAC80F87D5ED007DE38D /* PBXTextBookmark */ = 5841BAC80F87D5ED007DE38D /* PBXTextBookmark */;
 			5841BAC90F87D5EF007DE38D /* PBXTextBookmark */ = 5841BAC90F87D5EF007DE38D /* PBXTextBookmark */;
 			5841BACA0F87D5EF007DE38D /* PBXTextBookmark */ = 5841BACA0F87D5EF007DE38D /* PBXTextBookmark */;
+			5841BAD10F87D80A007DE38D /* PBXTextBookmark */ = 5841BAD10F87D80A007DE38D /* PBXTextBookmark */;
+			5841BAD40F87D821007DE38D /* PBXTextBookmark */ = 5841BAD40F87D821007DE38D /* PBXTextBookmark */;
+			5841BADA0F87D83D007DE38D /* PBXTextBookmark */ = 5841BADA0F87D83D007DE38D /* PBXTextBookmark */;
 		};
 		sourceControlManager = 589AAC0D0F7553D900E76C45 /* Source Control */;
 		userBuildSettings = {
@@ -138,8 +141,8 @@
 	};
 	582852D10F769DB1003559EE /* BlipConnection.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {736, 3616}}";
-			sepNavSelRange = "{6470, 0}";
+			sepNavIntBoundsRect = "{{0, 0}, {736, 3600}}";
+			sepNavSelRange = "{8052, 0}";
 			sepNavVisRange = "{0, 0}";
 			sepNavWindowFrame = "{{547, 203}, {924, 813}}";
 		};
@@ -394,6 +397,36 @@
 		name = "BlipConnection.m: 170";
 		rLen = 0;
 		rLoc = 6470;
+		rType = 0;
+		vrLen = 0;
+		vrLoc = 0;
+	};
+	5841BAD10F87D80A007DE38D /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 582852D10F769DB1003559EE /* BlipConnection.m */;
+		name = "BlipConnection.m: 225";
+		rLen = 0;
+		rLoc = 8031;
+		rType = 0;
+		vrLen = 0;
+		vrLoc = 0;
+	};
+	5841BAD40F87D821007DE38D /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 582852D10F769DB1003559EE /* BlipConnection.m */;
+		name = "BlipConnection.m: 226";
+		rLen = 0;
+		rLoc = 8051;
+		rType = 0;
+		vrLen = 0;
+		vrLoc = 0;
+	};
+	5841BADA0F87D83D007DE38D /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 582852D10F769DB1003559EE /* BlipConnection.m */;
+		name = "BlipConnection.m: 226";
+		rLen = 0;
+		rLoc = 8052;
 		rType = 0;
 		vrLen = 0;
 		vrLoc = 0;

@@ -11,6 +11,7 @@
 #import "BlipConnection.h"
 #import "HTTPStatusCodes.h"
 #import "NSArray+BSJSONAdditions.h"
+#import "OBUtils.h"
 
 @interface XBlipViewController ()
 - (void) prependMessageToLog: (NSString *) message;
@@ -107,9 +108,8 @@
 }
 
 - (void) requestFinishedWithResponse: (NSURLResponse *) response text: (NSString *) text {
-  NSCharacterSet *whitespace = [NSCharacterSet whitespaceAndNewlineCharacterSet];
-  NSString *trimmed = [text stringByTrimmingCharactersInSet: whitespace];
-  if (trimmed.length > 0 && [trimmed characterAtIndex: 0] == '[') {
+  NSString *trimmed = [OBUtils trimmedString: text];
+  if ([OBUtils string: trimmed startsWithCharacter: '[']) {
     NSArray *messages = [NSArray arrayWithJSONString: trimmed];
     for (NSDictionary *object in [messages reverseObjectEnumerator]) {
       NSString *userPath = [object objectForKey: @"user_path"];
