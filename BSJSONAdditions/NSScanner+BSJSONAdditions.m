@@ -125,7 +125,6 @@ NSString *jsonNullString = @"null";
 					[chars appendString:@"\\"]; // debugger shows result as having two slashes, but final output is correct. Possible debugger error?
 					[self setScanLocation:([self scanLocation] + 2)];
 					break;
-				// TODO: json.org docs mention this seq, so does yahoo, but not recognized here by xcode, note from crockford: not a required escape
 				case '/':
 					[chars appendString:@"/"];
 					[self setScanLocation:([self scanLocation] + 2)];
@@ -190,8 +189,8 @@ NSString *jsonNullString = @"null";
 		/* this code is more appropriate if you have a separate method to unescape the found string
 			for example, between inputting json and outputting it, it may make more sense to have a category on NSString to perform
 			escaping and unescaping. Keeping this code and looking into this for a future update.
-		unsigned int searchLength = [[self string] length] - [self scanLocation];
-		unsigned int quoteLocation = [[self string] rangeOfString:jsonStringDelimiterString options:0 range:NSMakeRange([self scanLocation], searchLength)].location;
+		NSUInteger searchLength = [[self string] length] - [self scanLocation];
+		NSUInteger quoteLocation = [[self string] rangeOfString:jsonStringDelimiterString options:0 range:NSMakeRange([self scanLocation], searchLength)].location;
 		searchLength = [[self string] length] - quoteLocation;
 		while (([[[self string] substringWithRange:NSMakeRange((quoteLocation - 1), 2)] isEqualToString:jsonStringEscapedDoubleQuoteString]) &&
 			   (quoteLocation != NSNotFound) &&
@@ -217,10 +216,26 @@ NSString *jsonNullString = @"null";
 	BOOL result = NO;
 	
 	[self scanJSONWhiteSpace];
+	
 	NSString *substring = [[self string] substringWithRange:NSMakeRange([self scanLocation], 1)];
-	unsigned int trueLocation = [[self string] rangeOfString:jsonTrueString options:0 range:NSMakeRange([self scanLocation], ([[self string] length] - [self scanLocation]))].location;
-	unsigned int falseLocation = [[self string] rangeOfString:jsonFalseString options:0 range:NSMakeRange([self scanLocation], ([[self string] length] - [self scanLocation]))].location;
-	unsigned int nullLocation = [[self string] rangeOfString:jsonNullString options:0 range:NSMakeRange([self scanLocation], ([[self string] length] - [self scanLocation]))].location;
+	
+	// Since we have already scanned white space, we know that we're at the start of some value, and each of the strings below is at most
+	// four characters, so just look ahead that many spaces. (In previous versions of the code, I was scanning ahead through the entire string, but this
+	// was incredibly expensive for long strings - adding massive amounts of time to scan way past the string we might care about)
+	NSUInteger scanLength = [[self string] length] - [self scanLocation];
+	if (scanLength > [jsonTrueString length])
+		scanLength = [jsonTrueString length];
+	NSUInteger trueLocation = [[self string] rangeOfString:jsonTrueString options:0 range:NSMakeRange([self scanLocation], scanLength)].location;
+	
+	scanLength = [[self string] length] - [self scanLocation];
+	if (scanLength > [jsonFalseString length])
+		scanLength = [jsonFalseString length];
+	NSUInteger falseLocation = [[self string] rangeOfString:jsonFalseString options:0 range:NSMakeRange([self scanLocation], scanLength)].location;
+	
+	scanLength = [[self string] length] - [self scanLocation];
+	if (scanLength > [jsonNullString length])
+		scanLength = [jsonNullString length];
+	NSUInteger nullLocation = [[self string] rangeOfString:jsonNullString options:0 range:NSMakeRange([self scanLocation], scanLength)].location;
 	
 	if ([substring isEqualToString:jsonStringDelimiterString]) {
 		result = [self scanJSONString:value];

@@ -22,7 +22,7 @@
 //  code useful. You can reach me at blakeseely@mac.com
 //
 
-#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
 
 extern NSString *jsonObjectStartString;
 extern NSString *jsonObjectEndString;

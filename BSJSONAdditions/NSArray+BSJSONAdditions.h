@@ -1,7 +1,7 @@
 //
 //  BSJSONAdditions
 //
-//  Created by Blake Seely on 2/1/06.
+//  Created by Blake Seely on 2009/03/24.
 //  Copyright 2006 Blake Seely - http://www.blakeseely.com  All rights reserved.
 //  Permission to use this code:
 //
@@ -23,6 +23,12 @@
 
 #import <Foundation/Foundation.h>
 
+#import "NSDictionary+BSJSONAdditions.h"
+
 @interface NSArray (BSJSONAdditions)
-+ (NSArray *) arrayWithJSONString: (NSString *) jsonString;
+
++ (NSArray *)arrayWithJSONString:(NSString *)jsonString;
+- (NSString *)jsonStringValue;
+- (NSString *)jsonStringValueWithIndentLevel:(NSInteger)level;
+
 @end

@@ -21,25 +21,14 @@
 //  appreciated, just to let me know that people are finding my 
 //  code useful. You can reach me at blakeseely@mac.com
 
-#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
 
 extern NSString *jsonIndentString;
-extern const int jsonDoNotIndent;
+extern const NSInteger jsonDoNotIndent;
 
 @interface NSDictionary (BSJSONAdditions)
-
 + (NSDictionary *)dictionaryWithJSONString:(NSString *)jsonString;
+
 - (NSString *)jsonStringValue;
-
-@end
-
-
-@interface NSDictionary (PrivateBSJSONAdditions)
-
-- (NSString *)jsonStringValueWithIndentLevel:(int)level;
-- (NSString *)jsonStringForValue:(id)value withIndentLevel:(int)level;
-- (NSString *)jsonStringForArray:(NSArray *)array withIndentLevel:(int)level;
-- (NSString *)jsonStringForString:(NSString *)string;
-- (NSString *)jsonIndentStringForLevel:(int)level;
-
+- (NSString *)jsonStringValueWithIndentLevel:(NSInteger)level;
 @end
