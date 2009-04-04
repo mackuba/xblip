@@ -17,6 +17,13 @@
 // TODO: handle requests better - BlipConnection should remember which request matches which response
 //       and should return more meaningful results, e.g. an NSArray of Messages instead of a JSON string
 
+@interface NSObject (BlipConnectionDelegate)
+- requestFinishedWithResponse: (NSURLResponse *) response text: (NSString*) text;
+- requestRedirected;
+- requestFailedWithError: (NSError *) error;
+- authenticationRequired: (NSURLAuthenticationChallenge *) challenge;
+@end
+
 @interface BlipConnection ()
 - (void) sendRequestTo: (NSString *) path;
 - (void) sendPostRequestTo: (NSString *) path withText: (NSString *) text;
@@ -205,7 +212,6 @@
 - (void) connection: (NSURLConnection *) connection
 didReceiveAuthenticationChallenge: (NSURLAuthenticationChallenge *) challenge {
   NSLog(@"auth plz");
-  // TODO: get rid of warnings on delegate methods
   if ([delegate respondsToSelector: @selector(authenticationRequired:)]) {
     [delegate authenticationRequired: challenge];
   }
