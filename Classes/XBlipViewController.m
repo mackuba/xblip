@@ -107,8 +107,10 @@
 }
 
 - (void) requestFinishedWithResponse: (NSURLResponse *) response text: (NSString *) text {
-  NSArray *messages = [NSArray arrayWithJSONString: text];
-  if (messages && messages.count > 0) {
+  NSCharacterSet *whitespace = [NSCharacterSet whitespaceAndNewlineCharacterSet];
+  NSString *trimmed = [text stringByTrimmingCharactersInSet: whitespace];
+  if (trimmed.length > 0 && [trimmed characterAtIndex: 0] == '[') {
+    NSArray *messages = [NSArray arrayWithJSONString: trimmed];
     for (NSDictionary *object in [messages reverseObjectEnumerator]) {
       NSString *userPath = [object objectForKey: @"user_path"];
       NSString *userName = [[userPath componentsSeparatedByString: @"/"] objectAtIndex: 2];

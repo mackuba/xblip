@@ -164,11 +164,15 @@
 
 - (void) connectionDidFinishLoading: (NSURLConnection *) connection {
   NSLog(@"finished");
-  if ([delegate respondsToSelector: @selector(requestFinishedWithResponse:text:)]) {
-    NSArray *messages = [NSArray arrayWithJSONString: currentText];
-    if (messages && messages.count > 0) {
+  NSCharacterSet *whitespace = [NSCharacterSet whitespaceAndNewlineCharacterSet];
+  NSString *trimmed = [currentText stringByTrimmingCharactersInSet: whitespace];
+  if (trimmed.length > 0 && [trimmed characterAtIndex: 0] == '[') {
+    NSArray *messages = [NSArray arrayWithJSONString: trimmed];
+    if (messages.count > 0) {
       lastMessageId = [[[messages objectAtIndex: 0] objectForKey: @"id"] intValue];
     }
+  }
+  if ([delegate respondsToSelector: @selector(requestFinishedWithResponse:text:)]) {
     [delegate requestFinishedWithResponse: currentResponse text: currentText];
   }
   [currentResponse release];

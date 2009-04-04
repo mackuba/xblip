@@ -24,6 +24,8 @@
 		582852D60F769DB1003559EE /* NSDataMBBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = 582852D40F769DB1003559EE /* NSDataMBBase64.m */; };
 		5828530F0F76CBC1003559EE /* LoginDialogController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5828530E0F76CBC1003559EE /* LoginDialogController.m */; };
 		582853110F76CC12003559EE /* LoginDialog.xib in Resources */ = {isa = PBXBuildFile; fileRef = 582853100F76CC12003559EE /* LoginDialog.xib */; };
+		5841BA610F879F22007DE38D /* NSString+BSJSONAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 5841BA600F879F22007DE38D /* NSString+BSJSONAdditions.m */; };
+		5841BAB60F87D452007DE38D /* OBUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 5841BAB50F87D452007DE38D /* OBUtils.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -55,6 +57,10 @@
 		5828530D0F76CBC1003559EE /* LoginDialogController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginDialogController.h; sourceTree = "<group>"; };
 		5828530E0F76CBC1003559EE /* LoginDialogController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginDialogController.m; sourceTree = "<group>"; };
 		582853100F76CC12003559EE /* LoginDialog.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoginDialog.xib; sourceTree = "<group>"; };
+		5841BA5F0F879F16007DE38D /* NSString+BSJSONAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+BSJSONAdditions.h"; sourceTree = "<group>"; };
+		5841BA600F879F22007DE38D /* NSString+BSJSONAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+BSJSONAdditions.m"; sourceTree = "<group>"; };
+		5841BAB40F87D452007DE38D /* OBUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OBUtils.h; sourceTree = "<group>"; };
+		5841BAB50F87D452007DE38D /* OBUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OBUtils.m; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -142,6 +148,8 @@
 		582852340F767A2A003559EE /* BSJSONAdditions */ = {
 			isa = PBXGroup;
 			children = (
+				5841BA600F879F22007DE38D /* NSString+BSJSONAdditions.m */,
+				5841BA5F0F879F16007DE38D /* NSString+BSJSONAdditions.h */,
 				582852350F767ABB003559EE /* NSDictionary+BSJSONAdditions.h */,
 				582852360F767ABB003559EE /* NSDictionary+BSJSONAdditions.m */,
 				582852370F767ABB003559EE /* NSScanner+BSJSONAdditions.h */,
@@ -160,6 +168,8 @@
 				582852D20F769DB1003559EE /* HTTPStatusCodes.h */,
 				582852D30F769DB1003559EE /* NSDataMBBase64.h */,
 				582852D40F769DB1003559EE /* NSDataMBBase64.m */,
+				5841BAB40F87D452007DE38D /* OBUtils.h */,
+				5841BAB50F87D452007DE38D /* OBUtils.m */,
 			);
 			path = ObjectiveBlip;
 			sourceTree = "<group>";
@@ -230,6 +240,8 @@
 				582852D50F769DB1003559EE /* BlipConnection.m in Sources */,
 				582852D60F769DB1003559EE /* NSDataMBBase64.m in Sources */,
 				5828530F0F76CBC1003559EE /* LoginDialogController.m in Sources */,
+				5841BA610F879F22007DE38D /* NSString+BSJSONAdditions.m in Sources */,
+				5841BAB60F87D452007DE38D /* OBUtils.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
