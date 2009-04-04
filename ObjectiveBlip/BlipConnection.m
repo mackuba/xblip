@@ -40,7 +40,7 @@
                delegate: (id) aDelegate {
   if (self = [super init]) {
     [self setUsername: aUsername password: aPassword];
-    delegate = [aDelegate retain];
+    delegate = aDelegate;
     lastMessageId = -1;
     loggedIn = NO;
   }
@@ -215,7 +215,6 @@ didReceiveAuthenticationChallenge: (NSURLAuthenticationChallenge *) challenge {
 
 - (void) dealloc {
   [self closeCurrentConnection];
-  [delegate release];
   [super dealloc];
 }
 

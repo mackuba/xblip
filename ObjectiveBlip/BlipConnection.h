@@ -20,7 +20,7 @@
   NSString *username;
   NSString *password;
   NSString *authenticationString;
-  id delegate;
+  __weak id delegate;
   NSInteger lastMessageId;
   NSURLConnection *currentConnection;
   NSURLResponse *currentResponse;
