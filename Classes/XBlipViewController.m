@@ -13,11 +13,15 @@
 #import "NSArray+BSJSONAdditions.h"
 #import "OBUtils.h"
 
+#define USERNAME_KEY @"blipUsername"
+#define PASSWORD_KEY @"blipPassword"
+
 @interface XBlipViewController ()
 - (void) prependMessageToLog: (NSString *) message;
+- (void) saveLoginAndPassword;
+- (void) scrollTextViewToTop;
 - (void) sendMessage;
 - (void) showLoginDialog;
-- (void) scrollTextViewToTop;
 @end
 
 @implementation XBlipViewController
@@ -26,8 +30,8 @@
 
 - (void) awakeFromNib {
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
-  NSString *username = [settings objectForKey: @"blipUsername"];
-  NSString *password = [settings objectForKey: @"blipPassword"]; // TODO: encode password?
+  NSString *username = [settings objectForKey: USERNAME_KEY];
+  NSString *password = [settings objectForKey: PASSWORD_KEY]; // TODO: encode password?
   if (username && password) {
     blip = [[BlipConnection alloc] initWithUsername: username password: password delegate: self];
     // check if the password is still OK
@@ -86,12 +90,16 @@
   loginController = nil;
   blip.delegate = self;
   blip.loggedIn = true;
-  NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
-  [settings setObject: blip.username forKey: @"blipUsername"];
-  [settings setObject: blip.password forKey: @"blipPassword"];
-  [settings synchronize];
+  [self saveLoginAndPassword];
   [blip getDashboard];
   [blip startMonitoringDashboard];
+}
+
+- (void) saveLoginAndPassword {
+  NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
+  [settings setObject: blip.username forKey: USERNAME_KEY];
+  [settings setObject: blip.password forKey: PASSWORD_KEY];
+  [settings synchronize];
 }
 
 - (IBAction) blipButtonClicked {
