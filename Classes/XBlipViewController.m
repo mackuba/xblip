@@ -22,6 +22,8 @@
 
 @implementation XBlipViewController
 
+@synthesize newMessageField, messageLog;
+
 - (void) awakeFromNib {
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
   NSString *username = [settings objectForKey: @"blipUsername"];

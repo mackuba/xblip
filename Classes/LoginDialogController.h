@@ -12,14 +12,20 @@
 @class XBlipViewController;
 
 @interface LoginDialogController : UIViewController <UITextFieldDelegate> {
-  IBOutlet UITextField *usernameField;
-  IBOutlet UITextField *passwordField;
-  IBOutlet UILabel *connectingLabel;
-  IBOutlet UILabel *incorrectLoginLabel;
-  IBOutlet UIActivityIndicatorView *spinner;
+  UITextField *usernameField;
+  UITextField *passwordField;
+  UILabel *connectingLabel;
+  UILabel *incorrectLoginLabel;
+  UIActivityIndicatorView *spinner;
   BlipConnection *blip;
   XBlipViewController *mainController;
 }
+
+@property (nonatomic, retain) IBOutlet UITextField *usernameField;
+@property (nonatomic, retain) IBOutlet UITextField *passwordField;
+@property (nonatomic, retain) IBOutlet UILabel *connectingLabel;
+@property (nonatomic, retain) IBOutlet UILabel *incorrectLoginLabel;
+@property (nonatomic, retain) IBOutlet UIActivityIndicatorView *spinner;
 
 - (id) initWithNibName: (NSString *) nibName
                 bundle: (NSBundle *) bundle

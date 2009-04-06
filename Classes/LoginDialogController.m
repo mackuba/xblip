@@ -12,6 +12,8 @@
 
 @implementation LoginDialogController
 
+@synthesize usernameField, passwordField, connectingLabel, incorrectLoginLabel, spinner;
+
 - (id) initWithNibName: (NSString *) nibName
                 bundle: (NSBundle *) bundle
                   blip: (BlipConnection *) blipInstance
