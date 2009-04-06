@@ -11,12 +11,11 @@
 @class XBlipViewController;
 
 @interface XBlipAppDelegate : NSObject <UIApplicationDelegate> {
-    UIWindow *window;
-    XBlipViewController *viewController;
+  UIWindow *window;
+  XBlipViewController *viewController;
 }
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
 @property (nonatomic, retain) IBOutlet XBlipViewController *viewController;
 
 @end
-
