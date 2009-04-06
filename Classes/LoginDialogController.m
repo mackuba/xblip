@@ -38,7 +38,8 @@
 }
 
 - (IBAction) newAccountPressed {
-  // TODO: implement redirecting to Safari to http://blip.pl/users/new
+  NSURL *registerURL = [NSURL URLWithString: @"http://blip.pl/users/new"];
+  [[UIApplication sharedApplication] openURL: registerURL];
 }
 
 - (IBAction) loginPressed {

@@ -122,7 +122,6 @@
 						<reference key="NSSuperview" ref="191373211"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
-						<bool key="IBUIEnabled">NO</bool>
 						<int key="IBUIContentHorizontalAlignment">0</int>
 						<int key="IBUIContentVerticalAlignment">0</int>
 						<reference key="IBUIFont" ref="834861009"/>
@@ -447,7 +446,7 @@
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<string>LoginDialogController</string>
 					<string>UIResponder</string>
-					<string>{{973, 231}, {320, 480}}</string>
+					<string>{{944, 231}, {320, 480}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<object class="NSMutableArray">
 						<bool key="EncodedWithXMLCoder">YES</bool>
