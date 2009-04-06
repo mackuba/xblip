@@ -37,7 +37,7 @@
 
 @implementation BlipConnection
 
-@synthesize username, delegate, loggedIn;
+@synthesize username, delegate, loggedIn, password;
 
 - (id) init {
   return [self initWithUsername: nil password: nil delegate: nil];

@@ -23,9 +23,17 @@
 @implementation XBlipViewController
 
 - (void) awakeFromNib {
-  // TODO: read login&password from a file, if possible
-  blip = [[BlipConnection alloc] init];
-  //blip = [[BlipConnection alloc] initWithUsername: @"xblip" password: @"....." delegate: self];
+  NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
+  NSString *username = [settings objectForKey: @"blipUsername"];
+  NSString *password = [settings objectForKey: @"blipPassword"]; // TODO: encode password?
+  if (username && password) {
+    blip = [[BlipConnection alloc] initWithUsername: username password: password delegate: self];
+    // check if the password is still OK
+    // TODO: [blip authenticate];
+    blip.loggedIn = true;
+  } else {
+    blip = [[BlipConnection alloc] init];
+  }
 }
 
 /*
@@ -47,6 +55,10 @@
 - (void) viewDidAppear: (BOOL) animated {
   if (!blip.loggedIn) {
     [self showLoginDialog];
+  } else {
+    // TODO: we should start monitoring after we check the password...
+    [blip getDashboard];
+    [blip startMonitoringDashboard];
   }
 }
 
@@ -72,6 +84,10 @@
   loginController = nil;
   blip.delegate = self;
   blip.loggedIn = true;
+  NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
+  [settings setObject: blip.username forKey: @"blipUsername"];
+  [settings setObject: blip.password forKey: @"blipPassword"];
+  [settings synchronize];
   [blip getDashboard];
   [blip startMonitoringDashboard];
 }

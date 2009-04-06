@@ -28,7 +28,8 @@
   NSTimer *monitorTimer;
 }
 
-@property (nonatomic, copy, readonly) NSString *username;
+@property (nonatomic, readonly) NSString *username;
+@property (nonatomic, readonly) NSString *password;
 @property (nonatomic, retain) id delegate;
 @property (nonatomic) BOOL loggedIn;
 // TODO: BlipConnection should set the loggedIn variable itself
