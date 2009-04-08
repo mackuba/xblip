@@ -26,6 +26,8 @@
 		582853110F76CC12003559EE /* LoginDialog.xib in Resources */ = {isa = PBXBuildFile; fileRef = 582853100F76CC12003559EE /* LoginDialog.xib */; };
 		5841BA610F879F22007DE38D /* NSString+BSJSONAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 5841BA600F879F22007DE38D /* NSString+BSJSONAdditions.m */; };
 		5841BAB60F87D452007DE38D /* OBUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 5841BAB50F87D452007DE38D /* OBUtils.m */; };
+		588ED0650F8D17E300BCE1FA /* MessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 588ED0640F8D17E300BCE1FA /* MessageCell.xib */; };
+		588ED0690F8D1E7500BCE1FA /* MessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 588ED0680F8D1E7500BCE1FA /* MessageCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -61,6 +63,9 @@
 		5841BA600F879F22007DE38D /* NSString+BSJSONAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+BSJSONAdditions.m"; sourceTree = "<group>"; };
 		5841BAB40F87D452007DE38D /* OBUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OBUtils.h; sourceTree = "<group>"; };
 		5841BAB50F87D452007DE38D /* OBUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OBUtils.m; sourceTree = "<group>"; };
+		588ED0640F8D17E300BCE1FA /* MessageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MessageCell.xib; sourceTree = "<group>"; };
+		588ED0670F8D1E7500BCE1FA /* MessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageCell.h; sourceTree = "<group>"; };
+		588ED0680F8D1E7500BCE1FA /* MessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageCell.m; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -87,6 +92,8 @@
 				28D7ACF70DDB3853001CB0EB /* XBlipViewController.m */,
 				5828530D0F76CBC1003559EE /* LoginDialogController.h */,
 				5828530E0F76CBC1003559EE /* LoginDialogController.m */,
+				588ED0670F8D1E7500BCE1FA /* MessageCell.h */,
+				588ED0680F8D1E7500BCE1FA /* MessageCell.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -131,6 +138,7 @@
 				8D1107310486CEB800E47090 /* Info.plist */,
 				582852700F7687E1003559EE /* README.txt */,
 				582853100F76CC12003559EE /* LoginDialog.xib */,
+				588ED0640F8D17E300BCE1FA /* MessageCell.xib */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -221,6 +229,7 @@
 				582852710F7687E1003559EE /* README.txt in Resources */,
 				582852730F7687EF003559EE /* GPL-LICENSE.txt in Resources */,
 				582853110F76CC12003559EE /* LoginDialog.xib in Resources */,
+				588ED0650F8D17E300BCE1FA /* MessageCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -242,6 +251,7 @@
 				5828530F0F76CBC1003559EE /* LoginDialogController.m in Sources */,
 				5841BA610F879F22007DE38D /* NSString+BSJSONAdditions.m in Sources */,
 				5841BAB60F87D452007DE38D /* OBUtils.m in Sources */,
+				588ED0690F8D1E7500BCE1FA /* MessageCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
