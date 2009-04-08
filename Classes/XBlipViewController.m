@@ -137,6 +137,9 @@
   NSString *trimmed = [OBUtils trimmedString: text];
   if ([OBUtils string: trimmed startsWithCharacter: '[']) {
     NSArray *messages = [NSArray arrayWithJSONString: trimmed];
+    if (messages.count > 0) {
+      [self scrollTextViewToTop];
+    }
     for (NSDictionary *object in [messages reverseObjectEnumerator]) {
       NSString *userPath = [object objectForKey: @"user_path"];
       NSString *userName = [[userPath componentsSeparatedByString: @"/"] objectAtIndex: 2];
@@ -145,7 +148,6 @@
       [self prependMessageToLog: message];
       [message release];
     }
-    [self scrollTextViewToTop];
   }
 }
 
