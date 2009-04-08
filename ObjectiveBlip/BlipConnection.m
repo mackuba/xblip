@@ -90,6 +90,7 @@
 
 - (void) dashboardTimerFired: (NSTimer *) timer {
   [self getDashboard];
+  // TODO: do not send a request if another request is still in progress
 }
 
 - (void) startMonitoringDashboard {

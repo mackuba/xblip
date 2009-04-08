@@ -22,7 +22,7 @@
 
 - (void) displayMessage: (Message *) message {
   content.text = message.content;
-  usernameLabel.text = message.username;
+  usernameLabel.text = [message.username stringByAppendingString: @":"];
 }
 
 - (void) setSelected: (BOOL) selected animated: (BOOL) animated {

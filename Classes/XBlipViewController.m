@@ -96,6 +96,7 @@
   blip.delegate = self;
   blip.loggedIn = true;
   [self saveLoginAndPassword];
+  // TODO: show "loading" while loading dashboard for the first time
   [blip getDashboard];
   [blip startMonitoringDashboard];
 }
@@ -145,6 +146,16 @@
   }
   [cell displayMessage: message];
   return cell;
+}
+
+- (CGFloat) tableView: (UITableView *) table heightForRowAtIndexPath: (NSIndexPath *) path {
+  NSString *text = [[messages objectAtIndex: path.row] content];
+  UIFont *font = [UIFont fontWithName: @"Helvetica" size: 13]; // TODO: read all attributes from NIB
+  CGSize r = [text sizeWithFont: font
+                   constrainedToSize: CGSizeMake(234, 10000)
+                   lineBreakMode: UILineBreakModeTailTruncation];
+  NSLog(@"height/width of '%@' = %f/%f", text, r.height, r.width);
+  return r.height + 20;
 }
 
 - (MessageCell *) createMessageCell {
