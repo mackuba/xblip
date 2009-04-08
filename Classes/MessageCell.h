@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+@class Message;
+
 @interface MessageCell : UITableViewCell {
   UILabel *usernameLabel;
   UITextView *content;
@@ -15,5 +17,7 @@
 
 @property (nonatomic, retain) IBOutlet UILabel *usernameLabel;
 @property (nonatomic, retain) IBOutlet UITextView *content;
+
+- (void) displayMessage: (Message *) message;
 
 @end

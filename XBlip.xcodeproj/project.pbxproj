@@ -28,6 +28,7 @@
 		5841BAB60F87D452007DE38D /* OBUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 5841BAB50F87D452007DE38D /* OBUtils.m */; };
 		588ED0650F8D17E300BCE1FA /* MessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 588ED0640F8D17E300BCE1FA /* MessageCell.xib */; };
 		588ED0690F8D1E7500BCE1FA /* MessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 588ED0680F8D1E7500BCE1FA /* MessageCell.m */; };
+		588ED0720F8D239100BCE1FA /* Message.m in Sources */ = {isa = PBXBuildFile; fileRef = 588ED0710F8D239100BCE1FA /* Message.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -66,6 +67,8 @@
 		588ED0640F8D17E300BCE1FA /* MessageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MessageCell.xib; sourceTree = "<group>"; };
 		588ED0670F8D1E7500BCE1FA /* MessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageCell.h; sourceTree = "<group>"; };
 		588ED0680F8D1E7500BCE1FA /* MessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageCell.m; sourceTree = "<group>"; };
+		588ED0700F8D239100BCE1FA /* Message.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Message.h; sourceTree = "<group>"; };
+		588ED0710F8D239100BCE1FA /* Message.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Message.m; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -94,6 +97,8 @@
 				5828530E0F76CBC1003559EE /* LoginDialogController.m */,
 				588ED0670F8D1E7500BCE1FA /* MessageCell.h */,
 				588ED0680F8D1E7500BCE1FA /* MessageCell.m */,
+				588ED0700F8D239100BCE1FA /* Message.h */,
+				588ED0710F8D239100BCE1FA /* Message.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -252,6 +257,7 @@
 				5841BA610F879F22007DE38D /* NSString+BSJSONAdditions.m in Sources */,
 				5841BAB60F87D452007DE38D /* OBUtils.m in Sources */,
 				588ED0690F8D1E7500BCE1FA /* MessageCell.m in Sources */,
+				588ED0720F8D239100BCE1FA /* Message.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -13,13 +13,14 @@
 
 @interface XBlipViewController : UIViewController <UITextFieldDelegate> {
   UITextField *newMessageField;
-  UITextView *messageLog;
+  UITableView *tableView;
   BlipConnection *blip;
   LoginDialogController *loginController;
+  NSMutableArray *messages;
 }
 
 @property (nonatomic, retain) IBOutlet UITextField *newMessageField;
-@property (nonatomic, retain) IBOutlet UITextView *messageLog;
+@property (nonatomic, retain) IBOutlet UITableView *tableView;
 
 - (IBAction) blipButtonClicked;
 - (void) loginSuccessful;

@@ -16,4 +16,6 @@
 @property (nonatomic, copy) NSString *username;
 @property (nonatomic, copy) NSString *content;
 
+- (id) initWithContent: (NSString *) content fromUser: (NSString *) username;
+
 @end

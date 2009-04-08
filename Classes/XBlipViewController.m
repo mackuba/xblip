@@ -12,12 +12,16 @@
 #import "HTTPStatusCodes.h"
 #import "NSArray+BSJSONAdditions.h"
 #import "OBUtils.h"
+#import "Message.h"
+#import "MessageCell.h"
 
 #define USERNAME_KEY @"blipUsername"
 #define PASSWORD_KEY @"blipPassword"
+#define MESSAGE_CELL_TYPE @"messageCell"
 
 @interface XBlipViewController ()
-- (void) prependMessageToLog: (NSString *) message;
+- (MessageCell *) createMessageCell;
+- (void) prependMessageToLog: (Message *) message;
 - (void) saveLoginAndPassword;
 - (void) scrollTextViewToTop;
 - (void) sendMessage;
@@ -26,9 +30,10 @@
 
 @implementation XBlipViewController
 
-@synthesize newMessageField, messageLog;
+@synthesize newMessageField, tableView;
 
 - (void) awakeFromNib {
+  messages = [[NSMutableArray alloc] init];
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
   NSString *username = [settings objectForKey: USERNAME_KEY];
   NSString *password = [settings objectForKey: PASSWORD_KEY]; // TODO: encode password?
@@ -119,13 +124,41 @@
   newMessageField.text = @"";
 }
 
-- (void) prependMessageToLog: (NSString *) message {
-  // TODO: is there a way to append a line without copying the whole contents of the view?
-  messageLog.text = [NSString stringWithFormat: @"%@\n%@", message, messageLog.text];
+- (void) prependMessageToLog: (Message *) message {
+  [tableView beginUpdates];
+  [messages addObject: message];
+  NSLog(@"added message: %@", [message content]);
+  NSIndexPath *row = [NSIndexPath indexPathForRow: 0 inSection: 0];
+  [tableView insertRowsAtIndexPaths: [NSArray arrayWithObject: row] withRowAnimation: UITableViewRowAnimationTop];
+  [tableView endUpdates];
+}
+
+- (NSInteger) tableView: (UITableView *) table numberOfRowsInSection: (NSInteger) section {
+  return messages.count;
+}
+
+- (UITableViewCell *) tableView: (UITableView *) table cellForRowAtIndexPath: (NSIndexPath *) path {
+  Message *message = [messages objectAtIndex: path.row];
+  MessageCell *cell = (MessageCell *) [table dequeueReusableCellWithIdentifier: MESSAGE_CELL_TYPE];
+  if (!cell) {
+    cell = [self createMessageCell];
+  }
+  [cell displayMessage: message];
+  return cell;
+}
+
+- (MessageCell *) createMessageCell {
+  NSArray *nibContents = [[NSBundle mainBundle] loadNibNamed: @"MessageCell" owner: self options: nil];
+  for (NSObject *nibItem in nibContents) {
+    if ([nibItem isKindOfClass: [MessageCell class]]) {
+      return (MessageCell *) nibItem;
+    }
+  }
+  return nil;
 }
 
 - (void) scrollTextViewToTop {
-  [messageLog scrollRangeToVisible: NSMakeRange(0, 0)];
+  [self.tableView setContentOffset: CGPointZero animated: YES];
 }
 
 - (void) didReceiveMemoryWarning {
@@ -136,15 +169,17 @@
 - (void) requestFinishedWithResponse: (NSURLResponse *) response text: (NSString *) text {
   NSString *trimmed = [OBUtils trimmedString: text];
   if ([OBUtils string: trimmed startsWithCharacter: '[']) {
-    NSArray *messages = [NSArray arrayWithJSONString: trimmed];
-    if (messages.count > 0) {
+    NSArray *receivedMessages = [NSArray arrayWithJSONString: trimmed];
+    NSLog(@"received %d messages", receivedMessages.count);
+    if (receivedMessages.count > 0) {
       [self scrollTextViewToTop];
     }
-    for (NSDictionary *object in [messages reverseObjectEnumerator]) {
+    for (NSDictionary *object in [receivedMessages reverseObjectEnumerator]) {
       NSString *userPath = [object objectForKey: @"user_path"];
       NSString *userName = [[userPath componentsSeparatedByString: @"/"] objectAtIndex: 2];
       NSString *body = [object objectForKey: @"body"];
-      NSString *message = [[NSString alloc] initWithFormat: @"%@: %@", userName, body];
+      NSLog(@"message %@ from %@", body, userName);
+      Message *message = [[Message alloc] initWithContent: body fromUser: userName];
       [self prependMessageToLog: message];
       [message release];
     }
@@ -176,7 +211,6 @@
 - (void) dealloc {
   [loginController release];
   [newMessageField release];
-  [messageLog release];
   [blip release];
   [super dealloc];
 }

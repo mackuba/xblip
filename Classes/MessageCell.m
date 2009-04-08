@@ -7,6 +7,7 @@
 // ---------------------------------------------------------------------------------------
 
 #import "MessageCell.h"
+#import "Message.h"
 
 @implementation MessageCell
 
@@ -17,6 +18,11 @@
     // Initialization code
   }
   return self;
+}
+
+- (void) displayMessage: (Message *) message {
+  content.text = message.content;
+  usernameLabel.text = message.username;
 }
 
 - (void) setSelected: (BOOL) selected animated: (BOOL) animated {

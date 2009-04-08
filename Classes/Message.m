@@ -12,4 +12,12 @@
 
 @synthesize username, content;
 
+- (id) initWithContent: (NSString *) messageContent fromUser: (NSString *) senderUsername {
+  if (self = [super init]) {
+    self.content = messageContent;
+    self.username = senderUsername;
+  }
+  return self;
+}
+
 @end
