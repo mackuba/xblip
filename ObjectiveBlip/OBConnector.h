@@ -15,7 +15,7 @@
 #define USER_AGENT @"xBlip/0.1"
 // TODO: get app version from configuration
 
-@interface BlipConnection : NSObject {
+@interface OBConnector : NSObject {
   BOOL loggedIn;
   NSString *username;
   NSString *password;
@@ -32,7 +32,7 @@
 @property (nonatomic, readonly) NSString *password;
 @property (nonatomic, retain) id delegate;
 @property (nonatomic) BOOL loggedIn;
-// TODO: BlipConnection should set the loggedIn variable itself
+// TODO: OBConnector should set the loggedIn variable itself
 
 - (id) init;
 - (id) initWithUsername: (NSString *) username

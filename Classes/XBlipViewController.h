@@ -8,13 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
-@class BlipConnection;
+@class OBConnector;
 @class LoginDialogController;
 
 @interface XBlipViewController : UIViewController <UITextFieldDelegate> {
   UITextField *newMessageField;
   UITableView *tableView;
-  BlipConnection *blip;
+  OBConnector *blip;
   LoginDialogController *loginController;
   NSMutableArray *messages;
 }

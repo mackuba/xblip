@@ -6,13 +6,14 @@
 // 2 of the License, or (at your option) any later version.
 // ---------------------------------------------------------------------------------------
 
-#import "XBlipViewController.h"
-#import "LoginDialogController.h"
-#import "BlipConnection.h"
-#import "HTTPStatusCodes.h"
-#import "NSArray+BSJSONAdditions.h"
 #import "OBUtils.h"
 #import "OBMessage.h"
+#import "OBConnector.h"
+#import "NSArray+BSJSONAdditions.h"
+
+#import "XBlipViewController.h"
+#import "LoginDialogController.h"
+#import "HTTPStatusCodes.h"
 #import "MessageCell.h"
 
 #define USERNAME_KEY @"blipUsername"
@@ -38,12 +39,12 @@
   NSString *username = [settings objectForKey: USERNAME_KEY];
   NSString *password = [settings objectForKey: PASSWORD_KEY]; // TODO: encode password?
   if (username && password) {
-    blip = [[BlipConnection alloc] initWithUsername: username password: password delegate: self];
+    blip = [[OBConnector alloc] initWithUsername: username password: password delegate: self];
     // check if the password is still OK
     // TODO: [blip authenticate];
     blip.loggedIn = true;
   } else {
-    blip = [[BlipConnection alloc] init];
+    blip = [[OBConnector alloc] init];
   }
 }
 

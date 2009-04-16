@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@class BlipConnection;
+@class OBConnector;
 @class XBlipViewController;
 
 @interface LoginDialogController : UIViewController <UITextFieldDelegate> {
@@ -17,7 +17,7 @@
   UILabel *connectingLabel;
   UILabel *incorrectLoginLabel;
   UIActivityIndicatorView *spinner;
-  BlipConnection *blip;
+  OBConnector *blip;
   XBlipViewController *mainController;
 }
 
@@ -29,7 +29,7 @@
 
 - (id) initWithNibName: (NSString *) nibName
                 bundle: (NSBundle *) bundle
-                  blip: (BlipConnection *) blipInstance
+                  blip: (OBConnector *) blipInstance
         mainController: (XBlipViewController *) controller;
 
 - (IBAction) newAccountPressed;

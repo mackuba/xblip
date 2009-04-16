@@ -20,7 +20,7 @@
 		582852590F767E84003559EE /* NSArray+BSJSONAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 582852580F767E84003559EE /* NSArray+BSJSONAdditions.m */; };
 		582852710F7687E1003559EE /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = 582852700F7687E1003559EE /* README.txt */; };
 		582852730F7687EF003559EE /* GPL-LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = 582852720F7687EF003559EE /* GPL-LICENSE.txt */; };
-		582852D50F769DB1003559EE /* BlipConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 582852D10F769DB1003559EE /* BlipConnection.m */; };
+		582852D50F769DB1003559EE /* OBConnector.m in Sources */ = {isa = PBXBuildFile; fileRef = 582852D10F769DB1003559EE /* OBConnector.m */; };
 		582852D60F769DB1003559EE /* NSDataMBBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = 582852D40F769DB1003559EE /* NSDataMBBase64.m */; };
 		5828530F0F76CBC1003559EE /* LoginDialogController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5828530E0F76CBC1003559EE /* LoginDialogController.m */; };
 		582853110F76CC12003559EE /* LoginDialog.xib in Resources */ = {isa = PBXBuildFile; fileRef = 582853100F76CC12003559EE /* LoginDialog.xib */; };
@@ -52,8 +52,8 @@
 		582852580F767E84003559EE /* NSArray+BSJSONAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+BSJSONAdditions.m"; sourceTree = "<group>"; };
 		582852700F7687E1003559EE /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
 		582852720F7687EF003559EE /* GPL-LICENSE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "GPL-LICENSE.txt"; sourceTree = "<group>"; };
-		582852D00F769DB1003559EE /* BlipConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlipConnection.h; sourceTree = "<group>"; };
-		582852D10F769DB1003559EE /* BlipConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlipConnection.m; sourceTree = "<group>"; };
+		582852D00F769DB1003559EE /* OBConnector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OBConnector.h; sourceTree = "<group>"; };
+		582852D10F769DB1003559EE /* OBConnector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OBConnector.m; sourceTree = "<group>"; };
 		582852D20F769DB1003559EE /* HTTPStatusCodes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTTPStatusCodes.h; sourceTree = "<group>"; };
 		582852D30F769DB1003559EE /* NSDataMBBase64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSDataMBBase64.h; sourceTree = "<group>"; };
 		582852D40F769DB1003559EE /* NSDataMBBase64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSDataMBBase64.m; sourceTree = "<group>"; };
@@ -176,8 +176,8 @@
 			children = (
 				588ED0700F8D239100BCE1FA /* OBMessage.h */,
 				588ED0710F8D239100BCE1FA /* OBMessage.m */,
-				582852D00F769DB1003559EE /* BlipConnection.h */,
-				582852D10F769DB1003559EE /* BlipConnection.m */,
+				582852D00F769DB1003559EE /* OBConnector.h */,
+				582852D10F769DB1003559EE /* OBConnector.m */,
 				582852D20F769DB1003559EE /* HTTPStatusCodes.h */,
 				582852D30F769DB1003559EE /* NSDataMBBase64.h */,
 				582852D40F769DB1003559EE /* NSDataMBBase64.m */,
@@ -251,7 +251,7 @@
 				582852390F767ABB003559EE /* NSDictionary+BSJSONAdditions.m in Sources */,
 				5828523A0F767ABB003559EE /* NSScanner+BSJSONAdditions.m in Sources */,
 				582852590F767E84003559EE /* NSArray+BSJSONAdditions.m in Sources */,
-				582852D50F769DB1003559EE /* BlipConnection.m in Sources */,
+				582852D50F769DB1003559EE /* OBConnector.m in Sources */,
 				582852D60F769DB1003559EE /* NSDataMBBase64.m in Sources */,
 				5828530F0F76CBC1003559EE /* LoginDialogController.m in Sources */,
 				5841BA610F879F22007DE38D /* NSString+BSJSONAdditions.m in Sources */,

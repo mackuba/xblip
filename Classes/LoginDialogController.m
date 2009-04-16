@@ -8,7 +8,7 @@
 
 #import "LoginDialogController.h"
 #import "XBlipViewController.h"
-#import "BlipConnection.h"
+#import "OBConnector.h"
 
 @implementation LoginDialogController
 
@@ -16,7 +16,7 @@
 
 - (id) initWithNibName: (NSString *) nibName
                 bundle: (NSBundle *) bundle
-                  blip: (BlipConnection *) blipInstance
+                  blip: (OBConnector *) blipInstance
         mainController: (XBlipViewController *) controller {
   if (self = [super initWithNibName: nibName bundle: bundle]) {
     blip = [blipInstance retain];

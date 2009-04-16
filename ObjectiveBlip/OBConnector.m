@@ -6,7 +6,7 @@
 // (License text originally created by Poul-Henning Kamp, http://people.freebsd.org/~phk/)
 // -------------------------------------------------------------------------------------------
 
-#import "BlipConnection.h"
+#import "OBConnector.h"
 #import "NSDataMBBase64.h"
 #import "NSDictionary+BSJSONAdditions.h"
 #import "NSArray+BSJSONAdditions.h"
@@ -14,17 +14,17 @@
 
 
 // TODO: make classes for updates, users etc.
-// TODO: handle requests better - BlipConnection should remember which request matches which response
+// TODO: handle requests better - OBConnector should remember which request matches which response
 //       and should return more meaningful results, e.g. an NSArray of Messages instead of a JSON string
 
-@interface NSObject (BlipConnectionDelegate)
+@interface NSObject (OBConnectorDelegate)
 - requestFinishedWithResponse: (NSURLResponse *) response text: (NSString*) text;
 - requestRedirected;
 - requestFailedWithError: (NSError *) error;
 - authenticationRequired: (NSURLAuthenticationChallenge *) challenge;
 @end
 
-@interface BlipConnection ()
+@interface OBConnector ()
 - (void) sendRequestTo: (NSString *) path;
 - (void) sendPostRequestTo: (NSString *) path withText: (NSString *) text;
 - (void) sendRequestTo: (NSString *) path
@@ -35,7 +35,7 @@
 @end
 
 
-@implementation BlipConnection
+@implementation OBConnector
 
 @synthesize username, delegate, loggedIn, password;
 
