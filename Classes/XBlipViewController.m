@@ -12,7 +12,7 @@
 #import "HTTPStatusCodes.h"
 #import "NSArray+BSJSONAdditions.h"
 #import "OBUtils.h"
-#import "Message.h"
+#import "OBMessage.h"
 #import "MessageCell.h"
 
 #define USERNAME_KEY @"blipUsername"
@@ -21,7 +21,7 @@
 
 @interface XBlipViewController ()
 - (MessageCell *) createMessageCell;
-- (void) prependMessageToLog: (Message *) message;
+- (void) prependMessageToLog: (OBMessage *) message;
 - (void) saveLoginAndPassword;
 - (void) scrollTextViewToTop;
 - (void) sendMessage;
@@ -125,7 +125,7 @@
   newMessageField.text = @"";
 }
 
-- (void) prependMessageToLog: (Message *) message {
+- (void) prependMessageToLog: (OBMessage *) message {
   [tableView beginUpdates];
   [messages addObject: message];
   NSLog(@"added message: %@", [message content]);
@@ -139,7 +139,7 @@
 }
 
 - (UITableViewCell *) tableView: (UITableView *) table cellForRowAtIndexPath: (NSIndexPath *) path {
-  Message *message = [messages objectAtIndex: path.row];
+  OBMessage *message = [messages objectAtIndex: path.row];
   MessageCell *cell = (MessageCell *) [table dequeueReusableCellWithIdentifier: MESSAGE_CELL_TYPE];
   if (!cell) {
     cell = [self createMessageCell];
@@ -190,7 +190,7 @@
       NSString *userName = [[userPath componentsSeparatedByString: @"/"] objectAtIndex: 2];
       NSString *body = [object objectForKey: @"body"];
       NSLog(@"message %@ from %@", body, userName);
-      Message *message = [[Message alloc] initWithContent: body fromUser: userName];
+      OBMessage *message = [[OBMessage alloc] initWithContent: body fromUser: userName];
       [self prependMessageToLog: message];
       [message release];
     }

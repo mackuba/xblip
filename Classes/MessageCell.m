@@ -7,7 +7,7 @@
 // ---------------------------------------------------------------------------------------
 
 #import "MessageCell.h"
-#import "Message.h"
+#import "OBMessage.h"
 
 @implementation MessageCell
 
@@ -20,7 +20,7 @@
   return self;
 }
 
-- (void) displayMessage: (Message *) message {
+- (void) displayMessage: (OBMessage *) message {
   content.text = message.content;
   usernameLabel.text = [message.username stringByAppendingString: @":"];
 }
