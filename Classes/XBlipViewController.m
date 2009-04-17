@@ -225,6 +225,8 @@
 - (void) dealloc {
   [loginController release];
   [newMessageField release];
+  [tableView release];
+  [messages release];
   [blip release];
   [super dealloc];
 }

@@ -81,7 +81,7 @@
     NSData *data = [authString dataUsingEncoding: NSUTF8StringEncoding];
     NSString *encoded = [[NSString alloc] initWithFormat: @"Basic %@", [data base64Encoding]];
     [authString release];
-    return encoded;
+    return [encoded autorelease];
   } else {
     return nil;
   }
@@ -236,6 +236,12 @@
 
 - (void) dealloc {
   [self closeAllConnections];
+  [username release];
+  [password release];
+  [authenticationString release];
+  [userAgent release];
+  [currentConnections release];
+  [monitorTimer release];
   [super dealloc];
 }
 

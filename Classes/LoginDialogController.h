@@ -18,7 +18,7 @@
   UILabel *incorrectLoginLabel;
   UIActivityIndicatorView *spinner;
   OBConnector *blip;
-  XBlipViewController *mainController;
+  __weak XBlipViewController *mainController;
 }
 
 @property (nonatomic, retain) IBOutlet UITextField *usernameField;

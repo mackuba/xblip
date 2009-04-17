@@ -22,4 +22,9 @@
   return self;
 };
 
+- (void) dealloc {
+  [request release];
+  [super dealloc];
+}
+
 @end

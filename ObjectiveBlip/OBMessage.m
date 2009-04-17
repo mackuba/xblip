@@ -43,4 +43,10 @@
   return [self initWithId: msgId content: body fromUser: userName];
 }
 
+- (void) dealloc {
+  [username release];
+  [content release];
+  [super dealloc];
+}
+
 @end

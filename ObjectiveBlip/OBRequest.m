@@ -86,4 +86,16 @@
   [receivedText appendString: text];
 }
 
+// -------------------------------------------------------------------------------------------
+#pragma mark Cleaning up
+
+- (void) dealloc {
+  [path release];
+  [httpMethod release];
+  [sentText release];
+  [response release];
+  [receivedText release];
+  [super dealloc];
+}
+
 @end

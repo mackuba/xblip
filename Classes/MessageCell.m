@@ -31,6 +31,8 @@
 }
 
 - (void) dealloc {
+  [usernameLabel release];
+  [content release];
   [super dealloc];
 }
 

@@ -111,6 +111,7 @@
   [passwordField release];
   [blip release];
   [connectingLabel release];
+  [incorrectLoginLabel release];
   [spinner release];
   [super dealloc];
 }
