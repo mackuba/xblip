@@ -6,19 +6,17 @@
 // 2 of the License, or (at your option) any later version.
 // ---------------------------------------------------------------------------------------
 
-#import "OBUtils.h"
 #import "OBMessage.h"
 #import "OBConnector.h"
-#import "NSArray+BSJSONAdditions.h"
-
 #import "XBlipViewController.h"
 #import "LoginDialogController.h"
-#import "HTTPStatusCodes.h"
 #import "MessageCell.h"
 
 #define USERNAME_KEY @"blipUsername"
 #define PASSWORD_KEY @"blipPassword"
 #define MESSAGE_CELL_TYPE @"messageCell"
+#define USER_AGENT @"xBlip/0.1"
+// TODO: get app version from configuration
 
 @interface XBlipViewController ()
 - (MessageCell *) createMessageCell;
@@ -32,6 +30,9 @@
 @implementation XBlipViewController
 
 @synthesize newMessageField, tableView;
+
+// -------------------------------------------------------------------------------------------
+#pragma mark View initialization
 
 - (void) awakeFromNib {
   messages = [[NSMutableArray alloc] init];
@@ -47,6 +48,7 @@
     blip = [[OBConnector alloc] init];
     firstConnection = NO;
   }
+  blip.userAgent = USER_AGENT;
 }
 
 /*
@@ -79,6 +81,9 @@
 }
 */
 
+// -------------------------------------------------------------------------------------------
+#pragma mark Authentication
+
 - (void) showLoginDialog {
   loginController = [[LoginDialogController alloc] initWithNibName: @"LoginDialog"
                                                             bundle: [NSBundle mainBundle]
@@ -107,6 +112,9 @@
   [settings synchronize];
 }
 
+// -------------------------------------------------------------------------------------------
+#pragma mark Action handlers
+
 - (IBAction) blipButtonClicked {
   [self sendMessage];
 }
@@ -127,11 +135,17 @@
 - (void) prependMessageToLog: (OBMessage *) message {
   [tableView beginUpdates];
   [messages addObject: message];
-  //NSLog(@"added message: %@", [message content]);
   NSIndexPath *row = [NSIndexPath indexPathForRow: 0 inSection: 0];
   [tableView insertRowsAtIndexPaths: [NSArray arrayWithObject: row] withRowAnimation: UITableViewRowAnimationTop];
   [tableView endUpdates];
 }
+
+- (void) scrollTextViewToTop {
+  [self.tableView setContentOffset: CGPointZero animated: YES];
+}
+
+// -------------------------------------------------------------------------------------------
+#pragma mark Table view delegate / data source
 
 - (NSInteger) tableView: (UITableView *) table numberOfRowsInSection: (NSInteger) section {
   return messages.count;
@@ -167,14 +181,8 @@
   return nil;
 }
 
-- (void) scrollTextViewToTop {
-  [self.tableView setContentOffset: CGPointZero animated: YES];
-}
-
-- (void) didReceiveMemoryWarning {
-  [super didReceiveMemoryWarning]; // Releases the view if it doesn't have a superview
-  // Release anything that's not essential, such as cached data
-}
+// -------------------------------------------------------------------------------------------
+#pragma mark OBConnector delegate callbacks
 
 // TODO: display sent message after a response to send request, not when it comes back in messagesReceived
 - (void) messagesReceived: (NSArray *) receivedMessages {
@@ -204,6 +212,14 @@
                                         otherButtonTitles: nil];
   [alert show];
   [alert release];
+}
+
+// -------------------------------------------------------------------------------------------
+#pragma mark Cleaning up
+
+- (void) didReceiveMemoryWarning {
+  [super didReceiveMemoryWarning]; // Releases the view if it doesn't have a superview
+  // Release anything that's not essential, such as cached data
 }
 
 - (void) dealloc {

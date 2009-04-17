@@ -6,19 +6,12 @@
 // (License text originally created by Poul-Henning Kamp, http://people.freebsd.org/~phk/)
 // -------------------------------------------------------------------------------------------
 
+#import "NSDataMBBase64.h"
+#import "Constants.h"
 #import "OBConnector.h"
 #import "OBRequest.h"
 #import "OBMessage.h"
 #import "OBURLConnection.h"
-#import "NSDataMBBase64.h"
-#import "NSDictionary+BSJSONAdditions.h"
-#import "NSArray+BSJSONAdditions.h"
-#import "OBUtils.h"
-
-
-// TODO: make classes for updates, users etc.
-// TODO: handle requests better - OBConnector should remember which request matches which response
-//       and should return more meaningful results, e.g. an NSArray of Messages instead of a JSON string
 
 @interface NSObject (OBConnectorDelegate)
 - messageSent;
@@ -29,20 +22,20 @@
 @end
 
 @interface OBConnector ()
-- (void) closeAllConnections;
-- (NSString *) generateAuthenticationStringFromUsername: (NSString *) username password: (NSString *) password;
+- (NSString *) generateAuthenticationStringFromUsername: (NSString *) username
+                                               password: (NSString *) password;
 - (NSMutableURLRequest *) buildNSURLRequestFor: (OBRequest *) request;
 - (void) handleFinishedRequest: (OBRequest *) request;
+- (void) closeAllConnections;
 @end
 
 
 @implementation OBConnector
 
-@synthesize username, delegate, loggedIn, password;
+@synthesize username, delegate, loggedIn, password, userAgent;
 
-- (id) init {
-  return [self initWithUsername: nil password: nil delegate: nil];
-}
+// -------------------------------------------------------------------------------------------
+#pragma mark Initializers
 
 - (id) initWithUsername: (NSString *) aUsername
                password: (NSString *) aPassword
@@ -57,15 +50,25 @@
   return self;
 }
 
+- (id) init {
+  return [self initWithUsername: nil password: nil delegate: nil];
+}
+
+// -------------------------------------------------------------------------------------------
+#pragma mark Instance methods
+
 - (void) setUsername: (NSString *) aUsername password: (NSString *) aPassword {
   [username autorelease];
   [password autorelease];
   username = [aUsername copy];
   password = [aPassword copy];
-  authenticationString = [[self generateAuthenticationStringFromUsername: username password: password] retain];
+  authenticationString = [self generateAuthenticationStringFromUsername: username
+                                                               password: password];
+  [authenticationString retain];
 }
 
-- (NSString *) generateAuthenticationStringFromUsername: (NSString *) aUsername password: (NSString *) aPassword {
+- (NSString *) generateAuthenticationStringFromUsername: (NSString *) aUsername
+                                               password: (NSString *) aPassword {
   if (aUsername && aPassword) {
     NSString *authString = [[NSString alloc] initWithFormat: @"%@:%@", aUsername, aPassword];
     NSData *data = [authString dataUsingEncoding: NSUTF8StringEncoding];
@@ -77,6 +80,24 @@
   }
 }
 
+- (void) startMonitoringDashboard {
+  [monitorTimer invalidate];
+  monitorTimer = [NSTimer scheduledTimerWithTimeInterval: 10
+                                                  target: self
+                                                selector: @selector(dashboardTimerFired:)
+                                                userInfo: nil
+                                                 repeats: YES];
+  [monitorTimer retain];
+}
+
+- (void) dashboardTimerFired: (NSTimer *) timer {
+  [self getDashboard];
+  // TODO: do not send a request if another request is still in progress
+}
+
+// -------------------------------------------------------------------------------------------
+#pragma mark Request sending
+
 - (void) authenticate {
   [self sendRequest: [OBRequest requestForAuthentication]];
 }
@@ -87,21 +108,6 @@
   } else {
     [self sendRequest: [OBRequest requestForDashboard]];
   }
-}
-
-- (void) dashboardTimerFired: (NSTimer *) timer {
-  [self getDashboard];
-  // TODO: do not send a request if another request is still in progress
-}
-
-- (void) startMonitoringDashboard {
-  [monitorTimer invalidate];
-  monitorTimer = [NSTimer scheduledTimerWithTimeInterval: 10
-                                                  target: self
-                                                selector: @selector(dashboardTimerFired:)
-                                                userInfo: nil
-                                                 repeats: YES];
-  [monitorTimer retain];
 }
 
 - (void) sendMessage: (NSString *) message {
@@ -127,19 +133,23 @@
   [nsrequest setHTTPMethod: request.httpMethod];
   
   [nsrequest setValue: BLIP_API_VERSION    forHTTPHeaderField: @"X-Blip-API"];
-  [nsrequest setValue: USER_AGENT          forHTTPHeaderField: @"User-Agent"];
   [nsrequest setValue: @"application/json" forHTTPHeaderField: @"Accept"];
-  
+  if (userAgent) {
+    [nsrequest setValue: userAgent forHTTPHeaderField: @"User-Agent"];
+  }
   if (authenticationString) {
     [nsrequest setValue: authenticationString forHTTPHeaderField: @"Authorization"];
   }
-  if ([request sendsText]) {
+  if ([request isSendingText]) {
     [nsrequest setHTTPBody: [request.sentText dataUsingEncoding: NSUTF8StringEncoding]];
     [nsrequest setValue: @"application/json" forHTTPHeaderField: @"Content-Type"];
   }
 
   return [nsrequest autorelease];
 }
+
+// -------------------------------------------------------------------------------------------
+#pragma mark Response handling
 
 - (void) connection: (NSURLConnection *) connection didReceiveResponse: (NSURLResponse *) response {
   NSLog(@"received response");
@@ -172,7 +182,7 @@
       break;
     
     case OBDashboardRequest:
-      messages = [OBMessage messagesFromJSON: request.receivedText];
+      messages = [OBMessage messagesFromJSONString: request.receivedText];
       if (messages.count > 0) {
         lastMessageId = [[messages objectAtIndex: 0] messageId];
       }
@@ -236,6 +246,9 @@ didReceiveAuthenticationChallenge: (NSURLAuthenticationChallenge *) challenge {
   [[challenge sender] cancelAuthenticationChallenge: challenge];
   [currentConnections removeObject: connection];
 }
+
+// -------------------------------------------------------------------------------------------
+#pragma mark Cleaning up
 
 - (void) closeAllConnections {
   for (NSURLConnection *connection in currentConnections) {

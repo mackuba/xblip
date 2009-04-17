@@ -6,32 +6,29 @@
 // (License text originally created by Poul-Henning Kamp, http://people.freebsd.org/~phk/)
 // -------------------------------------------------------------------------------------------
 
-// TODO: extract blip connection stuff to a framework?
+// TODO: extract blip connection stuff to a framework
 
 #import <Foundation/Foundation.h>
-
-#define BLIP_API_HOST @"http://api.blip.pl"
-#define BLIP_API_VERSION @"0.02"
-#define USER_AGENT @"xBlip/0.1"
-// TODO: get app version from configuration
 
 @class OBRequest;
 
 @interface OBConnector : NSObject {
+  __weak id delegate;
   BOOL loggedIn;
   NSString *username;
   NSString *password;
   NSString *authenticationString;
-  __weak id delegate;
+  NSString *userAgent;
   NSInteger lastMessageId;
   NSMutableArray *currentConnections;
   NSTimer *monitorTimer;
 }
 
+@property (nonatomic) BOOL loggedIn;
+@property (nonatomic, retain) id delegate;
 @property (nonatomic, readonly) NSString *username;
 @property (nonatomic, readonly) NSString *password;
-@property (nonatomic, retain) id delegate;
-@property (nonatomic) BOOL loggedIn;
+@property (nonatomic, copy) NSString *userAgent;
 
 - (id) init;
 - (id) initWithUsername: (NSString *) username

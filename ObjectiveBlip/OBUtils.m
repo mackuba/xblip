@@ -10,13 +10,13 @@
 
 @implementation OBUtils
 
-+ (NSString *) trimmedString: (NSString*) originalString {
+/* + (NSString *) trimmedString: (NSString*) originalString {
   NSCharacterSet *whitespace = [NSCharacterSet whitespaceAndNewlineCharacterSet];
   return [originalString stringByTrimmingCharactersInSet: whitespace];
 }
 
 + (BOOL) string: (NSString *) string startsWithCharacter: (unichar) character {
   return (string.length > 0 && [string characterAtIndex: 0] == character);
-}
+} */
 
 @end

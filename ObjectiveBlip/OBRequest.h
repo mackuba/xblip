@@ -47,8 +47,8 @@ typedef enum {
 - (id) initWithPath: (NSString *) path
                type: (OBRequestType) type;
 
-- (BOOL) sendsText;
 - (NSURL *) url;
+- (BOOL) isSendingText;
 - (void) appendReceivedText: (NSString *) text;
 
 @end

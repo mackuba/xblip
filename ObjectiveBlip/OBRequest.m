@@ -6,15 +6,16 @@
 // (License text originally created by Poul-Henning Kamp, http://people.freebsd.org/~phk/)
 // -------------------------------------------------------------------------------------------
 
+#import "NSString+BSJSONAdditions.h"
+#import "Constants.h"
 #import "OBRequest.h"
-#import "OBConnector.h"
-#import "NSDictionary+BSJSONAdditions.h"
 
 @implementation OBRequest
 
 @synthesize path, httpMethod, sentText, type, response, receivedText;
 
-// TODO: add pragma dividers everywhere
+// -------------------------------------------------------------------------------------------
+#pragma mark Initializers
 
 - (id) initWithPath: (NSString *) _path
              method: (NSString *) _method
@@ -41,19 +42,18 @@
   return [self initWithPath: _path method: @"GET" text: @"" type: _type];
 }
 
+// -------------------------------------------------------------------------------------------
+#pragma mark Request generators
+
 + (OBRequest *) requestSendingMessage: (NSString *) message {
   NSLog(@"sending message: '%@'", message);
-  // TODO: figure out a better way of constructing json... e.g. OBJson(key, value, OBJson(key, value), key, value...)
-  NSDictionary *update = [[NSDictionary alloc] initWithObjectsAndKeys: message, @"body", nil];
-  NSDictionary *content = [[NSDictionary alloc] initWithObjectsAndKeys: update, @"update", nil];
-  NSLog(@"content string: '%@'", [content jsonStringValue]);
+  NSString *content = [NSString stringWithFormat: @"{update: {body: %@}}", [message jsonStringValue]];
+  NSLog(@"content string: '%@'", content);
 
   OBRequest *request = [[OBRequest alloc] initWithPath: @"/updates"
                                                 method: @"POST"
-                                                  text: [content jsonStringValue]
+                                                  text: content
                                                   type: OBSendMessageRequest];
-  [content release];
-  [update release];
   return [request autorelease];
 }
 
@@ -70,7 +70,10 @@
   return [[OBRequest alloc] initWithPath: @"/login" type: OBAuthenticationRequest];
 }
 
-- (BOOL) sendsText {
+// -------------------------------------------------------------------------------------------
+#pragma mark Instance methods
+
+- (BOOL) isSendingText {
   return (sentText && sentText.length > 0);
 }
 

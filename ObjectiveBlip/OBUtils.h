@@ -10,7 +10,7 @@
 
 @interface OBUtils : NSObject
 
-+ (NSString *) trimmedString: (NSString*) string;
-+ (BOOL) string: (NSString *) string startsWithCharacter: (unichar) character;
+// + (NSString *) trimmedString: (NSString*) string;
+// + (BOOL) string: (NSString *) string startsWithCharacter: (unichar) character;
 
 @end

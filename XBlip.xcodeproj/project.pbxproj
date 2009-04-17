@@ -56,7 +56,7 @@
 		582852720F7687EF003559EE /* GPL-LICENSE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "GPL-LICENSE.txt"; sourceTree = "<group>"; };
 		582852D00F769DB1003559EE /* OBConnector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OBConnector.h; sourceTree = "<group>"; };
 		582852D10F769DB1003559EE /* OBConnector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OBConnector.m; sourceTree = "<group>"; };
-		582852D20F769DB1003559EE /* HTTPStatusCodes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTTPStatusCodes.h; sourceTree = "<group>"; };
+		582852D20F769DB1003559EE /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		582852D30F769DB1003559EE /* NSDataMBBase64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSDataMBBase64.h; sourceTree = "<group>"; };
 		582852D40F769DB1003559EE /* NSDataMBBase64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSDataMBBase64.m; sourceTree = "<group>"; };
 		5828530D0F76CBC1003559EE /* LoginDialogController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginDialogController.h; sourceTree = "<group>"; };
@@ -184,7 +184,7 @@
 				588ED0710F8D239100BCE1FA /* OBMessage.m */,
 				582852D00F769DB1003559EE /* OBConnector.h */,
 				582852D10F769DB1003559EE /* OBConnector.m */,
-				582852D20F769DB1003559EE /* HTTPStatusCodes.h */,
+				582852D20F769DB1003559EE /* Constants.h */,
 				582852D30F769DB1003559EE /* NSDataMBBase64.h */,
 				582852D40F769DB1003559EE /* NSDataMBBase64.m */,
 				5841BAB40F87D452007DE38D /* OBUtils.h */,

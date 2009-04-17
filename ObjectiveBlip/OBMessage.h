@@ -9,19 +9,21 @@
 #import <Foundation/Foundation.h>
 
 @interface OBMessage : NSObject {
-  NSString *username;
-  NSString *content;
   NSInteger messageId;
+  NSString *content;
+  NSString *username;
 }
 
-@property (nonatomic, copy) NSString *username;
-@property (nonatomic, copy) NSString *content;
 @property (nonatomic) NSInteger messageId;
+@property (nonatomic, copy) NSString *content;
+@property (nonatomic, copy) NSString *username;
+
++ (NSArray *) messagesFromJSONString: (NSString *) json;
 
 - (id) initWithId: (NSInteger) messageId
           content: (NSString *) content
          fromUser: (NSString *) username;
 
-+ (NSArray *) messagesFromJSON: (NSString *) json;
+- (id) initWithJSON: (NSDictionary *) json;
 
 @end

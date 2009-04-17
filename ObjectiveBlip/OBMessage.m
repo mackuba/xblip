@@ -6,12 +6,23 @@
 // (License text originally created by Poul-Henning Kamp, http://people.freebsd.org/~phk/)
 // -------------------------------------------------------------------------------------------
 
-#import "OBMessage.h"
 #import "NSArray+BSJSONAdditions.h"
+#import "OBMessage.h"
 
 @implementation OBMessage
 
 @synthesize messageId, username, content;
+
++ (NSArray *) messagesFromJSONString: (NSString *) json {
+  NSArray *records = [NSArray arrayWithJSONString: json];
+  NSMutableArray *messages = [NSMutableArray arrayWithCapacity: records.count];
+  for (NSDictionary *record in records) {
+    OBMessage *message = [[OBMessage alloc] initWithJSON: record];
+    [messages addObject: message];
+    [message release];
+  }
+  return messages;
+}
 
 - (id) initWithId: (NSInteger) _messageId
           content: (NSString *) _content
@@ -24,19 +35,12 @@
   return self;
 }
 
-+ (NSArray *) messagesFromJSON: (NSString *) json {
-  NSArray *records = [NSArray arrayWithJSONString: json];
-  NSMutableArray *messages = [NSMutableArray arrayWithCapacity: records.count];
-  for (NSDictionary *record in records) {
-    NSString *userPath = [record objectForKey: @"user_path"];
-    NSInteger messageId = [[record objectForKey: @"id"] intValue];
-    NSString *userName = [[userPath componentsSeparatedByString: @"/"] objectAtIndex: 2];
-    NSString *body = [record objectForKey: @"body"];
-    OBMessage *message = [[OBMessage alloc] initWithId: messageId content: body fromUser: userName];
-    [messages addObject: message];
-    [message release];
-  }
-  return messages;
+- (id) initWithJSON: (NSDictionary *) json {
+  NSString *userPath = [json objectForKey: @"user_path"];
+  NSInteger msgId = [[json objectForKey: @"id"] intValue];
+  NSString *userName = [[userPath componentsSeparatedByString: @"/"] objectAtIndex: 2];
+  NSString *body = [json objectForKey: @"body"];
+  return [self initWithId: msgId content: body fromUser: userName];
 }
 
 @end

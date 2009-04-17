@@ -14,6 +14,9 @@
 
 @synthesize usernameField, passwordField, connectingLabel, incorrectLoginLabel, spinner;
 
+// -------------------------------------------------------------------------------------------
+#pragma mark Initializers
+
 - (id) initWithNibName: (NSString *) nibName
                 bundle: (NSBundle *) bundle
                   blip: (OBConnector *) blipInstance
@@ -26,6 +29,9 @@
   return self;
 }
 
+// -------------------------------------------------------------------------------------------
+#pragma mark View initialization
+
 /*
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
@@ -36,6 +42,17 @@
 - (void) viewDidAppear: (BOOL) animated {
   [usernameField becomeFirstResponder];
 }
+
+/*
+// Override to allow orientations other than the default portrait orientation.
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
+    // Return YES for supported orientations
+    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+*/
+
+// -------------------------------------------------------------------------------------------
+#pragma mark Action handlers
 
 - (IBAction) newAccountPressed {
   NSURL *registerURL = [NSURL URLWithString: @"http://blip.pl/users/new"];
@@ -68,6 +85,9 @@
   }
 }
 
+// -------------------------------------------------------------------------------------------
+#pragma mark OBConnector delegate callbacks
+
 - (void) authenticationSuccessful {
   [mainController loginSuccessful];
 }
@@ -78,13 +98,8 @@
   incorrectLoginLabel.hidden = NO;
 }
 
-/*
-// Override to allow orientations other than the default portrait orientation.
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    // Return YES for supported orientations
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
-}
-*/
+// -------------------------------------------------------------------------------------------
+#pragma mark Cleaning up
 
 - (void) didReceiveMemoryWarning {
   [super didReceiveMemoryWarning]; // Releases the view if it doesn't have a superview
