@@ -13,6 +13,13 @@
 #import "OBMessage.h"
 #import "OBURLConnection.h"
 
+#define SetHeader(request, key, value) [request setValue: value forHTTPHeaderField: key]
+#define SetHeaderNotEmpty(request, key, value) if (value) [request setValue: value forHTTPHeaderField: key]
+#define ThisRequest() [((OBURLConnection *) connection) request]
+#define ConnectionFinished() [currentConnections removeObject: connection]
+#define SafeDelegateCall(method, ...) \
+  if ([delegate respondsToSelector: @selector(method)]) [delegate method __VA_ARGS__]
+
 @interface NSObject (OBConnectorDelegate)
 - messageSent;
 - messagesReceived: (NSArray *) messages;
@@ -131,18 +138,14 @@
                                            cachePolicy: NSURLRequestReloadIgnoringLocalCacheData
                                            timeoutInterval: 15];
   [nsrequest setHTTPMethod: request.httpMethod];
-  
-  [nsrequest setValue: BLIP_API_VERSION    forHTTPHeaderField: @"X-Blip-API"];
-  [nsrequest setValue: @"application/json" forHTTPHeaderField: @"Accept"];
-  if (userAgent) {
-    [nsrequest setValue: userAgent forHTTPHeaderField: @"User-Agent"];
-  }
-  if (authenticationString) {
-    [nsrequest setValue: authenticationString forHTTPHeaderField: @"Authorization"];
-  }
+
+  SetHeader(nsrequest, @"X-Blip-API", BLIP_API_VERSION);
+  SetHeader(nsrequest, @"Accept", @"application/json");
+  SetHeaderNotEmpty(nsrequest, @"User-Agent", userAgent);
+  SetHeaderNotEmpty(nsrequest, @"Authorization", authenticationString);
   if ([request isSendingText]) {
+    SetHeader(nsrequest, @"Content-Type", @"application/json");
     [nsrequest setHTTPBody: [request.sentText dataUsingEncoding: NSUTF8StringEncoding]];
-    [nsrequest setValue: @"application/json" forHTTPHeaderField: @"Content-Type"];
   }
 
   return [nsrequest autorelease];
@@ -153,32 +156,27 @@
 
 - (void) connection: (NSURLConnection *) connection didReceiveResponse: (NSURLResponse *) response {
   NSLog(@"received response");
-  OBRequest *request = [((OBURLConnection *) connection) request];
-  request.response = response;
+  ThisRequest().response = response;
 }
 
 - (void) connection: (NSURLConnection *) connection didReceiveData: (NSData *) data {
   NSLog(@"received data");
   NSString *receivedText = [[NSString alloc] initWithData: data encoding: NSUTF8StringEncoding];
-  OBRequest *request = [((OBURLConnection *) connection) request];
-  [request appendReceivedText: receivedText];
+  [ThisRequest() appendReceivedText: receivedText];
   [receivedText release];
 }
 
 - (void) connectionDidFinishLoading: (NSURLConnection *) connection {
-  OBRequest *request = [((OBURLConnection *) connection) request];
-  NSLog(@"finished request to %@ (%d) (text = %@)", request.path, request.type, request.receivedText);
-  [self handleFinishedRequest: request];
-  [currentConnections removeObject: connection];
+  NSLog(@"finished request to %@ (%d) (text = %@)", ThisRequest().path, ThisRequest().type, ThisRequest().receivedText);
+  [self handleFinishedRequest: ThisRequest()];
+  ConnectionFinished();
 }
 
 - (void) handleFinishedRequest: (OBRequest *) request {
   NSArray *messages;
   switch (request.type) {
     case OBSendMessageRequest:
-      if ([delegate respondsToSelector: @selector(messageSent)]) {
-        [delegate messageSent];
-      }
+      SafeDelegateCall(messageSent);
       break;
     
     case OBDashboardRequest:
@@ -186,15 +184,11 @@
       if (messages.count > 0) {
         lastMessageId = [[messages objectAtIndex: 0] messageId];
       }
-      if ([delegate respondsToSelector: @selector(messagesReceived:)]) {
-        [delegate messagesReceived: messages];
-      }
+      SafeDelegateCall(messagesReceived:, messages); 
       break;
     
     case OBAuthenticationRequest:
-      if ([delegate respondsToSelector: @selector(authenticationSuccessful)]) {
-        [delegate authenticationSuccessful];
-      }
+      SafeDelegateCall(authenticationSuccessful);
       loggedIn = YES;
       break;
   }
@@ -203,48 +197,31 @@
 - (NSURLRequest *) connection: (NSURLConnection *) connection
               willSendRequest: (NSURLRequest *) nsrequest
              redirectResponse: (NSURLResponse *) response {
-  if (response) {
-    // response was redirected
-    OBRequest *request = [((OBURLConnection *) connection) request];
-    if (request.type == OBAuthenticationRequest) {
-      // here, redirect means we've succesfully authenticated. this is Blip's way of telling us that... :-)
-      NSLog(@"auth redirected = OK");
-      if ([delegate respondsToSelector: @selector(authenticationSuccessful)]) {
-        [delegate authenticationSuccessful];
-      }
-      loggedIn = YES;
-      [currentConnections removeObject: connection];
-      return nil;
-    } else {
-      NSLog(@"something redirected");
-      // follow the redirect
-      return nsrequest;
-    }
+  if (response && ThisRequest().type == OBAuthenticationRequest) {
+    // here, redirect means we've succesfully authenticated. this is Blip's way of telling us that... :-)
+    NSLog(@"auth redirected = OK");
+    SafeDelegateCall(authenticationSuccessful);
+    ConnectionFinished();
+    loggedIn = YES;
+    return nil;
   } else {
-    NSLog(@"letting it go");
-    // it's the request we're just sending, let it go
     return nsrequest;
   }
 }
 
 - (void) connection: (NSURLConnection *) connection didFailWithError: (NSError *) error {
   NSLog(@"error");
-  if ([delegate respondsToSelector: @selector(requestFailedWithError:)]) {
-    // TODO: add more detailed error handling
-    [delegate requestFailedWithError: error];
-  }
-  [currentConnections removeObject: connection];
+  SafeDelegateCall(requestFailedWithError:, error);
+  ConnectionFinished();
 }
 
 - (void) connection: (NSURLConnection *) connection
-didReceiveAuthenticationChallenge: (NSURLAuthenticationChallenge *) challenge {
+         didReceiveAuthenticationChallenge: (NSURLAuthenticationChallenge *) challenge {
   NSLog(@"auth plz");
-  if ([delegate respondsToSelector: @selector(authenticationFailed)]) {
-    [delegate authenticationFailed];
-  }
+  SafeDelegateCall(authenticationFailed);
   // TODO: let the user try again and reuse the connection
   [[challenge sender] cancelAuthenticationChallenge: challenge];
-  [currentConnections removeObject: connection];
+  ConnectionFinished();
 }
 
 // -------------------------------------------------------------------------------------------
