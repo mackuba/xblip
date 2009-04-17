@@ -41,10 +41,11 @@
   if (username && password) {
     blip = [[OBConnector alloc] initWithUsername: username password: password delegate: self];
     // check if the password is still OK
-    // TODO: [blip authenticate];
-    blip.loggedIn = true;
+    firstConnection = YES;
+    [blip authenticate];
   } else {
     blip = [[OBConnector alloc] init];
+    firstConnection = NO;
   }
 }
 
@@ -65,12 +66,8 @@
 */
 
 - (void) viewDidAppear: (BOOL) animated {
-  if (!blip.loggedIn) {
+  if (!blip.loggedIn && !firstConnection) {
     [self showLoginDialog];
-  } else {
-    // TODO: we should start monitoring after we check the password...
-    [blip getDashboard];
-    [blip startMonitoringDashboard];
   }
 }
 
@@ -91,12 +88,13 @@
 }
 
 - (void) loginSuccessful {
-  [loginController dismissModalViewControllerAnimated: YES];
-  [loginController release];
-  loginController = nil;
-  blip.delegate = self;
-  blip.loggedIn = true;
-  [self saveLoginAndPassword];
+  if (loginController) {
+    [loginController dismissModalViewControllerAnimated: YES];
+    [loginController release];
+    loginController = nil;
+    [self saveLoginAndPassword];
+    blip.delegate = self;
+  }
   // TODO: show "loading" while loading dashboard for the first time
   [blip getDashboard];
   [blip startMonitoringDashboard];
@@ -129,7 +127,7 @@
 - (void) prependMessageToLog: (OBMessage *) message {
   [tableView beginUpdates];
   [messages addObject: message];
-  NSLog(@"added message: %@", [message content]);
+  //NSLog(@"added message: %@", [message content]);
   NSIndexPath *row = [NSIndexPath indexPathForRow: 0 inSection: 0];
   [tableView insertRowsAtIndexPaths: [NSArray arrayWithObject: row] withRowAnimation: UITableViewRowAnimationTop];
   [tableView endUpdates];
@@ -155,7 +153,7 @@
   CGSize r = [text sizeWithFont: font
                    constrainedToSize: CGSizeMake(234, 10000)
                    lineBreakMode: UILineBreakModeTailTruncation];
-  NSLog(@"height/width of '%@' = %f/%f", text, r.height, r.width);
+  //NSLog(@"height/width of '%@' = %f/%f", text, r.height, r.width);
   return r.height + 20;
 }
 
@@ -178,36 +176,24 @@
   // Release anything that's not essential, such as cached data
 }
 
-- (void) requestFinishedWithResponse: (NSURLResponse *) response text: (NSString *) text {
-  NSString *trimmed = [OBUtils trimmedString: text];
-  if ([OBUtils string: trimmed startsWithCharacter: '[']) {
-    NSArray *receivedMessages = [NSArray arrayWithJSONString: trimmed];
-    NSLog(@"received %d messages", receivedMessages.count);
-    if (receivedMessages.count > 0) {
-      [self scrollTextViewToTop];
-    }
-    for (NSDictionary *object in [receivedMessages reverseObjectEnumerator]) {
-      NSString *userPath = [object objectForKey: @"user_path"];
-      NSString *userName = [[userPath componentsSeparatedByString: @"/"] objectAtIndex: 2];
-      NSString *body = [object objectForKey: @"body"];
-      NSLog(@"message %@ from %@", body, userName);
-      OBMessage *message = [[OBMessage alloc] initWithContent: body fromUser: userName];
-      [self prependMessageToLog: message];
-      [message release];
-    }
+// TODO: display sent message after a response to send request, not when it comes back in messagesReceived
+- (void) messagesReceived: (NSArray *) receivedMessages {
+  NSLog(@"received %d messages", receivedMessages.count);
+  if (receivedMessages.count > 0) {
+    [self scrollTextViewToTop];
+  }
+  for (OBMessage *message in [receivedMessages reverseObjectEnumerator]) {
+    NSLog(@"message %@ from %@", message.content, message.username);
+    [self prependMessageToLog: message];
   }
 }
 
-- (void) authenticationRequired: (NSURLAuthenticationChallenge *) challenge {
-  UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"Login error"
-                                                  message: @"Invalid username or password."
-                                                 delegate: nil
-                                        cancelButtonTitle: @"OK"
-                                        otherButtonTitles: nil];
-  [alert show];
-  [alert release];
-  [[challenge sender] cancelAuthenticationChallenge: challenge];
-  // TODO: show login dialog again?
+- (void) authenticationFailed {
+  [self showLoginDialog];
+}
+
+- (void) authenticationSuccessful {
+  [self loginSuccessful];
 }
 
 - (void) requestFailedWithError: (NSError *) error {

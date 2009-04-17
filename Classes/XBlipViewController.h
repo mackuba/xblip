@@ -17,6 +17,7 @@
   OBConnector *blip;
   LoginDialogController *loginController;
   NSMutableArray *messages;
+  BOOL firstConnection;
 }
 
 @property (nonatomic, retain) IBOutlet UITextField *newMessageField;

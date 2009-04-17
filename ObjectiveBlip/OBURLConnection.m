@@ -6,22 +6,20 @@
 // (License text originally created by Poul-Henning Kamp, http://people.freebsd.org/~phk/)
 // -------------------------------------------------------------------------------------------
 
-#import <Foundation/Foundation.h>
+#import "OBURLConnection.h"
+#import "OBRequest.h"
 
-@interface OBMessage : NSObject {
-  NSString *username;
-  NSString *content;
-  NSInteger messageId;
-}
+@implementation OBURLConnection
 
-@property (nonatomic, copy) NSString *username;
-@property (nonatomic, copy) NSString *content;
-@property (nonatomic) NSInteger messageId;
+@synthesize request;
 
-- (id) initWithId: (NSInteger) messageId
-          content: (NSString *) content
-         fromUser: (NSString *) username;
-
-+ (NSArray *) messagesFromJSON: (NSString *) json;
+- (id) initWithNSURLRequest: (NSURLRequest *) nsrequest
+                  OBRequest: (OBRequest *) obrequest
+                   delegate: (id) delegate {
+  if (self = [super initWithRequest: nsrequest delegate: delegate]) {
+    self.request = obrequest;
+  }
+  return self;
+};
 
 @end

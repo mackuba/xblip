@@ -15,6 +15,8 @@
 #define USER_AGENT @"xBlip/0.1"
 // TODO: get app version from configuration
 
+@class OBRequest;
+
 @interface OBConnector : NSObject {
   BOOL loggedIn;
   NSString *username;
@@ -22,9 +24,7 @@
   NSString *authenticationString;
   __weak id delegate;
   NSInteger lastMessageId;
-  NSURLConnection *currentConnection;
-  NSURLResponse *currentResponse;
-  NSMutableString *currentText;
+  NSMutableArray *currentConnections;
   NSTimer *monitorTimer;
 }
 
@@ -32,7 +32,6 @@
 @property (nonatomic, readonly) NSString *password;
 @property (nonatomic, retain) id delegate;
 @property (nonatomic) BOOL loggedIn;
-// TODO: OBConnector should set the loggedIn variable itself
 
 - (id) init;
 - (id) initWithUsername: (NSString *) username
@@ -43,6 +42,7 @@
 - (void) getDashboard;
 - (void) startMonitoringDashboard;
 - (void) sendMessage: (NSString *) message;
+- (void) sendRequest: (OBRequest *) request;
 - (void) setUsername: (NSString *) aUsername password: (NSString *) aPassword;
 
 @end

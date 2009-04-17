@@ -7,6 +7,9 @@
 // -------------------------------------------------------------------------------------------
 
 #import "OBConnector.h"
+#import "OBRequest.h"
+#import "OBMessage.h"
+#import "OBURLConnection.h"
 #import "NSDataMBBase64.h"
 #import "NSDictionary+BSJSONAdditions.h"
 #import "NSArray+BSJSONAdditions.h"
@@ -18,20 +21,18 @@
 //       and should return more meaningful results, e.g. an NSArray of Messages instead of a JSON string
 
 @interface NSObject (OBConnectorDelegate)
-- requestFinishedWithResponse: (NSURLResponse *) response text: (NSString*) text;
-- requestRedirected;
+- messageSent;
+- messagesReceived: (NSArray *) messages;
+- authenticationSuccessful;
+- authenticationFailed;
 - requestFailedWithError: (NSError *) error;
-- authenticationRequired: (NSURLAuthenticationChallenge *) challenge;
 @end
 
 @interface OBConnector ()
-- (void) sendRequestTo: (NSString *) path;
-- (void) sendPostRequestTo: (NSString *) path withText: (NSString *) text;
-- (void) sendRequestTo: (NSString *) path
-                method: (NSString *) method
-              withText: (NSString *) text;
-- (void) closeCurrentConnection;
+- (void) closeAllConnections;
 - (NSString *) generateAuthenticationStringFromUsername: (NSString *) username password: (NSString *) password;
+- (NSMutableURLRequest *) buildNSURLRequestFor: (OBRequest *) request;
+- (void) handleFinishedRequest: (OBRequest *) request;
 @end
 
 
@@ -51,6 +52,7 @@
     delegate = aDelegate;
     lastMessageId = -1;
     loggedIn = NO;
+    currentConnections = [[NSMutableArray alloc] initWithCapacity: 5];
   }
   return self;
 }
@@ -76,16 +78,15 @@
 }
 
 - (void) authenticate {
-  [self sendRequestTo: @"/login"];
+  [self sendRequest: [OBRequest requestForAuthentication]];
 }
 
 - (void) getDashboard {
-  NSMutableString *path = [[NSMutableString alloc] initWithString: @"/dashboard"];
   if (lastMessageId > 0) {
-    [path appendFormat: @"/since/%d", lastMessageId];
+    [self sendRequest: [OBRequest requestForDashboardSince: lastMessageId]];
+  } else {
+    [self sendRequest: [OBRequest requestForDashboard]];
   }
-  [self sendRequestTo: path];
-  [path release];
 }
 
 - (void) dashboardTimerFired: (NSTimer *) timer {
@@ -104,128 +105,147 @@
 }
 
 - (void) sendMessage: (NSString *) message {
-  NSLog(@"sending message: '%@'", message);
-  NSDictionary *update = [[NSDictionary alloc] initWithObjectsAndKeys: message, @"body", nil];
-  NSDictionary *content = [[NSDictionary alloc] initWithObjectsAndKeys: update, @"update", nil];
-  NSLog(@"content string: '%@'", [content jsonStringValue]);
-  [self sendPostRequestTo: @"/updates" withText: [content jsonStringValue]];
-  [content release];
-  [update release];
+  [self sendRequest: [OBRequest requestSendingMessage: message]];
 }
 
-- (void) sendRequestTo: (NSString *) path {
-  [self sendRequestTo: path method: @"GET" withText: nil];
+- (void) sendRequest: (OBRequest *) request {
+  NSMutableURLRequest *nsrequest = [self buildNSURLRequestFor: request];
+  NSLog(@"sending request to %@ %@ (type %d) with text '%@'", request.httpMethod, request.path, request.type,
+    request.sentText);
+  OBURLConnection *connection = [[OBURLConnection alloc] initWithNSURLRequest: nsrequest
+                                                                    OBRequest: request
+                                                                     delegate: self];
+  [currentConnections addObject: connection];
+  [connection release];
 }
 
-- (void) sendPostRequestTo: (NSString *) path withText: (NSString *) text {
-  [self sendRequestTo: path method: @"POST" withText: text];
-}
-
-- (void) sendRequestTo: (NSString *) path
-                method: (NSString *) method
-              withText: (NSString *) text {
-  [self closeCurrentConnection];
+- (NSMutableURLRequest *) buildNSURLRequestFor: (OBRequest *) request {
+  NSMutableURLRequest *nsrequest;
+  nsrequest = [[NSMutableURLRequest alloc] initWithURL: [request url]
+                                           cachePolicy: NSURLRequestReloadIgnoringLocalCacheData
+                                           timeoutInterval: 15];
+  [nsrequest setHTTPMethod: request.httpMethod];
   
-  NSString *urlString = [BLIP_API_HOST stringByAppendingString: path];
-  NSLog(@"connecting to: %@", urlString);
-  NSURL *url = [[NSURL alloc] initWithString: urlString];
-
-  // TODO: shouldn't I use NSURLRequestReloadIgnoringLocalAndRemoteCacheData ?
-  NSMutableURLRequest *request;
-  request = [[NSMutableURLRequest alloc] initWithURL: url
-                                         cachePolicy: NSURLRequestReloadIgnoringLocalCacheData
-                                         timeoutInterval: 15];
-  [request setHTTPMethod: method];
-  [request setValue: BLIP_API_VERSION forHTTPHeaderField: @"X-Blip-API"];
-  [request setValue: USER_AGENT forHTTPHeaderField: @"User-Agent"];
-  [request setValue: @"application/json" forHTTPHeaderField: @"Accept"];
+  [nsrequest setValue: BLIP_API_VERSION    forHTTPHeaderField: @"X-Blip-API"];
+  [nsrequest setValue: USER_AGENT          forHTTPHeaderField: @"User-Agent"];
+  [nsrequest setValue: @"application/json" forHTTPHeaderField: @"Accept"];
+  
   if (authenticationString) {
-    [request setValue: authenticationString forHTTPHeaderField: @"Authorization"];
+    [nsrequest setValue: authenticationString forHTTPHeaderField: @"Authorization"];
   }
-  if (text && text.length > 0) {
-    [request setHTTPBody: [text dataUsingEncoding: NSUTF8StringEncoding]];
-    [request setValue: @"application/json" forHTTPHeaderField: @"Content-Type"];
-  }
-
-  currentConnection = [[NSURLConnection alloc] initWithRequest: request delegate: self];
-  if (currentText) {
-    [currentText setString: @""];
-  } else {
-    currentText = [[NSMutableString alloc] init];
+  if ([request sendsText]) {
+    [nsrequest setHTTPBody: [request.sentText dataUsingEncoding: NSUTF8StringEncoding]];
+    [nsrequest setValue: @"application/json" forHTTPHeaderField: @"Content-Type"];
   }
 
-  [request release];
-  [url release];
+  return [nsrequest autorelease];
 }
 
 - (void) connection: (NSURLConnection *) connection didReceiveResponse: (NSURLResponse *) response {
   NSLog(@"received response");
-  [currentResponse release];
-  currentResponse = [response retain];
+  OBRequest *request = [((OBURLConnection *) connection) request];
+  request.response = response;
 }
 
 - (void) connection: (NSURLConnection *) connection didReceiveData: (NSData *) data {
   NSLog(@"received data");
   NSString *receivedText = [[NSString alloc] initWithData: data encoding: NSUTF8StringEncoding];
-  [currentText appendString: receivedText];
+  OBRequest *request = [((OBURLConnection *) connection) request];
+  [request appendReceivedText: receivedText];
   [receivedText release];
 }
 
 - (void) connectionDidFinishLoading: (NSURLConnection *) connection {
-  NSLog(@"finished");
-  NSString *trimmed = [OBUtils trimmedString: currentText];
-  if ([OBUtils string: trimmed startsWithCharacter: '[']) {
-    NSArray *messages = [NSArray arrayWithJSONString: trimmed];
-    if (messages.count > 0) {
-      lastMessageId = [[[messages objectAtIndex: 0] objectForKey: @"id"] intValue];
-    }
+  OBRequest *request = [((OBURLConnection *) connection) request];
+  NSLog(@"finished request to %@ (%d) (text = %@)", request.path, request.type, request.receivedText);
+  [self handleFinishedRequest: request];
+  [currentConnections removeObject: connection];
+}
+
+- (void) handleFinishedRequest: (OBRequest *) request {
+  NSArray *messages;
+  switch (request.type) {
+    case OBSendMessageRequest:
+      if ([delegate respondsToSelector: @selector(messageSent)]) {
+        [delegate messageSent];
+      }
+      break;
+    
+    case OBDashboardRequest:
+      messages = [OBMessage messagesFromJSON: request.receivedText];
+      if (messages.count > 0) {
+        lastMessageId = [[messages objectAtIndex: 0] messageId];
+      }
+      if ([delegate respondsToSelector: @selector(messagesReceived:)]) {
+        [delegate messagesReceived: messages];
+      }
+      break;
+    
+    case OBAuthenticationRequest:
+      if ([delegate respondsToSelector: @selector(authenticationSuccessful)]) {
+        [delegate authenticationSuccessful];
+      }
+      loggedIn = YES;
+      break;
   }
-  if ([delegate respondsToSelector: @selector(requestFinishedWithResponse:text:)]) {
-    [delegate requestFinishedWithResponse: currentResponse text: currentText];
-  }
-  [currentResponse release];
-  currentResponse = nil;
 }
 
 - (NSURLRequest *) connection: (NSURLConnection *) connection
-              willSendRequest: (NSURLRequest *) request
+              willSendRequest: (NSURLRequest *) nsrequest
              redirectResponse: (NSURLResponse *) response {
   if (response) {
-    // don't follow redirects - just let the delegate know
-    NSLog(@"redirect");
-    if ([delegate respondsToSelector: @selector(requestRedirected)]) {
-      [delegate requestRedirected];
+    // response was redirected
+    OBRequest *request = [((OBURLConnection *) connection) request];
+    if (request.type == OBAuthenticationRequest) {
+      // here, redirect means we've succesfully authenticated. this is Blip's way of telling us that... :-)
+      NSLog(@"auth redirected = OK");
+      if ([delegate respondsToSelector: @selector(authenticationSuccessful)]) {
+        [delegate authenticationSuccessful];
+      }
+      loggedIn = YES;
+      [currentConnections removeObject: connection];
+      return nil;
+    } else {
+      NSLog(@"something redirected");
+      // follow the redirect
+      return nsrequest;
     }
-    return nil;
   } else {
+    NSLog(@"letting it go");
     // it's the request we're just sending, let it go
-    return request;
+    return nsrequest;
   }
 }
 
 - (void) connection: (NSURLConnection *) connection didFailWithError: (NSError *) error {
   NSLog(@"error");
   if ([delegate respondsToSelector: @selector(requestFailedWithError:)]) {
+    // TODO: add more detailed error handling
     [delegate requestFailedWithError: error];
   }
+  [currentConnections removeObject: connection];
 }
 
 - (void) connection: (NSURLConnection *) connection
 didReceiveAuthenticationChallenge: (NSURLAuthenticationChallenge *) challenge {
   NSLog(@"auth plz");
-  if ([delegate respondsToSelector: @selector(authenticationRequired:)]) {
-    [delegate authenticationRequired: challenge];
+  if ([delegate respondsToSelector: @selector(authenticationFailed)]) {
+    [delegate authenticationFailed];
   }
+  // TODO: let the user try again and reuse the connection
+  [[challenge sender] cancelAuthenticationChallenge: challenge];
+  [currentConnections removeObject: connection];
 }
 
-- (void) closeCurrentConnection {
-  [currentConnection cancel];
-  [currentConnection release];
-  currentConnection = nil;
+- (void) closeAllConnections {
+  for (NSURLConnection *connection in currentConnections) {
+    [connection cancel];
+  }
+  [currentConnections removeAllObjects];
 }
 
 - (void) dealloc {
-  [self closeCurrentConnection];
+  [self closeAllConnections];
   [super dealloc];
 }
 

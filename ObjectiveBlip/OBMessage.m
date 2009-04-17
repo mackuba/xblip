@@ -7,17 +7,36 @@
 // -------------------------------------------------------------------------------------------
 
 #import "OBMessage.h"
+#import "NSArray+BSJSONAdditions.h"
 
 @implementation OBMessage
 
-@synthesize username, content;
+@synthesize messageId, username, content;
 
-- (id) initWithContent: (NSString *) messageContent fromUser: (NSString *) senderUsername {
+- (id) initWithId: (NSInteger) _messageId
+          content: (NSString *) _content
+         fromUser: (NSString *) _username {
   if (self = [super init]) {
-    self.content = messageContent;
-    self.username = senderUsername;
+    self.messageId = _messageId;
+    self.content = _content;
+    self.username = _username;
   }
   return self;
+}
+
++ (NSArray *) messagesFromJSON: (NSString *) json {
+  NSArray *records = [NSArray arrayWithJSONString: json];
+  NSMutableArray *messages = [NSMutableArray arrayWithCapacity: records.count];
+  for (NSDictionary *record in records) {
+    NSString *userPath = [record objectForKey: @"user_path"];
+    NSInteger messageId = [[record objectForKey: @"id"] intValue];
+    NSString *userName = [[userPath componentsSeparatedByString: @"/"] objectAtIndex: 2];
+    NSString *body = [record objectForKey: @"body"];
+    OBMessage *message = [[OBMessage alloc] initWithId: messageId content: body fromUser: userName];
+    [messages addObject: message];
+    [message release];
+  }
+  return messages;
 }
 
 @end

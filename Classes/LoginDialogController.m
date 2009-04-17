@@ -68,23 +68,14 @@
   }
 }
 
-- (void) requestFinishedWithResponse: (NSURLResponse *) response text: (NSString *) text {
-  // authentication successful
+- (void) authenticationSuccessful {
   [mainController loginSuccessful];
 }
 
-- (void) requestRedirected {
-  // authentication successful
-  [mainController loginSuccessful];
-}
-
-- (void) authenticationRequired: (NSURLAuthenticationChallenge *) challenge {
-  // authentication failed
+- (void) authenticationFailed {
   [spinner stopAnimating];
   connectingLabel.hidden = YES;
   incorrectLoginLabel.hidden = NO;
-  [[challenge sender] cancelAuthenticationChallenge: challenge];
-  // TODO: reuse connection instead of cancelling it?
 }
 
 /*

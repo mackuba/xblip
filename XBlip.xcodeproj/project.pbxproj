@@ -29,6 +29,8 @@
 		588ED0650F8D17E300BCE1FA /* MessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 588ED0640F8D17E300BCE1FA /* MessageCell.xib */; };
 		588ED0690F8D1E7500BCE1FA /* MessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 588ED0680F8D1E7500BCE1FA /* MessageCell.m */; };
 		588ED0720F8D239100BCE1FA /* OBMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 588ED0710F8D239100BCE1FA /* OBMessage.m */; };
+		58E1952D0F97B32B001530BA /* OBRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 58E1952C0F97B32B001530BA /* OBRequest.m */; };
+		58E1960E0F990BC2001530BA /* OBURLConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 58E1960D0F990BC2001530BA /* OBURLConnection.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -69,6 +71,10 @@
 		588ED0680F8D1E7500BCE1FA /* MessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageCell.m; sourceTree = "<group>"; };
 		588ED0700F8D239100BCE1FA /* OBMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OBMessage.h; sourceTree = "<group>"; };
 		588ED0710F8D239100BCE1FA /* OBMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OBMessage.m; sourceTree = "<group>"; };
+		58E1952B0F97B32B001530BA /* OBRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OBRequest.h; sourceTree = "<group>"; };
+		58E1952C0F97B32B001530BA /* OBRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OBRequest.m; sourceTree = "<group>"; };
+		58E1960C0F990BC2001530BA /* OBURLConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OBURLConnection.h; sourceTree = "<group>"; };
+		58E1960D0F990BC2001530BA /* OBURLConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OBURLConnection.m; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -183,6 +189,10 @@
 				582852D40F769DB1003559EE /* NSDataMBBase64.m */,
 				5841BAB40F87D452007DE38D /* OBUtils.h */,
 				5841BAB50F87D452007DE38D /* OBUtils.m */,
+				58E1952B0F97B32B001530BA /* OBRequest.h */,
+				58E1952C0F97B32B001530BA /* OBRequest.m */,
+				58E1960C0F990BC2001530BA /* OBURLConnection.h */,
+				58E1960D0F990BC2001530BA /* OBURLConnection.m */,
 			);
 			path = ObjectiveBlip;
 			sourceTree = "<group>";
@@ -258,6 +268,8 @@
 				5841BAB60F87D452007DE38D /* OBUtils.m in Sources */,
 				588ED0690F8D1E7500BCE1FA /* MessageCell.m in Sources */,
 				588ED0720F8D239100BCE1FA /* OBMessage.m in Sources */,
+				58E1952D0F97B32B001530BA /* OBRequest.m in Sources */,
+				58E1960E0F990BC2001530BA /* OBURLConnection.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -273,6 +285,7 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = XBlip_Prefix.pch;
+				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				INFOPLIST_FILE = Info.plist;
 				PRODUCT_NAME = xBlip;
 			};
@@ -285,6 +298,7 @@
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = XBlip_Prefix.pch;
+				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				INFOPLIST_FILE = Info.plist;
 				PRODUCT_NAME = xBlip;
 			};

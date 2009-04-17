@@ -8,20 +8,16 @@
 
 #import <Foundation/Foundation.h>
 
-@interface OBMessage : NSObject {
-  NSString *username;
-  NSString *content;
-  NSInteger messageId;
+@class OBRequest;
+
+@interface OBURLConnection : NSURLConnection {
+  OBRequest *request;
 }
 
-@property (nonatomic, copy) NSString *username;
-@property (nonatomic, copy) NSString *content;
-@property (nonatomic) NSInteger messageId;
+@property (nonatomic, retain) OBRequest *request;
 
-- (id) initWithId: (NSInteger) messageId
-          content: (NSString *) content
-         fromUser: (NSString *) username;
-
-+ (NSArray *) messagesFromJSON: (NSString *) json;
+- (id) initWithNSURLRequest: (NSURLRequest *) nsrequest
+                  OBRequest: (OBRequest *) request
+                   delegate: (id) delegate;
 
 @end
