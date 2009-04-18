@@ -38,6 +38,7 @@
 - (void) authenticate;
 - (void) getDashboard;
 - (void) startMonitoringDashboard;
+- (void) stopMonitoringDashboard;
 - (void) sendMessage: (NSString *) message;
 - (void) sendRequest: (OBRequest *) request;
 - (void) setUsername: (NSString *) aUsername password: (NSString *) aPassword;

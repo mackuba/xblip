@@ -9,6 +9,7 @@
 #import "OBMessage.h"
 #import "OBConnector.h"
 #import "OBUtils.h"
+#import "Utils.h"
 #import "XBlipViewController.h"
 #import "LoginDialogController.h"
 #import "MessageCell.h"
@@ -21,6 +22,7 @@
 
 @interface XBlipViewController ()
 - (MessageCell *) createMessageCell;
+- (NSString *) errorResponseForNSError: (NSError *) nserror;
 - (void) prependMessageToLog: (OBMessage *) message;
 - (void) saveLoginAndPassword;
 - (void) scrollTextViewToTop;
@@ -206,14 +208,17 @@ OnDeallocRelease(newMessageField, tableView, loginController, messages, blip);
   [self loginSuccessful];
 }
 
+- (NSString *) errorResponseForNSError: (NSError *) nserror {
+  if (nserror.domain == NSURLErrorDomain) {
+    switch (nserror.code) {
+      case NSURLErrorTimedOut: return @"Can't connect to Blip server.";
+    }
+  }
+  return [nserror localizedDescription];
+}
+
 - (void) requestFailedWithError: (NSError *) error {
-  UIAlertView *alert = [[UIAlertView alloc] initWithTitle: [error localizedDescription]
-                                                  message: [error localizedFailureReason]
-                                                 delegate: nil
-                                        cancelButtonTitle: @"OK"
-                                        otherButtonTitles: nil];
-  [alert show];
-  [alert release];
+  [Utils showAlertWithTitle: @"Error" content: [self errorResponseForNSError: error]];
 }
 
 // -------------------------------------------------------------------------------------------

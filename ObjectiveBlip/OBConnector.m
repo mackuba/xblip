@@ -90,13 +90,18 @@
 }
 
 - (void) startMonitoringDashboard {
-  [monitorTimer invalidate];
+  [self stopMonitoringDashboard];
   monitorTimer = [NSTimer scheduledTimerWithTimeInterval: 10
                                                   target: self
                                                 selector: @selector(dashboardTimerFired:)
                                                 userInfo: nil
                                                  repeats: YES];
   [monitorTimer retain];
+}
+
+- (void) stopMonitoringDashboard {
+  [monitorTimer invalidate];
+  monitorTimer = nil;
 }
 
 - (void) dashboardTimerFired: (NSTimer *) timer {
@@ -223,6 +228,9 @@
 
 - (void) connection: (NSURLConnection *) connection didFailWithError: (NSError *) error {
   NSLog(@"error");
+  if (error.domain == NSURLErrorDomain && error.code == NSURLErrorTimedOut) {
+    [self stopMonitoringDashboard];
+  }
   SafeDelegateCall(requestFailedWithError:, error);
   ConnectionFinished();
 }

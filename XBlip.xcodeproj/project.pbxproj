@@ -31,6 +31,7 @@
 		588ED0720F8D239100BCE1FA /* OBMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 588ED0710F8D239100BCE1FA /* OBMessage.m */; };
 		58E1952D0F97B32B001530BA /* OBRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 58E1952C0F97B32B001530BA /* OBRequest.m */; };
 		58E1960E0F990BC2001530BA /* OBURLConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 58E1960D0F990BC2001530BA /* OBURLConnection.m */; };
+		58E1968B0F99E54E001530BA /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 58E1968A0F99E54E001530BA /* Utils.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -75,6 +76,8 @@
 		58E1952C0F97B32B001530BA /* OBRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OBRequest.m; sourceTree = "<group>"; };
 		58E1960C0F990BC2001530BA /* OBURLConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OBURLConnection.h; sourceTree = "<group>"; };
 		58E1960D0F990BC2001530BA /* OBURLConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OBURLConnection.m; sourceTree = "<group>"; };
+		58E196890F99E54E001530BA /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
+		58E1968A0F99E54E001530BA /* Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utils.m; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -103,6 +106,8 @@
 				5828530E0F76CBC1003559EE /* LoginDialogController.m */,
 				588ED0670F8D1E7500BCE1FA /* MessageCell.h */,
 				588ED0680F8D1E7500BCE1FA /* MessageCell.m */,
+				58E196890F99E54E001530BA /* Utils.h */,
+				58E1968A0F99E54E001530BA /* Utils.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -270,6 +275,7 @@
 				588ED0720F8D239100BCE1FA /* OBMessage.m in Sources */,
 				58E1952D0F97B32B001530BA /* OBRequest.m in Sources */,
 				58E1960E0F990BC2001530BA /* OBURLConnection.m in Sources */,
+				58E1968B0F99E54E001530BA /* Utils.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
