@@ -34,6 +34,7 @@
                                                password: (NSString *) password;
 - (NSMutableURLRequest *) buildNSURLRequestFor: (OBRequest *) request;
 - (void) handleFinishedRequest: (OBRequest *) request;
+- (BOOL) isSendingDashboardRequest;
 - (void) closeAllConnections;
 @end
 
@@ -99,8 +100,9 @@
 }
 
 - (void) dashboardTimerFired: (NSTimer *) timer {
-  [self getDashboard];
-  // TODO: do not send a request if another request is still in progress
+  if (![self isSendingDashboardRequest]) {
+    [self getDashboard];
+  }
 }
 
 // -------------------------------------------------------------------------------------------
@@ -116,6 +118,15 @@
   } else {
     [self sendRequest: [OBRequest requestForDashboard]];
   }
+}
+
+- (BOOL) isSendingDashboardRequest {
+  for (OBURLConnection *connection in currentConnections) {
+    if (connection.request.type == OBDashboardRequest) {
+      return YES;
+    }
+  }
+  return NO;
 }
 
 - (void) sendMessage: (NSString *) message {
