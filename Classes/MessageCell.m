@@ -12,7 +12,7 @@
 
 @implementation MessageCell
 
-SynthesizeAndReleaseLater(content, usernameLabel);
+SynthesizeAndReleaseLater(contentLabel, usernameLabel);
 
 - (id) initWithFrame: (CGRect) frame reuseIdentifier: (NSString *) reuseIdentifier {
   if (self = [super initWithFrame: frame reuseIdentifier: reuseIdentifier]) {
@@ -22,7 +22,7 @@ SynthesizeAndReleaseLater(content, usernameLabel);
 }
 
 - (void) displayMessage: (OBMessage *) message {
-  content.text = message.content;
+  contentLabel.text = message.content;
   usernameLabel.text = [message.username stringByAppendingString: @":"];
 }
 

@@ -169,9 +169,9 @@ OnDeallocRelease(newMessageField, tableView, loginController, messages, blip);
   NSString *text = [[messages objectAtIndex: path.row] content];
   UIFont *font = [UIFont fontWithName: @"Helvetica" size: 13]; // TODO: read all attributes from NIB
   CGSize r = [text sizeWithFont: font
-                   constrainedToSize: CGSizeMake(234, 10000)
-                   lineBreakMode: UILineBreakModeTailTruncation];
-  //NSLog(@"height/width of '%@' = %f/%f", text, r.height, r.width);
+                   constrainedToSize: CGSizeMake(227, 10000)
+                   lineBreakMode: UILineBreakModeWordWrap];
+  NSLog(@"height/width of '%@' = %f/%f", text, r.height, r.width);
   return r.height + 20;
 }
 
@@ -179,7 +179,7 @@ OnDeallocRelease(newMessageField, tableView, loginController, messages, blip);
   NSArray *nibContents = [[NSBundle mainBundle] loadNibNamed: @"MessageCell" owner: self options: nil];
   for (NSObject *nibItem in nibContents) {
     if ([nibItem isKindOfClass: [MessageCell class]]) {
-      return (MessageCell *) nibItem;
+      return [((MessageCell *) nibItem) retain];
     }
   }
   return nil;
