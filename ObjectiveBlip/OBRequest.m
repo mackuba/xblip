@@ -9,10 +9,12 @@
 #import "NSString+BSJSONAdditions.h"
 #import "Constants.h"
 #import "OBRequest.h"
+#import "OBUtils.h"
 
 @implementation OBRequest
 
 @synthesize path, httpMethod, sentText, type, response, receivedText;
+OnDeallocRelease(path, httpMethod, sentText, response, receivedText);
 
 // -------------------------------------------------------------------------------------------
 #pragma mark Initializers
@@ -84,18 +86,6 @@
 
 - (void) appendReceivedText: (NSString *) text {
   [receivedText appendString: text];
-}
-
-// -------------------------------------------------------------------------------------------
-#pragma mark Cleaning up
-
-- (void) dealloc {
-  [path release];
-  [httpMethod release];
-  [sentText release];
-  [response release];
-  [receivedText release];
-  [super dealloc];
 }
 
 @end

@@ -8,10 +8,11 @@
 
 #import "OBURLConnection.h"
 #import "OBRequest.h"
+#import "OBUtils.h"
 
 @implementation OBURLConnection
 
-@synthesize request;
+SynthesizeAndReleaseLater(request);
 
 - (id) initWithNSURLRequest: (NSURLRequest *) nsrequest
                   OBRequest: (OBRequest *) obrequest
@@ -21,10 +22,5 @@
   }
   return self;
 };
-
-- (void) dealloc {
-  [request release];
-  [super dealloc];
-}
 
 @end

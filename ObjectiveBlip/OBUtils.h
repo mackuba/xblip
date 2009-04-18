@@ -8,6 +8,23 @@
 
 #import <Foundation/Foundation.h>
 
+#define ReleaseAll(...) \
+  NSArray *_releaseList = [[NSArray alloc] initWithObjects: __VA_ARGS__, nil]; \
+  for (NSObject *object in _releaseList) { \
+    [object release]; \
+  } \
+  [_releaseList release];
+
+#define OnDeallocRelease(...) \
+  - (void) dealloc { \
+    ReleaseAll(__VA_ARGS__); \
+    [super dealloc]; \
+  }
+
+#define SynthesizeAndReleaseLater(...) \
+  @synthesize __VA_ARGS__; \
+  OnDeallocRelease(__VA_ARGS__);
+
 @interface OBUtils : NSObject
 
 // + (NSString *) trimmedString: (NSString*) string;

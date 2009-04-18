@@ -8,10 +8,12 @@
 
 #import "NSArray+BSJSONAdditions.h"
 #import "OBMessage.h"
+#import "OBUtils.h"
 
 @implementation OBMessage
 
 @synthesize messageId, username, content;
+OnDeallocRelease(username, content);
 
 + (NSArray *) messagesFromJSONString: (NSString *) json {
   NSArray *records = [NSArray arrayWithJSONString: json];
@@ -41,12 +43,6 @@
   NSString *userName = [[userPath componentsSeparatedByString: @"/"] objectAtIndex: 2];
   NSString *body = [json objectForKey: @"body"];
   return [self initWithId: msgId content: body fromUser: userName];
-}
-
-- (void) dealloc {
-  [username release];
-  [content release];
-  [super dealloc];
 }
 
 @end

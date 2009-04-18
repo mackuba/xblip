@@ -9,10 +9,12 @@
 #import "LoginDialogController.h"
 #import "XBlipViewController.h"
 #import "OBConnector.h"
+#import "OBUtils.h"
 
 @implementation LoginDialogController
 
 @synthesize usernameField, passwordField, connectingLabel, incorrectLoginLabel, spinner;
+OnDeallocRelease(usernameField, passwordField, connectingLabel, incorrectLoginLabel, spinner, blip);
 
 // -------------------------------------------------------------------------------------------
 #pragma mark Initializers
@@ -104,16 +106,6 @@
 - (void) didReceiveMemoryWarning {
   [super didReceiveMemoryWarning]; // Releases the view if it doesn't have a superview
   // Release anything that's not essential, such as cached data
-}
-
-- (void) dealloc {
-  [usernameField release];
-  [passwordField release];
-  [blip release];
-  [connectingLabel release];
-  [incorrectLoginLabel release];
-  [spinner release];
-  [super dealloc];
 }
 
 @end

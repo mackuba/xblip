@@ -8,6 +8,7 @@
 
 #import "OBMessage.h"
 #import "OBConnector.h"
+#import "OBUtils.h"
 #import "XBlipViewController.h"
 #import "LoginDialogController.h"
 #import "MessageCell.h"
@@ -30,6 +31,7 @@
 @implementation XBlipViewController
 
 @synthesize newMessageField, tableView;
+OnDeallocRelease(newMessageField, tableView, loginController, messages, blip);
 
 // -------------------------------------------------------------------------------------------
 #pragma mark View initialization
@@ -220,15 +222,6 @@
 - (void) didReceiveMemoryWarning {
   [super didReceiveMemoryWarning]; // Releases the view if it doesn't have a superview
   // Release anything that's not essential, such as cached data
-}
-
-- (void) dealloc {
-  [loginController release];
-  [newMessageField release];
-  [tableView release];
-  [messages release];
-  [blip release];
-  [super dealloc];
 }
 
 @end

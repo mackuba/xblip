@@ -11,6 +11,7 @@
 #import "OBConnector.h"
 #import "OBRequest.h"
 #import "OBMessage.h"
+#import "OBUtils.h"
 #import "OBURLConnection.h"
 
 #define SetHeader(request, key, value) [request setValue: value forHTTPHeaderField: key]
@@ -236,12 +237,7 @@
 
 - (void) dealloc {
   [self closeAllConnections];
-  [username release];
-  [password release];
-  [authenticationString release];
-  [userAgent release];
-  [currentConnections release];
-  [monitorTimer release];
+  ReleaseAll(username, password, authenticationString, userAgent, currentConnections, monitorTimer);
   [super dealloc];
 }
 

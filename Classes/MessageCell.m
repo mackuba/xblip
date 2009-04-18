@@ -8,10 +8,11 @@
 
 #import "MessageCell.h"
 #import "OBMessage.h"
+#import "OBUtils.h"
 
 @implementation MessageCell
 
-@synthesize content, usernameLabel;
+SynthesizeAndReleaseLater(content, usernameLabel);
 
 - (id) initWithFrame: (CGRect) frame reuseIdentifier: (NSString *) reuseIdentifier {
   if (self = [super initWithFrame: frame reuseIdentifier: reuseIdentifier]) {
@@ -28,12 +29,6 @@
 - (void) setSelected: (BOOL) selected animated: (BOOL) animated {
   [super setSelected: selected animated: animated];
   // Configure the view for the selected state
-}
-
-- (void) dealloc {
-  [usernameLabel release];
-  [content release];
-  [super dealloc];
 }
 
 @end
