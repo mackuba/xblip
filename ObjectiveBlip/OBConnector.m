@@ -166,17 +166,21 @@
 
 - (void) handleFinishedRequest: (OBRequest *) request {
   NSArray *messages;
+  NSString *trimmedString;
   switch (request.type) {
     case OBSendMessageRequest:
       SafeDelegateCall(messageSent);
       break;
     
     case OBDashboardRequest:
-      messages = [OBMessage messagesFromJSONString: request.receivedText];
-      if (messages.count > 0) {
-        lastMessageId = [[messages objectAtIndex: 0] messageId];
+      trimmedString = [OBUtils trimmedString: request.receivedText];
+      if (trimmedString.length > 0) {
+        messages = [OBMessage messagesFromJSONString: trimmedString];
+        if (messages.count > 0) {
+          lastMessageId = [[messages objectAtIndex: 0] messageId];
+        }
+        SafeDelegateCall(messagesReceived:, messages);
       }
-      SafeDelegateCall(messagesReceived:, messages); 
       break;
     
     case OBAuthenticationRequest:

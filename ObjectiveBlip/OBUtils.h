@@ -27,7 +27,7 @@
 
 @interface OBUtils : NSObject
 
-// + (NSString *) trimmedString: (NSString*) string;
++ (NSString *) trimmedString: (NSString*) string;
 // + (BOOL) string: (NSString *) string startsWithCharacter: (unichar) character;
 
 @end
