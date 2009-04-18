@@ -11,37 +11,47 @@
 #import "OBRequest.h"
 #import "OBUtils.h"
 
+#define SetHeader(key, value) [self setValue: value forHTTPHeaderField: key]
+
 @implementation OBRequest
 
-@synthesize path, httpMethod, sentText, type, response, receivedText;
-OnDeallocRelease(path, httpMethod, sentText, response, receivedText);
+@synthesize type;
+SynthesizeAndReleaseLater(response, receivedText, sentText);
 
 // -------------------------------------------------------------------------------------------
 #pragma mark Initializers
 
-- (id) initWithPath: (NSString *) _path
-             method: (NSString *) _method
-               text: (NSString *) _text
-               type: (OBRequestType) _type {
-  if (self = [super init]) {
-    self.path = _path;
-    self.type = _type;
-    self.httpMethod = _method;
-    self.sentText = _text;
+- (id) initWithPath: (NSString *) path
+             method: (NSString *) method
+               text: (NSString *) text
+               type: (OBRequestType) requestType {
+  self = [super initWithURL: [NSURL URLWithString: [BLIP_API_HOST stringByAppendingString: path]]
+                cachePolicy: NSURLRequestReloadIgnoringLocalCacheData
+            timeoutInterval: 15];
+  if (self) {
+    self.type = requestType;
+    self.HTTPMethod = method;
     receivedText = [[NSMutableString alloc] init];
+    sentText = [text copy];
+    SetHeader(@"X-Blip-API", BLIP_API_VERSION);
+    SetHeader(@"Accept", @"application/json");
+    if (sentText) {
+      SetHeader(@"Content-Type", @"application/json");
+      self.HTTPBody = [sentText dataUsingEncoding: NSUTF8StringEncoding];
+    }
   }
   return self;
 }
 
-- (id) initWithPath: (NSString *) _path
-             method: (NSString *) _method
-               type: (OBRequestType) _type {
-  return [self initWithPath: _path method: _method text: @"" type: _type];
+- (id) initWithPath: (NSString *) path
+             method: (NSString *) method
+               type: (OBRequestType) requestType {
+  return [self initWithPath: path method: method text: @"" type: requestType];
 }
 
-- (id) initWithPath: (NSString *) _path
-               type: (OBRequestType) _type {
-  return [self initWithPath: _path method: @"GET" text: @"" type: _type];
+- (id) initWithPath: (NSString *) path
+               type: (OBRequestType) requestType {
+  return [self initWithPath: path method: @"GET" text: @"" type: requestType];
 }
 
 // -------------------------------------------------------------------------------------------
@@ -60,32 +70,27 @@ OnDeallocRelease(path, httpMethod, sentText, response, receivedText);
 }
 
 + (OBRequest *) requestForDashboard {
-  return [[OBRequest alloc] initWithPath: @"/dashboard" type: OBDashboardRequest];
+  return [[[OBRequest alloc] initWithPath: @"/dashboard" type: OBDashboardRequest] autorelease];
 }
 
 + (OBRequest *) requestForDashboardSince: (NSInteger) lastMessageId {
   NSString *path = [NSString stringWithFormat: @"/dashboard/since/%d", lastMessageId];
-  return [[OBRequest alloc] initWithPath: path type: OBDashboardRequest];
+  return [[[OBRequest alloc] initWithPath: path type: OBDashboardRequest] autorelease];
 }
 
 + (OBRequest *) requestForAuthentication {
-  return [[OBRequest alloc] initWithPath: @"/login" type: OBAuthenticationRequest];
+  return [[[OBRequest alloc] initWithPath: @"/login" type: OBAuthenticationRequest] autorelease];
 }
 
 // -------------------------------------------------------------------------------------------
 #pragma mark Instance methods
 
-- (BOOL) isSendingText {
-  return (sentText && sentText.length > 0);
-}
-
-- (NSURL *) url {
-  NSString *urlString = [BLIP_API_HOST stringByAppendingString: path];
-  return [NSURL URLWithString: urlString];
-}
-
 - (void) appendReceivedText: (NSString *) text {
   [receivedText appendString: text];
+}
+
+- (void) setValueIfNotEmpty: (NSString *) value forHTTPHeaderField: (NSString *) field {
+  if (value) SetHeader(field, value);
 }
 
 @end

@@ -14,20 +14,16 @@ typedef enum {
   OBAuthenticationRequest
 } OBRequestType;
 
-@interface OBRequest : NSObject {
-  NSString *path;
-  NSString *httpMethod;
-  NSString *sentText;
+@interface OBRequest : NSMutableURLRequest {
   OBRequestType type;
   NSURLResponse *response;
+  NSString *sentText;
   NSMutableString *receivedText;
 }
 
-@property (nonatomic, copy) NSString *path;
-@property (nonatomic, copy) NSString *httpMethod;
-@property (nonatomic, copy) NSString *sentText;
 @property (nonatomic) OBRequestType type;
 @property (nonatomic, retain) NSURLResponse *response;
+@property (nonatomic, readonly) NSString *sentText;
 @property (nonatomic, readonly) NSMutableString *receivedText;
 
 + (OBRequest *) requestSendingMessage: (NSString *) message;
@@ -47,8 +43,7 @@ typedef enum {
 - (id) initWithPath: (NSString *) path
                type: (OBRequestType) type;
 
-- (NSURL *) url;
-- (BOOL) isSendingText;
 - (void) appendReceivedText: (NSString *) text;
+- (void) setValueIfNotEmpty: (NSString *) value forHTTPHeaderField: (NSString *) field;
 
 @end

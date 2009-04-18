@@ -16,8 +16,7 @@
 
 @property (nonatomic, retain) OBRequest *request;
 
-- (id) initWithNSURLRequest: (NSURLRequest *) nsrequest
-                  OBRequest: (OBRequest *) request
-                   delegate: (id) delegate;
++ (OBURLConnection *) connectionWithRequest: (OBRequest *) request delegate: (id) delegate;
+- (id) initWithRequest: (OBRequest *) request delegate: (id) delegate;
 
 @end

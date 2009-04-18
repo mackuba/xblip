@@ -14,8 +14,6 @@
 #import "OBUtils.h"
 #import "OBURLConnection.h"
 
-#define SetHeader(request, key, value) [request setValue: value forHTTPHeaderField: key]
-#define SetHeaderNotEmpty(request, key, value) if (value) [request setValue: value forHTTPHeaderField: key]
 #define ThisRequest() [((OBURLConnection *) connection) request]
 #define ConnectionFinished() [currentConnections removeObject: connection]
 #define SafeDelegateCall(method, ...) \
@@ -32,7 +30,6 @@
 @interface OBConnector ()
 - (NSString *) generateAuthenticationStringFromUsername: (NSString *) username
                                                password: (NSString *) password;
-- (NSMutableURLRequest *) buildNSURLRequestFor: (OBRequest *) request;
 - (void) handleFinishedRequest: (OBRequest *) request;
 - (BOOL) isSendingDashboardRequest;
 - (void) closeAllConnections;
@@ -139,33 +136,11 @@
 }
 
 - (void) sendRequest: (OBRequest *) request {
-  NSMutableURLRequest *nsrequest = [self buildNSURLRequestFor: request];
-  NSLog(@"sending request to %@ %@ (type %d) with text '%@'", request.httpMethod, request.path, request.type,
-    request.sentText);
-  OBURLConnection *connection = [[OBURLConnection alloc] initWithNSURLRequest: nsrequest
-                                                                    OBRequest: request
-                                                                     delegate: self];
+  NSLog(@"sending %@ to %@ (type %d) with '%@'", request.HTTPMethod, request.URL, request.type, request.sentText);
+  [request setValueIfNotEmpty: userAgent forHTTPHeaderField: @"User-Agent"];
+  [request setValueIfNotEmpty: authenticationString forHTTPHeaderField: @"Authorization"];
+  OBURLConnection *connection = [OBURLConnection connectionWithRequest: request delegate: self];
   [currentConnections addObject: connection];
-  [connection release];
-}
-
-- (NSMutableURLRequest *) buildNSURLRequestFor: (OBRequest *) request {
-  NSMutableURLRequest *nsrequest;
-  nsrequest = [[NSMutableURLRequest alloc] initWithURL: [request url]
-                                           cachePolicy: NSURLRequestReloadIgnoringLocalCacheData
-                                           timeoutInterval: 15];
-  [nsrequest setHTTPMethod: request.httpMethod];
-
-  SetHeader(nsrequest, @"X-Blip-API", BLIP_API_VERSION);
-  SetHeader(nsrequest, @"Accept", @"application/json");
-  SetHeaderNotEmpty(nsrequest, @"User-Agent", userAgent);
-  SetHeaderNotEmpty(nsrequest, @"Authorization", authenticationString);
-  if ([request isSendingText]) {
-    SetHeader(nsrequest, @"Content-Type", @"application/json");
-    [nsrequest setHTTPBody: [request.sentText dataUsingEncoding: NSUTF8StringEncoding]];
-  }
-
-  return [nsrequest autorelease];
 }
 
 // -------------------------------------------------------------------------------------------
@@ -184,7 +159,7 @@
 }
 
 - (void) connectionDidFinishLoading: (NSURLConnection *) connection {
-  NSLog(@"finished request to %@ (%d) (text = %@)", ThisRequest().path, ThisRequest().type, ThisRequest().receivedText);
+  NSLog(@"finished request to %@ (%d) (text = %@)", ThisRequest().URL, ThisRequest().type, ThisRequest().receivedText);
   [self handleFinishedRequest: ThisRequest()];
   ConnectionFinished();
 }

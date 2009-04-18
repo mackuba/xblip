@@ -14,10 +14,12 @@
 
 SynthesizeAndReleaseLater(request);
 
-- (id) initWithNSURLRequest: (NSURLRequest *) nsrequest
-                  OBRequest: (OBRequest *) obrequest
-                   delegate: (id) delegate {
-  if (self = [super initWithRequest: nsrequest delegate: delegate]) {
++ (OBURLConnection *) connectionWithRequest: (OBRequest *) request delegate: (id) delegate {
+  return [[[OBURLConnection alloc] initWithRequest: request delegate: delegate] autorelease];
+};
+
+- (id) initWithRequest: (OBRequest *) obrequest delegate: (id) delegate {
+  if (self = [super initWithRequest: obrequest delegate: delegate]) {
     self.request = obrequest;
   }
   return self;
