@@ -138,7 +138,7 @@ OnDeallocRelease(newMessageField, tableView, loginController, messages, blip);
 
 - (void) prependMessageToLog: (OBMessage *) message {
   [tableView beginUpdates];
-  [messages addObject: message];
+  [messages insertObject: message atIndex: 0];
   NSIndexPath *row = [NSIndexPath indexPathForRow: 0 inSection: 0];
   [tableView insertRowsAtIndexPaths: [NSArray arrayWithObject: row] withRowAnimation: UITableViewRowAnimationTop];
   [tableView endUpdates];
@@ -194,6 +194,7 @@ OnDeallocRelease(newMessageField, tableView, loginController, messages, blip);
   if (receivedMessages.count > 0) {
     [self scrollTextViewToTop];
   }
+  // first message in the array is the latest one, so we want it to be added as the last one
   for (OBMessage *message in [receivedMessages reverseObjectEnumerator]) {
     NSLog(@"message %@ from %@", message.content, message.username);
     [self prependMessageToLog: message];

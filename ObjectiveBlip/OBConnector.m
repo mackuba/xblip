@@ -175,6 +175,7 @@
     case OBDashboardRequest:
       trimmedString = [OBUtils trimmedString: request.receivedText];
       if (trimmedString.length > 0) {
+        // msgs are coming in the order from newest to oldest
         messages = [OBMessage messagesFromJSONString: trimmedString];
         if (messages.count > 0) {
           lastMessageId = [[messages objectAtIndex: 0] messageId];
