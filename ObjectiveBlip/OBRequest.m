@@ -58,9 +58,7 @@ SynthesizeAndReleaseLater(response, receivedText, sentText);
 #pragma mark Request generators
 
 + (OBRequest *) requestSendingMessage: (NSString *) message {
-  NSLog(@"sending message: '%@'", message);
   NSString *content = [NSString stringWithFormat: @"{\"update\": {\"body\": %@}}", [message jsonStringValue]];
-  NSLog(@"content string: '%@'", content);
 
   OBRequest *request = [[OBRequest alloc] initWithPath: @"/updates"
                                                 method: @"POST"

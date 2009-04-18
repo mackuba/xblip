@@ -171,7 +171,7 @@ OnDeallocRelease(newMessageField, tableView, loginController, messages, blip);
   CGSize r = [text sizeWithFont: font
                    constrainedToSize: CGSizeMake(227, 10000)
                    lineBreakMode: UILineBreakModeWordWrap];
-  NSLog(@"height/width of '%@' = %f/%f", text, r.height, r.width);
+  //NSLog(@"height/width of '%@' = %f/%f", text, r.height, r.width);
   return r.height + 20;
 }
 

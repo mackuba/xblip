@@ -147,12 +147,10 @@
 #pragma mark Response handling
 
 - (void) connection: (NSURLConnection *) connection didReceiveResponse: (NSURLResponse *) response {
-  NSLog(@"received response");
   ThisRequest().response = response;
 }
 
 - (void) connection: (NSURLConnection *) connection didReceiveData: (NSData *) data {
-  NSLog(@"received data");
   NSString *receivedText = [[NSString alloc] initWithData: data encoding: NSUTF8StringEncoding];
   [ThisRequest() appendReceivedText: receivedText];
   [receivedText release];
@@ -207,7 +205,6 @@
 }
 
 - (void) connection: (NSURLConnection *) connection didFailWithError: (NSError *) error {
-  NSLog(@"error");
   if (error.domain == NSURLErrorDomain && error.code == NSURLErrorTimedOut) {
     [self stopMonitoringDashboard];
   }
@@ -217,7 +214,6 @@
 
 - (void) connection: (NSURLConnection *) connection
          didReceiveAuthenticationChallenge: (NSURLAuthenticationChallenge *) challenge {
-  NSLog(@"auth plz");
   SafeDelegateCall(authenticationFailed);
   // TODO: let the user try again and reuse the connection
   [[challenge sender] cancelAuthenticationChallenge: challenge];
