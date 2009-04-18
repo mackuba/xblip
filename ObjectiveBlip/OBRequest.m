@@ -59,7 +59,7 @@ SynthesizeAndReleaseLater(response, receivedText, sentText);
 
 + (OBRequest *) requestSendingMessage: (NSString *) message {
   NSLog(@"sending message: '%@'", message);
-  NSString *content = [NSString stringWithFormat: @"{update: {body: %@}}", [message jsonStringValue]];
+  NSString *content = [NSString stringWithFormat: @"{\"update\": {\"body\": %@}}", [message jsonStringValue]];
   NSLog(@"content string: '%@'", content);
 
   OBRequest *request = [[OBRequest alloc] initWithPath: @"/updates"
