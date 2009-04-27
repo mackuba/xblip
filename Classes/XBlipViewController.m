@@ -21,7 +21,6 @@
 // TODO: get app version from configuration
 
 @interface XBlipViewController ()
-- (MessageCell *) createMessageCell;
 - (NSString *) errorResponseForNSError: (NSError *) nserror;
 - (void) prependMessageToLog: (OBMessage *) message;
 - (void) saveLoginAndPassword;
@@ -32,8 +31,8 @@
 
 @implementation XBlipViewController
 
-@synthesize newMessageField, tableView;
-OnDeallocRelease(newMessageField, tableView, loginController, messages, blip);
+@synthesize newMessageField, tableView, currentCell;
+OnDeallocRelease(newMessageField, tableView, currentCell, loginController, messages, blip);
 
 // -------------------------------------------------------------------------------------------
 #pragma mark View initialization
@@ -159,7 +158,8 @@ OnDeallocRelease(newMessageField, tableView, loginController, messages, blip);
   OBMessage *message = [messages objectAtIndex: path.row];
   MessageCell *cell = (MessageCell *) [table dequeueReusableCellWithIdentifier: MESSAGE_CELL_TYPE];
   if (!cell) {
-    cell = [self createMessageCell];
+    [[NSBundle mainBundle] loadNibNamed: @"MessageCell" owner: self options: nil];
+    cell = currentCell;
   }
   [cell displayMessage: message];
   return cell;
@@ -171,18 +171,7 @@ OnDeallocRelease(newMessageField, tableView, loginController, messages, blip);
   CGSize r = [text sizeWithFont: font
                    constrainedToSize: CGSizeMake(227, 10000)
                    lineBreakMode: UILineBreakModeWordWrap];
-  //NSLog(@"height/width of '%@' = %f/%f", text, r.height, r.width);
   return r.height + 20;
-}
-
-- (MessageCell *) createMessageCell {
-  NSArray *nibContents = [[NSBundle mainBundle] loadNibNamed: @"MessageCell" owner: self options: nil];
-  for (NSObject *nibItem in nibContents) {
-    if ([nibItem isKindOfClass: [MessageCell class]]) {
-      return [((MessageCell *) nibItem) retain];
-    }
-  }
-  return nil;
 }
 
 // -------------------------------------------------------------------------------------------

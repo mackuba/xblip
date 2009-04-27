@@ -10,6 +10,7 @@
 
 @class OBConnector;
 @class LoginDialogController;
+@class MessageCell;
 
 @interface XBlipViewController : UIViewController <UITextFieldDelegate> {
   UITextField *newMessageField;
@@ -18,10 +19,12 @@
   LoginDialogController *loginController;
   NSMutableArray *messages;
   BOOL firstConnection;
+  MessageCell *currentCell;
 }
 
 @property (nonatomic, retain) IBOutlet UITextField *newMessageField;
 @property (nonatomic, retain) IBOutlet UITableView *tableView;
+@property (nonatomic, retain) IBOutlet MessageCell *currentCell;
 
 - (IBAction) blipButtonClicked;
 - (void) loginSuccessful;

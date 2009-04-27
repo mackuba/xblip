@@ -14,13 +14,6 @@
 
 SynthesizeAndReleaseLater(contentLabel, usernameLabel);
 
-- (id) initWithFrame: (CGRect) frame reuseIdentifier: (NSString *) reuseIdentifier {
-  if (self = [super initWithFrame: frame reuseIdentifier: reuseIdentifier]) {
-    // Initialization code
-  }
-  return self;
-}
-
 - (void) displayMessage: (OBMessage *) message {
   contentLabel.text = message.content;
   usernameLabel.text = [message.username stringByAppendingString: @":"];
