@@ -58,8 +58,7 @@ SynthesizeAndReleaseLater(response, receivedText, sentText);
 #pragma mark Request generators
 
 + (OBRequest *) requestSendingMessage: (NSString *) message {
-  NSString *content = [NSString stringWithFormat: @"{\"update\": {\"body\": %@}}", [message jsonStringValue]];
-
+  NSString *content = OBFormat(@"{\"update\": {\"body\": %@}}", [message jsonStringValue]);
   OBRequest *request = [[OBRequest alloc] initWithPath: @"/updates"
                                                 method: @"POST"
                                                   text: content
@@ -72,7 +71,7 @@ SynthesizeAndReleaseLater(response, receivedText, sentText);
 }
 
 + (OBRequest *) requestForDashboardSince: (NSInteger) lastMessageId {
-  NSString *path = [NSString stringWithFormat: @"/dashboard/since/%d", lastMessageId];
+  NSString *path = OBFormat(@"/dashboard/since/%d", lastMessageId);
   return [[[OBRequest alloc] initWithPath: path type: OBDashboardRequest] autorelease];
 }
 

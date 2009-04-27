@@ -140,7 +140,7 @@ OnDeallocRelease(newMessageField, tableView, loginController, messages, blip);
   [tableView beginUpdates];
   [messages insertObject: message atIndex: 0];
   NSIndexPath *row = [NSIndexPath indexPathForRow: 0 inSection: 0];
-  [tableView insertRowsAtIndexPaths: [NSArray arrayWithObject: row] withRowAnimation: UITableViewRowAnimationTop];
+  [tableView insertRowsAtIndexPaths: OBArray(row) withRowAnimation: UITableViewRowAnimationTop];
   [tableView endUpdates];
 }
 

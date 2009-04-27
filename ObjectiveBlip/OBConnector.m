@@ -76,11 +76,10 @@
 - (NSString *) generateAuthenticationStringFromUsername: (NSString *) aUsername
                                                password: (NSString *) aPassword {
   if (aUsername && aPassword) {
-    NSString *authString = [[NSString alloc] initWithFormat: @"%@:%@", aUsername, aPassword];
+    NSString *authString = OBFormat(@"%@:%@", aUsername, aPassword);
     NSData *data = [authString dataUsingEncoding: NSUTF8StringEncoding];
-    NSString *encoded = [[NSString alloc] initWithFormat: @"Basic %@", [data base64Encoding]];
-    [authString release];
-    return [encoded autorelease];
+    NSString *encoded = OBFormat(@"Basic %@", [data base64Encoding]);
+    return encoded;
   } else {
     return nil;
   }
