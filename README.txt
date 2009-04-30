@@ -6,8 +6,7 @@ anything doesn't work, looks like shit, doesn't have essential features, or expl
 intended).
 
 The ObjectiveBlip directory contains the backend code that handles the connection to Blip API. It's considered a
-separate subproject, and released under Beerware license (see comments in headers). You can use it to create your
-own Blip clients in ObjectiveC/Cocoa if you want.
+separate subproject; you can use it to create your own Blip clients in ObjectiveC/Cocoa if you want.
 
 Note: to install and run in a simulator, you need:
 * a Mac
@@ -19,5 +18,5 @@ To install and run on an iPhone, you need additionally:
 
 -----
 
-Copyright by Jakub Suder (Psionides) <jakub.suder@gmail.com>. Licensed under GPL v2.
+Copyright by Jakub Suder (Psionides) <jakub.suder@gmail.com>. Licensed under MIT license.
 Includes open source libraries NSData+MBBase64 by MiloBird, and BSJSONAdditions by Blake Seely.
