@@ -13,7 +13,6 @@
 @implementation LoginDialogController
 
 @synthesize usernameField, passwordField, connectingLabel, incorrectLoginLabel, spinner;
-OnDeallocRelease(usernameField, passwordField, connectingLabel, incorrectLoginLabel, spinner, blip);
 
 // -------------------------------------------------------------------------------------------
 #pragma mark Initializers
@@ -105,6 +104,14 @@ OnDeallocRelease(usernameField, passwordField, connectingLabel, incorrectLoginLa
 - (void) didReceiveMemoryWarning {
   [super didReceiveMemoryWarning]; // Releases the view if it doesn't have a superview
   // Release anything that's not essential, such as cached data
+}
+
+- (void) dealloc {
+  if (blip.delegate == self) {
+    blip.delegate = nil;
+  }
+  ReleaseAll(usernameField, passwordField, connectingLabel, incorrectLoginLabel, spinner, blip);
+  [super dealloc];
 }
 
 @end

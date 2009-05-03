@@ -19,13 +19,13 @@
 		5828523A0F767ABB003559EE /* NSScanner+BSJSONAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 582852380F767ABB003559EE /* NSScanner+BSJSONAdditions.m */; };
 		582852590F767E84003559EE /* NSArray+BSJSONAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 582852580F767E84003559EE /* NSArray+BSJSONAdditions.m */; };
 		582852710F7687E1003559EE /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = 582852700F7687E1003559EE /* README.txt */; };
-		582852730F7687EF003559EE /* GPL-LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = 582852720F7687EF003559EE /* GPL-LICENSE.txt */; };
 		582852D50F769DB1003559EE /* OBConnector.m in Sources */ = {isa = PBXBuildFile; fileRef = 582852D10F769DB1003559EE /* OBConnector.m */; };
 		582852D60F769DB1003559EE /* NSDataMBBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = 582852D40F769DB1003559EE /* NSDataMBBase64.m */; };
 		5828530F0F76CBC1003559EE /* LoginDialogController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5828530E0F76CBC1003559EE /* LoginDialogController.m */; };
 		582853110F76CC12003559EE /* LoginDialog.xib in Resources */ = {isa = PBXBuildFile; fileRef = 582853100F76CC12003559EE /* LoginDialog.xib */; };
 		5841BA610F879F22007DE38D /* NSString+BSJSONAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 5841BA600F879F22007DE38D /* NSString+BSJSONAdditions.m */; };
 		5841BAB60F87D452007DE38D /* OBUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 5841BAB50F87D452007DE38D /* OBUtils.m */; };
+		584587040FAD996D00832C66 /* MIT-LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = 584587030FAD996D00832C66 /* MIT-LICENSE.txt */; };
 		588ED0650F8D17E300BCE1FA /* MessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 588ED0640F8D17E300BCE1FA /* MessageCell.xib */; };
 		588ED0690F8D1E7500BCE1FA /* MessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 588ED0680F8D1E7500BCE1FA /* MessageCell.m */; };
 		588ED0720F8D239100BCE1FA /* OBMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 588ED0710F8D239100BCE1FA /* OBMessage.m */; };
@@ -54,7 +54,6 @@
 		582852570F767E84003559EE /* NSArray+BSJSONAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+BSJSONAdditions.h"; sourceTree = "<group>"; };
 		582852580F767E84003559EE /* NSArray+BSJSONAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+BSJSONAdditions.m"; sourceTree = "<group>"; };
 		582852700F7687E1003559EE /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
-		582852720F7687EF003559EE /* GPL-LICENSE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "GPL-LICENSE.txt"; sourceTree = "<group>"; };
 		582852D00F769DB1003559EE /* OBConnector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OBConnector.h; sourceTree = "<group>"; };
 		582852D10F769DB1003559EE /* OBConnector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OBConnector.m; sourceTree = "<group>"; };
 		582852D20F769DB1003559EE /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
@@ -67,6 +66,7 @@
 		5841BA600F879F22007DE38D /* NSString+BSJSONAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+BSJSONAdditions.m"; sourceTree = "<group>"; };
 		5841BAB40F87D452007DE38D /* OBUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OBUtils.h; sourceTree = "<group>"; };
 		5841BAB50F87D452007DE38D /* OBUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OBUtils.m; sourceTree = "<group>"; };
+		584587030FAD996D00832C66 /* MIT-LICENSE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "MIT-LICENSE.txt"; sourceTree = "<group>"; };
 		588ED0640F8D17E300BCE1FA /* MessageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MessageCell.xib; sourceTree = "<group>"; };
 		588ED0670F8D1E7500BCE1FA /* MessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageCell.h; sourceTree = "<group>"; };
 		588ED0680F8D1E7500BCE1FA /* MessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageCell.m; sourceTree = "<group>"; };
@@ -146,7 +146,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				582852720F7687EF003559EE /* GPL-LICENSE.txt */,
+				584587030FAD996D00832C66 /* MIT-LICENSE.txt */,
 				2899E5210DE3E06400AC0155 /* XBlipViewController.xib */,
 				28AD733E0D9D9553002E5188 /* MainWindow.xib */,
 				8D1107310486CEB800E47090 /* Info.plist */,
@@ -247,9 +247,9 @@
 				28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */,
 				2899E5220DE3E06400AC0155 /* XBlipViewController.xib in Resources */,
 				582852710F7687E1003559EE /* README.txt in Resources */,
-				582852730F7687EF003559EE /* GPL-LICENSE.txt in Resources */,
 				582853110F76CC12003559EE /* LoginDialog.xib in Resources */,
 				588ED0650F8D17E300BCE1FA /* MessageCell.xib in Resources */,
+				584587040FAD996D00832C66 /* MIT-LICENSE.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -31,7 +31,6 @@
 @implementation XBlipViewController
 
 @synthesize newMessageField, tableView, currentCell;
-OnDeallocRelease(newMessageField, tableView, currentCell, loginController, messages, blip);
 
 // -------------------------------------------------------------------------------------------
 #pragma mark View initialization
@@ -216,6 +215,14 @@ OnDeallocRelease(newMessageField, tableView, currentCell, loginController, messa
 - (void) didReceiveMemoryWarning {
   [super didReceiveMemoryWarning]; // Releases the view if it doesn't have a superview
   // Release anything that's not essential, such as cached data
+}
+
+- (void) dealloc {
+  if (blip.delegate == self) {
+    blip.delegate = nil;
+  }
+  ReleaseAll(newMessageField, tableView, currentCell, loginController, messages, blip);
+  [super dealloc];
 }
 
 @end

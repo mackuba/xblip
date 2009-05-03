@@ -2,3 +2,5 @@ build
 *.tm_build_errors
 XBlip.xcodeproj/*.pbxuser
 XBlip.xcodeproj/*.perspective*
+._*
+
