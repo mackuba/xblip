@@ -1,8 +1,12 @@
 # xBlip
 
-xBlip is a native iPhone client for [blip.pl](http://blip.pl), Polish microblogging service. Currently in alpha stage (which means, if anything doesn't work, looks like shit, doesn't have essential features, or explodes when you touch it - don't complain... :).
+xBlip is a native iPhone client for [blip.pl](http://blip.pl), Polish microblogging service. Currently in alpha stage
+(which means, if anything doesn't work, looks like shit, doesn't have essential features, or explodes when you touch it
+- don't complain... :).
 
-The ObjectiveBlip directory contains the backend code that handles the connection to Blip API. It's considered a separate subproject; you can use it to create your own Blip clients in ObjectiveC/Cocoa if you want.
+The ObjectiveBlip directory contains the backend code that handles the connection to Blip API. It's a separate
+subproject, available at [http://github.com/psionides/ObjetiveBlip](http://github.com/psionides/ObjetiveBlip), and you
+can use it to create your own Blip clients in ObjectiveC/Cocoa if you want.
 
 ## Requirements
 
@@ -39,5 +43,6 @@ Plans for future:
 
 ## License
 
-Copyright by Jakub Suder (Psionides) <jakub.suder at gmail.com>. Licensed under MIT license.
+Copyright by Jakub Suder (Psionides) <jakub.suder at gmail.com>. Both the main project and the backend subproject are
+licensed under MIT license.
 Includes open source libraries NSData+MBBase64 by MiloBird, and BSJSONAdditions by Blake Seely.
