@@ -5,7 +5,7 @@ xBlip is a native iPhone client for [blip.pl](http://blip.pl), Polish microblogg
 - don't complain... :).
 
 The ObjectiveBlip directory contains the backend code that handles the connection to Blip API. It's a separate
-subproject, available at [http://github.com/psionides/ObjetiveBlip](http://github.com/psionides/ObjetiveBlip), and you
+subproject, available at [http://github.com/psionides/ObjectiveBlip](http://github.com/psionides/ObjectiveBlip), and you
 can use it to create your own Blip clients in ObjectiveC/Cocoa if you want.
 
 ## Requirements
