@@ -10,7 +10,6 @@
 @class OBRequest;
 
 @interface OBConnector : NSObject {
-  __weak id delegate;
   BOOL loggedIn;
   BOOL isSendingDashboardRequest;
   NSString *username;
@@ -21,20 +20,18 @@
 }
 
 @property (nonatomic) BOOL loggedIn;
-@property (nonatomic, retain) id delegate;
 @property (nonatomic, readonly) NSString *username;
 @property (nonatomic, readonly) NSString *password;
 
 - (id) init;
-- (id) initWithUsername: (NSString *) username
-               password: (NSString *) password
-               delegate: (id) delegate;
+- (id) initWithUsername: (NSString *) username password: (NSString *) password;
 
-- (void) authenticate;
-- (void) getDashboard;
+- (OBRequest *) authenticateRequest;
+- (OBRequest *) dashboardRequest;
+- (OBRequest *) sendMessageRequest: (NSString *) message;
+
 - (void) startMonitoringDashboard;
 - (void) stopMonitoringDashboard;
-- (void) sendMessage: (NSString *) message;
 - (void) setUsername: (NSString *) aUsername password: (NSString *) aPassword;
 
 @end

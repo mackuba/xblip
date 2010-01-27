@@ -7,6 +7,7 @@
 
 #import "OBMessage.h"
 #import "OBConnector.h"
+#import "OBRequest.h"
 #import "OBUtils.h"
 #import "Utils.h"
 #import "XBlipViewController.h"
@@ -40,10 +41,10 @@
   NSString *username = [settings objectForKey: USERNAME_KEY];
   NSString *password = [settings objectForKey: PASSWORD_KEY]; // TODO: encode password?
   if (username && password) {
-    blip = [[OBConnector alloc] initWithUsername: username password: password delegate: self];
+    blip = [[OBConnector alloc] initWithUsername: username password: password];
     // check if the password is still OK
     firstConnection = YES;
-    [blip authenticate];
+    [[blip authenticateRequest] sendFor: self onSuccess: @selector(loginSuccessful)];
   } else {
     blip = [[OBConnector alloc] init];
     firstConnection = NO;
@@ -97,10 +98,9 @@
     [loginController release];
     loginController = nil;
     [self saveLoginAndPassword];
-    blip.delegate = self;
   }
   // TODO: show "loading" while loading dashboard for the first time
-  [blip getDashboard];
+  [[blip dashboardRequest] sendFor: self onSuccess: @selector(messagesReceived:)];
   [blip startMonitoringDashboard];
 }
 
@@ -126,7 +126,7 @@
 - (void) sendMessage {
   [newMessageField resignFirstResponder];
   if (newMessageField.text.length > 0) {
-    [blip sendMessage: newMessageField.text];
+    [[blip sendMessageRequest: newMessageField.text] send];
   }    
   newMessageField.text = @"";
 }
@@ -216,9 +216,6 @@
 }
 
 - (void) dealloc {
-  if (blip.delegate == self) {
-    blip.delegate = nil;
-  }
   ReleaseAll(newMessageField, tableView, currentCell, loginController, messages, blip);
   [super dealloc];
 }

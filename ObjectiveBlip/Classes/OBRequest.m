@@ -7,12 +7,10 @@
 
 #import "Constants.h"
 #import "OBRequest.h"
-#import "OBUtils.h"
 
 @implementation OBRequest
 
-// -------------------------------------------------------------------------------------------
-#pragma mark Initializers
+@synthesize target, action;
 
 - (id) initWithPath: (NSString *) path
              method: (NSString *) method
@@ -33,11 +31,14 @@
   return self;
 }
 
-+ (OBRequest *) requestWithPath: (NSString *) path
-                         method: (NSString *) method
-                           text: (NSString *) text {
-  OBRequest *request = [[OBRequest alloc] initWithPath: path method: method text: text];
-  return [request autorelease];
+- (void) sendFor: (id) t onSuccess: (SEL) a {
+  target = t;
+  action = a;
+  [self startAsynchronous];
+}
+
+- (void) send {
+  [self startAsynchronous];
 }
 
 @end

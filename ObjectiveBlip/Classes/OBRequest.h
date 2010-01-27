@@ -8,14 +8,21 @@
 #import <Foundation/Foundation.h>
 #import "ASIHTTPRequest.h"
 
-@interface OBRequest : ASIHTTPRequest {}
+@interface OBRequest : ASIHTTPRequest {
+  id target;
+  SEL action;
+}
 
-+ (OBRequest *) requestWithPath: (NSString *) path
-                         method: (NSString *) method
-                           text: (NSString *) text;
+@property (nonatomic, readonly) id target;
+@property (nonatomic, readonly) SEL action;
 
 - (id) initWithPath: (NSString *) path
              method: (NSString *) method
                text: (NSString *) text;
+
+- (void) sendFor: (id) target
+       onSuccess: (SEL) action;
+
+- (void) send;
 
 @end

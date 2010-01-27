@@ -8,6 +8,7 @@
 #import "LoginDialogController.h"
 #import "XBlipViewController.h"
 #import "OBConnector.h"
+#import "OBRequest.h"
 #import "OBUtils.h"
 
 @implementation LoginDialogController
@@ -23,7 +24,6 @@
         mainController: (XBlipViewController *) controller {
   if (self = [super initWithNibName: nibName bundle: bundle]) {
     blip = [blipInstance retain];
-    blip.delegate = self;
     mainController = controller;
   }
   return self;
@@ -64,7 +64,7 @@
     [usernameField resignFirstResponder];
     [passwordField resignFirstResponder];
     [blip setUsername: usernameField.text password: passwordField.text];
-    [blip authenticate];
+    [[blip authenticateRequest] sendFor: self onSuccess: @selector(authenticationSuccessful)];
     [spinner startAnimating];
     incorrectLoginLabel.hidden = YES;
     connectingLabel.hidden = NO;
@@ -107,9 +107,6 @@
 }
 
 - (void) dealloc {
-  if (blip.delegate == self) {
-    blip.delegate = nil;
-  }
   ReleaseAll(usernameField, passwordField, connectingLabel, incorrectLoginLabel, spinner, blip);
   [super dealloc];
 }
