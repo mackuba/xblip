@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 45;
+	objectVersion = 46;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -15,7 +15,6 @@
 		2899E5220DE3E06400AC0155 /* XBlipViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2899E5210DE3E06400AC0155 /* XBlipViewController.xib */; };
 		28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD733E0D9D9553002E5188 /* MainWindow.xib */; };
 		28D7ACF80DDB3853001CB0EB /* XBlipViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D7ACF70DDB3853001CB0EB /* XBlipViewController.m */; };
-		582852710F7687E1003559EE /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = 582852700F7687E1003559EE /* README.txt */; };
 		5828530F0F76CBC1003559EE /* LoginDialogController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5828530E0F76CBC1003559EE /* LoginDialogController.m */; };
 		582853110F76CC12003559EE /* LoginDialog.xib in Resources */ = {isa = PBXBuildFile; fileRef = 582853100F76CC12003559EE /* LoginDialog.xib */; };
 		584587040FAD996D00832C66 /* MIT-LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = 584587030FAD996D00832C66 /* MIT-LICENSE.txt */; };
@@ -32,9 +31,8 @@
 		58E65FE61110E6E9006AC2C7 /* NSScanner+BSJSONAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 58E65FD71110E6E9006AC2C7 /* NSScanner+BSJSONAdditions.m */; };
 		58E65FE71110E6E9006AC2C7 /* NSString+BSJSONAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 58E65FD91110E6E9006AC2C7 /* NSString+BSJSONAdditions.m */; };
 		58E65FE81110E6E9006AC2C7 /* NSDataMBBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = 58E65FDB1110E6E9006AC2C7 /* NSDataMBBase64.m */; };
-		58E65FE91110E6E9006AC2C7 /* MIT-LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = 58E65FDC1110E6E9006AC2C7 /* MIT-LICENSE.txt */; };
-		58E65FEA1110E6E9006AC2C7 /* README.markdown in Resources */ = {isa = PBXBuildFile; fileRef = 58E65FDD1110E6E9006AC2C7 /* README.markdown */; };
 		58E65FED1110E73D006AC2C7 /* BSJSONEncoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 58E65FEC1110E73D006AC2C7 /* BSJSONEncoder.m */; };
+		58E660011110E806006AC2C7 /* README.markdown in Resources */ = {isa = PBXBuildFile; fileRef = 58E660001110E806006AC2C7 /* README.markdown */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,7 +48,6 @@
 		28D7ACF70DDB3853001CB0EB /* XBlipViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XBlipViewController.m; sourceTree = "<group>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		32CA4F630368D1EE00C91783 /* XBlip_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XBlip_Prefix.pch; sourceTree = "<group>"; };
-		582852700F7687E1003559EE /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
 		5828530D0F76CBC1003559EE /* LoginDialogController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginDialogController.h; sourceTree = "<group>"; };
 		5828530E0F76CBC1003559EE /* LoginDialogController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginDialogController.m; sourceTree = "<group>"; };
 		582853100F76CC12003559EE /* LoginDialog.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoginDialog.xib; sourceTree = "<group>"; };
@@ -81,10 +78,9 @@
 		58E65FD91110E6E9006AC2C7 /* NSString+BSJSONAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+BSJSONAdditions.m"; sourceTree = "<group>"; };
 		58E65FDA1110E6E9006AC2C7 /* NSDataMBBase64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSDataMBBase64.h; sourceTree = "<group>"; };
 		58E65FDB1110E6E9006AC2C7 /* NSDataMBBase64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSDataMBBase64.m; sourceTree = "<group>"; };
-		58E65FDC1110E6E9006AC2C7 /* MIT-LICENSE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "MIT-LICENSE.txt"; sourceTree = "<group>"; };
-		58E65FDD1110E6E9006AC2C7 /* README.markdown */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.markdown; sourceTree = "<group>"; };
 		58E65FEB1110E73D006AC2C7 /* BSJSONEncoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSJSONEncoder.h; sourceTree = "<group>"; };
 		58E65FEC1110E73D006AC2C7 /* BSJSONEncoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BSJSONEncoder.m; sourceTree = "<group>"; };
+		58E660001110E806006AC2C7 /* README.markdown */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.markdown; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -152,11 +148,11 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				58E660001110E806006AC2C7 /* README.markdown */,
 				584587030FAD996D00832C66 /* MIT-LICENSE.txt */,
 				2899E5210DE3E06400AC0155 /* XBlipViewController.xib */,
 				28AD733E0D9D9553002E5188 /* MainWindow.xib */,
 				8D1107310486CEB800E47090 /* Info.plist */,
-				582852700F7687E1003559EE /* README.txt */,
 				582853100F76CC12003559EE /* LoginDialog.xib */,
 				588ED0640F8D17E300BCE1FA /* MessageCell.xib */,
 			);
@@ -179,8 +175,6 @@
 				58E65FC21110E6E9006AC2C7 /* Classes */,
 				58E65FCD1110E6E9006AC2C7 /* Constants.h */,
 				58E65FCE1110E6E9006AC2C7 /* Lib */,
-				58E65FDC1110E6E9006AC2C7 /* MIT-LICENSE.txt */,
-				58E65FDD1110E6E9006AC2C7 /* README.markdown */,
 			);
 			path = ObjectiveBlip;
 			sourceTree = "<group>";
@@ -255,7 +249,7 @@
 		29B97313FDCFA39411CA2CEA /* Project object */ = {
 			isa = PBXProject;
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "XBlip" */;
-			compatibilityVersion = "Xcode 3.1";
+			compatibilityVersion = "Xcode 3.2";
 			hasScannedForEncodings = 1;
 			mainGroup = 29B97314FDCFA39411CA2CEA /* CustomTemplate */;
 			projectDirPath = "";
@@ -273,12 +267,10 @@
 			files = (
 				28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */,
 				2899E5220DE3E06400AC0155 /* XBlipViewController.xib in Resources */,
-				582852710F7687E1003559EE /* README.txt in Resources */,
 				582853110F76CC12003559EE /* LoginDialog.xib in Resources */,
 				588ED0650F8D17E300BCE1FA /* MessageCell.xib in Resources */,
 				584587040FAD996D00832C66 /* MIT-LICENSE.txt in Resources */,
-				58E65FE91110E6E9006AC2C7 /* MIT-LICENSE.txt in Resources */,
-				58E65FEA1110E6E9006AC2C7 /* README.markdown in Resources */,
+				58E660011110E806006AC2C7 /* README.markdown in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -324,6 +316,7 @@
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				INFOPLIST_FILE = Info.plist;
 				PRODUCT_NAME = xBlip;
+				SDKROOT = iphoneos3.0;
 			};
 			name = Debug;
 		};
@@ -337,6 +330,7 @@
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				INFOPLIST_FILE = Info.plist;
 				PRODUCT_NAME = xBlip;
+				SDKROOT = iphoneos3.0;
 			};
 			name = Release;
 		};
@@ -350,7 +344,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				PREBINDING = NO;
-				SDKROOT = iphoneos2.2.1;
+				SDKROOT = iphoneos3.0;
 			};
 			name = Debug;
 		};
@@ -363,7 +357,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				PREBINDING = NO;
-				SDKROOT = iphoneos2.2.1;
+				SDKROOT = iphoneos3.0;
 			};
 			name = Release;
 		};
