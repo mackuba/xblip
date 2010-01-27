@@ -14,8 +14,8 @@
 
 @implementation OBRequest
 
-@synthesize type;
-SynthesizeAndReleaseLater(response, receivedText, sentText);
+@synthesize type, response, receivedText, sentText;
+OnDeallocRelease(response, receivedText, sentText);
 
 // -------------------------------------------------------------------------------------------
 #pragma mark Initializers

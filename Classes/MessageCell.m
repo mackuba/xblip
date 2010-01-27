@@ -11,7 +11,8 @@
 
 @implementation MessageCell
 
-SynthesizeAndReleaseLater(contentLabel, usernameLabel);
+@synthesize contentLabel, usernameLabel;
+OnDeallocRelease(contentLabel, usernameLabel);
 
 - (void) displayMessage: (OBMessage *) message {
   contentLabel.text = message.content;

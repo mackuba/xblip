@@ -11,7 +11,8 @@
 
 @implementation OBURLConnection
 
-SynthesizeAndReleaseLater(request);
+@synthesize request;
+OnDeallocRelease(request);
 
 + (OBURLConnection *) connectionWithRequest: (OBRequest *) request delegate: (id) delegate {
   return [[[OBURLConnection alloc] initWithRequest: request delegate: delegate] autorelease];

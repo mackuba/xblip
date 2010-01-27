@@ -11,7 +11,8 @@
 
 @implementation XBlipAppDelegate
 
-SynthesizeAndReleaseLater(window, viewController);
+@synthesize window, viewController;
+OnDeallocRelease(window, viewController);
 
 - (void) applicationDidFinishLaunching: (UIApplication *) application {
   // Override point for customization after app launch

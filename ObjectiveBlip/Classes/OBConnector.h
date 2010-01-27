@@ -5,8 +5,6 @@
 // Licensed under MIT license
 // -------------------------------------------------------
 
-// TODO: extract blip connection stuff to a framework
-
 #import <Foundation/Foundation.h>
 
 @class OBRequest;
