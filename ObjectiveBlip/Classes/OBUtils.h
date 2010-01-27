@@ -24,8 +24,6 @@
 #define OBDict(...) [NSDictionary dictionaryWithObjectsAndKeys: __VA_ARGS__, nil]
 #define OBFormat(...) [NSString stringWithFormat: __VA_ARGS__]
 
-@interface OBUtils : NSObject
-
-+ (NSString *) trimmedString: (NSString*) string;
-
+@interface NSString (OBUtils)
+- (NSString *) trimmedString;
 @end

@@ -7,11 +7,11 @@
 
 #import "OBUtils.h"
 
-@implementation OBUtils
+@implementation NSString (OBUtils)
 
-+ (NSString *) trimmedString: (NSString*) originalString {
+- (NSString *) trimmedString {
   NSCharacterSet *whitespace = [NSCharacterSet whitespaceAndNewlineCharacterSet];
-  return [originalString stringByTrimmingCharactersInSet: whitespace];
+  return [self stringByTrimmingCharactersInSet: whitespace];
 }
 
 @end

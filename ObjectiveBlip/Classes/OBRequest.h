@@ -8,33 +8,14 @@
 #import <Foundation/Foundation.h>
 #import "ASIHTTPRequest.h"
 
-typedef enum {
-  OBDashboardRequest = 1,
-  OBSendMessageRequest,
-  OBAuthenticationRequest
-} OBRequestType;
+@interface OBRequest : ASIHTTPRequest {}
 
-@interface OBRequest : ASIHTTPRequest {
-  OBRequestType type;
-}
-
-@property (nonatomic) OBRequestType type;
-
-+ (OBRequest *) requestSendingMessage: (NSString *) message;
-+ (OBRequest *) requestForDashboard;
-+ (OBRequest *) requestForDashboardSince: (NSInteger) lastMessageId;
-+ (OBRequest *) requestForAuthentication;
++ (OBRequest *) requestWithPath: (NSString *) path
+                         method: (NSString *) method
+                           text: (NSString *) text;
 
 - (id) initWithPath: (NSString *) path
              method: (NSString *) method
-               text: (NSString *) text
-               type: (OBRequestType) type;
-
-- (id) initWithPath: (NSString *) path
-             method: (NSString *) method
-               type: (OBRequestType) type;
-
-- (id) initWithPath: (NSString *) path
-               type: (OBRequestType) type;
+               text: (NSString *) text;
 
 @end

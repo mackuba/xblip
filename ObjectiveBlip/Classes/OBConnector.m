@@ -10,6 +10,7 @@
 #import "OBRequest.h"
 #import "OBMessage.h"
 #import "OBUtils.h"
+#import "NSString+BSJSONAdditions.h"
 
 #define SafeDelegateCall(method, ...) \
   if ([delegate respondsToSelector: @selector(method)]) [delegate method __VA_ARGS__]
@@ -23,9 +24,7 @@
 @end
 
 @interface OBConnector ()
-- (void) handleFinishedRequest: (OBRequest *) request;
-- (BOOL) isSendingDashboardRequest;
-- (void) cancelAllRequests;
+- (void) sendRequest: (OBRequest *) request handler: (SEL) handler;
 @end
 
 
@@ -44,6 +43,7 @@
     delegate = aDelegate;
     lastMessageId = -1;
     loggedIn = NO;
+    isSendingDashboardRequest = NO;
     currentRequests = [[NSMutableArray alloc] initWithCapacity: 5];
   }
   return self;
@@ -79,7 +79,8 @@
 }
 
 - (void) dashboardTimerFired: (NSTimer *) timer {
-  if (![self isSendingDashboardRequest]) {
+  if (!isSendingDashboardRequest) {
+    isSendingDashboardRequest = YES;
     [self getDashboard];
   }
 }
@@ -88,37 +89,29 @@
 #pragma mark Request sending
 
 - (void) authenticate {
-  [self sendRequest: [OBRequest requestForAuthentication]];
+  OBRequest *request = [OBRequest requestWithPath: @"/login" method: @"GET" text: nil];
+  [self sendRequest: request handler: @selector(authenticationSuccessful:)];
 }
 
 - (void) getDashboard {
-  if (lastMessageId > 0) {
-    [self sendRequest: [OBRequest requestForDashboardSince: lastMessageId]];
-  } else {
-    [self sendRequest: [OBRequest requestForDashboard]];
-  }
-}
-
-- (BOOL) isSendingDashboardRequest {
-  for (OBRequest *request in currentRequests) {
-    if (request.type == OBDashboardRequest) {
-      return YES;
-    }
-  }
-  return NO;
+  NSString *path = (lastMessageId > 0) ? OBFormat(@"/dashboard/since/%d", lastMessageId) : @"/dashboard";
+  OBRequest *request = [OBRequest requestWithPath: path method: @"GET" text: nil];
+  [self sendRequest: request handler: @selector(dashboardUpdated:)];
 }
 
 - (void) sendMessage: (NSString *) message {
-  [self sendRequest: [OBRequest requestSendingMessage: message]];
+  NSString *content = OBFormat(@"{\"update\": {\"body\": %@}}", [message jsonStringValue]);
+  OBRequest *request = [OBRequest requestWithPath: @"/updates" method: @"POST" text: content];
+  [self sendRequest: request handler: @selector(messageSent:)];
 }
 
-- (void) sendRequest: (OBRequest *) request {
+- (void) sendRequest: (OBRequest *) request handler: (SEL) handler {
   [request addBasicAuthenticationHeaderWithUsername: username andPassword: password];
   [request setDelegate: self];
-  [request setDidFinishSelector: @selector(requestFinished:)];
+  [request setDidFinishSelector: handler];
   [request setDidFailSelector: @selector(requestFailed:)];
 
-  NSLog(@"sending %@ to %@ (type %d) with '%@'", request.requestMethod, request.url, request.type, request.postBody);
+  NSLog(@"sending %@ to %@ with '%@'", request.requestMethod, request.url, request.postBody);
   [currentRequests addObject: request];
   [request startAsynchronous];
 }
@@ -126,40 +119,36 @@
 // -------------------------------------------------------------------------------------------
 #pragma mark Response handling
 
-- (void) requestFinished: (ASIHTTPRequest *) asiRequest {
-  OBRequest *request = (OBRequest *) asiRequest;
+- (void) handleFinishedRequest: (ASIHTTPRequest *) request {
   BOOL html = [[request.responseHeaders objectForKey: @"Content-Type"] isEqual: @"text/html; charset=utf-8"];
-  NSLog(@"finished request to %@ (%d) (text = %@)",
-    request.url, request.type, html ? @"<...html...>" : request.responseString);
-  [self handleFinishedRequest: request];
+  NSLog(@"finished request to %@ (text = %@)", request.url, html ? @"<...html...>" : request.responseString);
+  [[request retain] autorelease];
   [currentRequests removeObject: request];
 }
 
-- (void) handleFinishedRequest: (OBRequest *) request {
-  NSArray *messages;
-  NSString *trimmedString;
-  switch (request.type) {
-    case OBSendMessageRequest:
-      SafeDelegateCall(messageSent);
-      break;
-    
-    case OBDashboardRequest:
-      trimmedString = [OBUtils trimmedString: request.responseString];
-      if (trimmedString.length > 0) {
-        // msgs are coming in the order from newest to oldest
-        messages = [OBMessage messagesFromJSONString: trimmedString];
-        if (messages.count > 0) {
-          lastMessageId = [[messages objectAtIndex: 0] messageId];
-        }
-        SafeDelegateCall(messagesReceived:, messages);
-      }
-      break;
-    
-    case OBAuthenticationRequest:
-      SafeDelegateCall(authenticationSuccessful);
-      loggedIn = YES;
-      break;
+- (void) authenticationSuccessful: (ASIHTTPRequest *) request {
+  [self handleFinishedRequest: request];
+  SafeDelegateCall(authenticationSuccessful);
+  loggedIn = YES;
+}
+
+- (void) dashboardUpdated: (ASIHTTPRequest *) request {
+  [self handleFinishedRequest: request];
+  NSString *trimmedString = [request.responseString trimmedString];
+  if (trimmedString.length > 0) {
+    // msgs are coming in the order from newest to oldest
+    NSArray *messages = [OBMessage messagesFromJSONString: trimmedString];
+    if (messages.count > 0) {
+      lastMessageId = [[messages objectAtIndex: 0] messageId];
+    }
+    SafeDelegateCall(messagesReceived:, messages);
+    isSendingDashboardRequest = NO;
   }
+}
+
+- (void) messageSent: (ASIHTTPRequest *) request {
+  [self handleFinishedRequest: request];
+  SafeDelegateCall(messageSent);
 }
 
 - (void) requestFailed: (ASIHTTPRequest *) request {

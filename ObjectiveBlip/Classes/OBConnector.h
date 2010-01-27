@@ -12,6 +12,7 @@
 @interface OBConnector : NSObject {
   __weak id delegate;
   BOOL loggedIn;
+  BOOL isSendingDashboardRequest;
   NSString *username;
   NSString *password;
   NSInteger lastMessageId;
@@ -34,7 +35,6 @@
 - (void) startMonitoringDashboard;
 - (void) stopMonitoringDashboard;
 - (void) sendMessage: (NSString *) message;
-- (void) sendRequest: (OBRequest *) request;
 - (void) setUsername: (NSString *) aUsername password: (NSString *) aPassword;
 
 @end
