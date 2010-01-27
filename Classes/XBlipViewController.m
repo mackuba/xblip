@@ -16,7 +16,6 @@
 #define USERNAME_KEY @"blipUsername"
 #define PASSWORD_KEY @"blipPassword"
 #define MESSAGE_CELL_TYPE @"messageCell"
-#define USER_AGENT @"xBlip/0.1"
 // TODO: get app version from configuration
 
 @interface XBlipViewController ()
@@ -49,7 +48,6 @@
     blip = [[OBConnector alloc] init];
     firstConnection = NO;
   }
-  blip.userAgent = USER_AGENT;
 }
 
 /*

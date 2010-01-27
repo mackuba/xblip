@@ -6,6 +6,7 @@
 // -------------------------------------------------------
 
 #import <Foundation/Foundation.h>
+#import "ASIHTTPRequest.h"
 
 typedef enum {
   OBDashboardRequest = 1,
@@ -13,17 +14,11 @@ typedef enum {
   OBAuthenticationRequest
 } OBRequestType;
 
-@interface OBRequest : NSMutableURLRequest {
+@interface OBRequest : ASIHTTPRequest {
   OBRequestType type;
-  NSURLResponse *response;
-  NSString *sentText;
-  NSMutableString *receivedText;
 }
 
 @property (nonatomic) OBRequestType type;
-@property (nonatomic, retain) NSURLResponse *response;
-@property (nonatomic, readonly) NSString *sentText;
-@property (nonatomic, readonly) NSMutableString *receivedText;
 
 + (OBRequest *) requestSendingMessage: (NSString *) message;
 + (OBRequest *) requestForDashboard;
@@ -41,8 +36,5 @@ typedef enum {
 
 - (id) initWithPath: (NSString *) path
                type: (OBRequestType) type;
-
-- (void) appendReceivedText: (NSString *) text;
-- (void) setValueIfNotEmpty: (NSString *) value forHTTPHeaderField: (NSString *) field;
 
 @end

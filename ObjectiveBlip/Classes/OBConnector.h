@@ -14,10 +14,8 @@
   BOOL loggedIn;
   NSString *username;
   NSString *password;
-  NSString *authenticationString;
-  NSString *userAgent;
   NSInteger lastMessageId;
-  NSMutableArray *currentConnections;
+  NSMutableArray *currentRequests;
   NSTimer *monitorTimer;
 }
 
@@ -25,7 +23,6 @@
 @property (nonatomic, retain) id delegate;
 @property (nonatomic, readonly) NSString *username;
 @property (nonatomic, readonly) NSString *password;
-@property (nonatomic, copy) NSString *userAgent;
 
 - (id) init;
 - (id) initWithUsername: (NSString *) username

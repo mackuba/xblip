@@ -5,16 +5,12 @@
 // Licensed under MIT license
 // -------------------------------------------------------
 
-#import "NSDataMBBase64.h"
 #import "Constants.h"
 #import "OBConnector.h"
 #import "OBRequest.h"
 #import "OBMessage.h"
 #import "OBUtils.h"
-#import "OBURLConnection.h"
 
-#define ThisRequest() [((OBURLConnection *) connection) request]
-#define ConnectionFinished() [currentConnections removeObject: connection]
 #define SafeDelegateCall(method, ...) \
   if ([delegate respondsToSelector: @selector(method)]) [delegate method __VA_ARGS__]
 
@@ -27,17 +23,15 @@
 @end
 
 @interface OBConnector ()
-- (NSString *) generateAuthenticationStringFromUsername: (NSString *) username
-                                               password: (NSString *) password;
 - (void) handleFinishedRequest: (OBRequest *) request;
 - (BOOL) isSendingDashboardRequest;
-- (void) closeAllConnections;
+- (void) cancelAllRequests;
 @end
 
 
 @implementation OBConnector
 
-@synthesize username, delegate, loggedIn, password, userAgent;
+@synthesize username, delegate, loggedIn, password;
 
 // -------------------------------------------------------------------------------------------
 #pragma mark Initializers
@@ -50,7 +44,7 @@
     delegate = aDelegate;
     lastMessageId = -1;
     loggedIn = NO;
-    currentConnections = [[NSMutableArray alloc] initWithCapacity: 5];
+    currentRequests = [[NSMutableArray alloc] initWithCapacity: 5];
   }
   return self;
 }
@@ -67,21 +61,6 @@
   [password autorelease];
   username = [aUsername copy];
   password = [aPassword copy];
-  authenticationString = [self generateAuthenticationStringFromUsername: username
-                                                               password: password];
-  [authenticationString retain];
-}
-
-- (NSString *) generateAuthenticationStringFromUsername: (NSString *) aUsername
-                                               password: (NSString *) aPassword {
-  if (aUsername && aPassword) {
-    NSString *authString = OBFormat(@"%@:%@", aUsername, aPassword);
-    NSData *data = [authString dataUsingEncoding: NSUTF8StringEncoding];
-    NSString *encoded = OBFormat(@"Basic %@", [data base64Encoding]);
-    return encoded;
-  } else {
-    return nil;
-  }
 }
 
 - (void) startMonitoringDashboard {
@@ -121,8 +100,8 @@
 }
 
 - (BOOL) isSendingDashboardRequest {
-  for (OBURLConnection *connection in currentConnections) {
-    if (connection.request.type == OBDashboardRequest) {
+  for (OBRequest *request in currentRequests) {
+    if (request.type == OBDashboardRequest) {
       return YES;
     }
   }
@@ -134,30 +113,26 @@
 }
 
 - (void) sendRequest: (OBRequest *) request {
-  NSLog(@"sending %@ to %@ (type %d) with '%@'", request.HTTPMethod, request.URL, request.type, request.sentText);
-  [request setValueIfNotEmpty: userAgent forHTTPHeaderField: @"User-Agent"];
-  [request setValueIfNotEmpty: authenticationString forHTTPHeaderField: @"Authorization"];
-  OBURLConnection *connection = [OBURLConnection connectionWithRequest: request delegate: self];
-  [currentConnections addObject: connection];
+  [request addBasicAuthenticationHeaderWithUsername: username andPassword: password];
+  [request setDelegate: self];
+  [request setDidFinishSelector: @selector(requestFinished:)];
+  [request setDidFailSelector: @selector(requestFailed:)];
+
+  NSLog(@"sending %@ to %@ (type %d) with '%@'", request.requestMethod, request.url, request.type, request.postBody);
+  [currentRequests addObject: request];
+  [request startAsynchronous];
 }
 
 // -------------------------------------------------------------------------------------------
 #pragma mark Response handling
 
-- (void) connection: (NSURLConnection *) connection didReceiveResponse: (NSURLResponse *) response {
-  ThisRequest().response = response;
-}
-
-- (void) connection: (NSURLConnection *) connection didReceiveData: (NSData *) data {
-  NSString *receivedText = [[NSString alloc] initWithData: data encoding: NSUTF8StringEncoding];
-  [ThisRequest() appendReceivedText: receivedText];
-  [receivedText release];
-}
-
-- (void) connectionDidFinishLoading: (NSURLConnection *) connection {
-  NSLog(@"finished request to %@ (%d) (text = %@)", ThisRequest().URL, ThisRequest().type, ThisRequest().receivedText);
-  [self handleFinishedRequest: ThisRequest()];
-  ConnectionFinished();
+- (void) requestFinished: (ASIHTTPRequest *) asiRequest {
+  OBRequest *request = (OBRequest *) asiRequest;
+  BOOL html = [[request.responseHeaders objectForKey: @"Content-Type"] isEqual: @"text/html; charset=utf-8"];
+  NSLog(@"finished request to %@ (%d) (text = %@)",
+    request.url, request.type, html ? @"<...html...>" : request.responseString);
+  [self handleFinishedRequest: request];
+  [currentRequests removeObject: request];
 }
 
 - (void) handleFinishedRequest: (OBRequest *) request {
@@ -169,7 +144,7 @@
       break;
     
     case OBDashboardRequest:
-      trimmedString = [OBUtils trimmedString: request.receivedText];
+      trimmedString = [OBUtils trimmedString: request.responseString];
       if (trimmedString.length > 0) {
         // msgs are coming in the order from newest to oldest
         messages = [OBMessage messagesFromJSONString: trimmedString];
@@ -187,50 +162,34 @@
   }
 }
 
-- (NSURLRequest *) connection: (NSURLConnection *) connection
-              willSendRequest: (NSURLRequest *) nsrequest
-             redirectResponse: (NSURLResponse *) response {
-  if (response && ThisRequest().type == OBAuthenticationRequest) {
-    // here, redirect means we've succesfully authenticated. this is Blip's way of telling us that... :-)
-    NSLog(@"auth redirected = OK");
-    SafeDelegateCall(authenticationSuccessful);
-    ConnectionFinished();
-    loggedIn = YES;
-    return nil;
-  } else {
-    return nsrequest;
-  }
-}
-
-- (void) connection: (NSURLConnection *) connection didFailWithError: (NSError *) error {
-  if (error.domain == NSURLErrorDomain && error.code == NSURLErrorTimedOut) {
+- (void) requestFailed: (ASIHTTPRequest *) request {
+  if (request.error.domain == NSURLErrorDomain && request.error.code == NSURLErrorTimedOut) {
     [self stopMonitoringDashboard];
   }
-  SafeDelegateCall(requestFailedWithError:, error);
-  ConnectionFinished();
+  SafeDelegateCall(requestFailedWithError:, request.error);
+  [currentRequests removeObject: request];
 }
 
-- (void) connection: (NSURLConnection *) connection
-         didReceiveAuthenticationChallenge: (NSURLAuthenticationChallenge *) challenge {
+- (void) authenticationNeededForRequest: (ASIHTTPRequest *) request {
   SafeDelegateCall(authenticationFailed);
   // TODO: let the user try again and reuse the connection
-  [[challenge sender] cancelAuthenticationChallenge: challenge];
-  ConnectionFinished();
+  [request cancel];
+  [currentRequests removeObject: request];
 }
 
 // -------------------------------------------------------------------------------------------
 #pragma mark Cleaning up
 
-- (void) closeAllConnections {
-  for (NSURLConnection *connection in currentConnections) {
-    [connection cancel];
+- (void) cancelAllRequests {
+  for (ASIHTTPRequest *request in currentRequests) {
+    [request cancel];
   }
-  [currentConnections removeAllObjects];
+  [currentRequests removeAllObjects];
 }
 
 - (void) dealloc {
-  [self closeAllConnections];
-  ReleaseAll(username, password, authenticationString, userAgent, currentConnections, monitorTimer);
+  [self cancelAllRequests];
+  ReleaseAll(username, password, currentRequests, monitorTimer);
   [super dealloc];
 }
 

@@ -24,13 +24,11 @@
 		58E65FDE1110E6E9006AC2C7 /* OBConnector.m in Sources */ = {isa = PBXBuildFile; fileRef = 58E65FC41110E6E9006AC2C7 /* OBConnector.m */; };
 		58E65FDF1110E6E9006AC2C7 /* OBMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 58E65FC61110E6E9006AC2C7 /* OBMessage.m */; };
 		58E65FE01110E6E9006AC2C7 /* OBRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 58E65FC81110E6E9006AC2C7 /* OBRequest.m */; };
-		58E65FE11110E6E9006AC2C7 /* OBURLConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 58E65FCA1110E6E9006AC2C7 /* OBURLConnection.m */; };
 		58E65FE21110E6E9006AC2C7 /* OBUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 58E65FCC1110E6E9006AC2C7 /* OBUtils.m */; };
 		58E65FE41110E6E9006AC2C7 /* NSArray+BSJSONAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 58E65FD31110E6E9006AC2C7 /* NSArray+BSJSONAdditions.m */; };
 		58E65FE51110E6E9006AC2C7 /* NSDictionary+BSJSONAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 58E65FD51110E6E9006AC2C7 /* NSDictionary+BSJSONAdditions.m */; };
 		58E65FE61110E6E9006AC2C7 /* NSScanner+BSJSONAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 58E65FD71110E6E9006AC2C7 /* NSScanner+BSJSONAdditions.m */; };
 		58E65FE71110E6E9006AC2C7 /* NSString+BSJSONAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 58E65FD91110E6E9006AC2C7 /* NSString+BSJSONAdditions.m */; };
-		58E65FE81110E6E9006AC2C7 /* NSDataMBBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = 58E65FDB1110E6E9006AC2C7 /* NSDataMBBase64.m */; };
 		58E65FED1110E73D006AC2C7 /* BSJSONEncoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 58E65FEC1110E73D006AC2C7 /* BSJSONEncoder.m */; };
 		58E660011110E806006AC2C7 /* README.markdown in Resources */ = {isa = PBXBuildFile; fileRef = 58E660001110E806006AC2C7 /* README.markdown */; };
 		58E660561110EBD7006AC2C7 /* ASIAuthenticationDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = 58E660481110EBD7006AC2C7 /* ASIAuthenticationDialog.m */; };
@@ -73,8 +71,6 @@
 		58E65FC61110E6E9006AC2C7 /* OBMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OBMessage.m; sourceTree = "<group>"; };
 		58E65FC71110E6E9006AC2C7 /* OBRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OBRequest.h; sourceTree = "<group>"; };
 		58E65FC81110E6E9006AC2C7 /* OBRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OBRequest.m; sourceTree = "<group>"; };
-		58E65FC91110E6E9006AC2C7 /* OBURLConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OBURLConnection.h; sourceTree = "<group>"; };
-		58E65FCA1110E6E9006AC2C7 /* OBURLConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OBURLConnection.m; sourceTree = "<group>"; };
 		58E65FCB1110E6E9006AC2C7 /* OBUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OBUtils.h; sourceTree = "<group>"; };
 		58E65FCC1110E6E9006AC2C7 /* OBUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OBUtils.m; sourceTree = "<group>"; };
 		58E65FCD1110E6E9006AC2C7 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
@@ -86,8 +82,6 @@
 		58E65FD71110E6E9006AC2C7 /* NSScanner+BSJSONAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSScanner+BSJSONAdditions.m"; sourceTree = "<group>"; };
 		58E65FD81110E6E9006AC2C7 /* NSString+BSJSONAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+BSJSONAdditions.h"; sourceTree = "<group>"; };
 		58E65FD91110E6E9006AC2C7 /* NSString+BSJSONAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+BSJSONAdditions.m"; sourceTree = "<group>"; };
-		58E65FDA1110E6E9006AC2C7 /* NSDataMBBase64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSDataMBBase64.h; sourceTree = "<group>"; };
-		58E65FDB1110E6E9006AC2C7 /* NSDataMBBase64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSDataMBBase64.m; sourceTree = "<group>"; };
 		58E65FEB1110E73D006AC2C7 /* BSJSONEncoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSJSONEncoder.h; sourceTree = "<group>"; };
 		58E65FEC1110E73D006AC2C7 /* BSJSONEncoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BSJSONEncoder.m; sourceTree = "<group>"; };
 		58E660001110E806006AC2C7 /* README.markdown */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.markdown; sourceTree = "<group>"; };
@@ -222,8 +216,6 @@
 				58E65FC61110E6E9006AC2C7 /* OBMessage.m */,
 				58E65FC71110E6E9006AC2C7 /* OBRequest.h */,
 				58E65FC81110E6E9006AC2C7 /* OBRequest.m */,
-				58E65FC91110E6E9006AC2C7 /* OBURLConnection.h */,
-				58E65FCA1110E6E9006AC2C7 /* OBURLConnection.m */,
 				58E65FCB1110E6E9006AC2C7 /* OBUtils.h */,
 				58E65FCC1110E6E9006AC2C7 /* OBUtils.m */,
 			);
@@ -235,8 +227,6 @@
 			children = (
 				58E660461110EBD7006AC2C7 /* ASIHTTPRequest */,
 				58E65FCF1110E6E9006AC2C7 /* BSJSONAdditions */,
-				58E65FDA1110E6E9006AC2C7 /* NSDataMBBase64.h */,
-				58E65FDB1110E6E9006AC2C7 /* NSDataMBBase64.m */,
 			);
 			path = Lib;
 			sourceTree = "<group>";
@@ -347,13 +337,11 @@
 				58E65FDE1110E6E9006AC2C7 /* OBConnector.m in Sources */,
 				58E65FDF1110E6E9006AC2C7 /* OBMessage.m in Sources */,
 				58E65FE01110E6E9006AC2C7 /* OBRequest.m in Sources */,
-				58E65FE11110E6E9006AC2C7 /* OBURLConnection.m in Sources */,
 				58E65FE21110E6E9006AC2C7 /* OBUtils.m in Sources */,
 				58E65FE41110E6E9006AC2C7 /* NSArray+BSJSONAdditions.m in Sources */,
 				58E65FE51110E6E9006AC2C7 /* NSDictionary+BSJSONAdditions.m in Sources */,
 				58E65FE61110E6E9006AC2C7 /* NSScanner+BSJSONAdditions.m in Sources */,
 				58E65FE71110E6E9006AC2C7 /* NSString+BSJSONAdditions.m in Sources */,
-				58E65FE81110E6E9006AC2C7 /* NSDataMBBase64.m in Sources */,
 				58E65FED1110E73D006AC2C7 /* BSJSONEncoder.m in Sources */,
 				58E660561110EBD7006AC2C7 /* ASIAuthenticationDialog.m in Sources */,
 				58E660571110EBD7006AC2C7 /* ASIFormDataRequest.m in Sources */,

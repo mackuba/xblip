@@ -5,17 +5,14 @@
 // Licensed under MIT license
 // -------------------------------------------------------
 
-#import "NSString+BSJSONAdditions.h"
 #import "Constants.h"
 #import "OBRequest.h"
 #import "OBUtils.h"
-
-#define SetHeader(key, value) [self setValue: value forHTTPHeaderField: key]
+#import "NSString+BSJSONAdditions.h"
 
 @implementation OBRequest
 
-@synthesize type, response, receivedText, sentText;
-OnDeallocRelease(response, receivedText, sentText);
+@synthesize type;
 
 // -------------------------------------------------------------------------------------------
 #pragma mark Initializers
@@ -24,19 +21,18 @@ OnDeallocRelease(response, receivedText, sentText);
              method: (NSString *) method
                text: (NSString *) text
                type: (OBRequestType) requestType {
-  self = [super initWithURL: [NSURL URLWithString: [BLIP_API_HOST stringByAppendingString: path]]
-                cachePolicy: NSURLRequestReloadIgnoringLocalCacheData
-            timeoutInterval: 15];
+  NSURL *wrappedUrl = [NSURL URLWithString: [BLIP_API_HOST stringByAppendingString: path]];
+  self = [super initWithURL: wrappedUrl];
   if (self) {
+    self.timeOutSeconds = 15;
     self.type = requestType;
-    self.HTTPMethod = method;
-    receivedText = [[NSMutableString alloc] init];
-    sentText = [text copy];
-    SetHeader(@"X-Blip-API", BLIP_API_VERSION);
-    SetHeader(@"Accept", @"application/json");
-    if (sentText) {
-      SetHeader(@"Content-Type", @"application/json");
-      self.HTTPBody = [sentText dataUsingEncoding: NSUTF8StringEncoding];
+    self.requestMethod = method;
+    [self addRequestHeader: @"X-Blip-API" value: BLIP_API_VERSION];
+    [self addRequestHeader: @"User-Agent" value: BLIP_USER_AGENT];
+    [self addRequestHeader: @"Accept" value: @"application/json"];
+    [self addRequestHeader: @"Content-Type" value: @"application/json"];
+    if (text) {
+      [self appendPostData: [text dataUsingEncoding: NSUTF8StringEncoding]];
     }
   }
   return self;
@@ -76,17 +72,6 @@ OnDeallocRelease(response, receivedText, sentText);
 
 + (OBRequest *) requestForAuthentication {
   return [[[OBRequest alloc] initWithPath: @"/login" type: OBAuthenticationRequest] autorelease];
-}
-
-// -------------------------------------------------------------------------------------------
-#pragma mark Instance methods
-
-- (void) appendReceivedText: (NSString *) text {
-  [receivedText appendString: text];
-}
-
-- (void) setValueIfNotEmpty: (NSString *) value forHTTPHeaderField: (NSString *) field {
-  if (value) SetHeader(field, value);
 }
 
 @end

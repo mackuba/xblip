@@ -12,6 +12,7 @@ so don't expect much...
 * create a new group "ObjectiveBlip" in your Xcode project; set its path to ObjectiveBlip directory (context menu -> "Get Info" -> path)
 * add -> existing files -> select everything inside ObjectiveBlip directory
 * add CFNetwork, SystemConfiguration and zlib (libz.1.2.3) frameworks to your project (follow the [ASIHTTPRequest documentation](http://allseeing-i.com/ASIHTTPRequest/Setup-instructions)
+* optionally, change BLIP\_USER\_AGENT constant in Constants.h to a more suitable value
 
 ## Usage instructions
 
@@ -20,4 +21,4 @@ TODO...
 ## License
 
 Copyright by Jakub Suder (Psionides) <jakub.suder at gmail.com>. Licensed under MIT license.
-Includes open source libraries NSData+MBBase64 by MiloBird, and BSJSONAdditions by Blake Seely, and ASIHTTPRequest by Ben Copsey.
+Includes open source libraries BSJSONAdditions by Blake Seely and ASIHTTPRequest by Ben Copsey.
