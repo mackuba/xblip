@@ -15,23 +15,25 @@
 		2899E5220DE3E06400AC0155 /* XBlipViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2899E5210DE3E06400AC0155 /* XBlipViewController.xib */; };
 		28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD733E0D9D9553002E5188 /* MainWindow.xib */; };
 		28D7ACF80DDB3853001CB0EB /* XBlipViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D7ACF70DDB3853001CB0EB /* XBlipViewController.m */; };
-		582852390F767ABB003559EE /* NSDictionary+BSJSONAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 582852360F767ABB003559EE /* NSDictionary+BSJSONAdditions.m */; };
-		5828523A0F767ABB003559EE /* NSScanner+BSJSONAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 582852380F767ABB003559EE /* NSScanner+BSJSONAdditions.m */; };
-		582852590F767E84003559EE /* NSArray+BSJSONAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 582852580F767E84003559EE /* NSArray+BSJSONAdditions.m */; };
 		582852710F7687E1003559EE /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = 582852700F7687E1003559EE /* README.txt */; };
-		582852D50F769DB1003559EE /* OBConnector.m in Sources */ = {isa = PBXBuildFile; fileRef = 582852D10F769DB1003559EE /* OBConnector.m */; };
-		582852D60F769DB1003559EE /* NSDataMBBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = 582852D40F769DB1003559EE /* NSDataMBBase64.m */; };
 		5828530F0F76CBC1003559EE /* LoginDialogController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5828530E0F76CBC1003559EE /* LoginDialogController.m */; };
 		582853110F76CC12003559EE /* LoginDialog.xib in Resources */ = {isa = PBXBuildFile; fileRef = 582853100F76CC12003559EE /* LoginDialog.xib */; };
-		5841BA610F879F22007DE38D /* NSString+BSJSONAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 5841BA600F879F22007DE38D /* NSString+BSJSONAdditions.m */; };
-		5841BAB60F87D452007DE38D /* OBUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 5841BAB50F87D452007DE38D /* OBUtils.m */; };
 		584587040FAD996D00832C66 /* MIT-LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = 584587030FAD996D00832C66 /* MIT-LICENSE.txt */; };
 		588ED0650F8D17E300BCE1FA /* MessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 588ED0640F8D17E300BCE1FA /* MessageCell.xib */; };
 		588ED0690F8D1E7500BCE1FA /* MessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 588ED0680F8D1E7500BCE1FA /* MessageCell.m */; };
-		588ED0720F8D239100BCE1FA /* OBMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 588ED0710F8D239100BCE1FA /* OBMessage.m */; };
-		58E1952D0F97B32B001530BA /* OBRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 58E1952C0F97B32B001530BA /* OBRequest.m */; };
-		58E1960E0F990BC2001530BA /* OBURLConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 58E1960D0F990BC2001530BA /* OBURLConnection.m */; };
 		58E1968B0F99E54E001530BA /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 58E1968A0F99E54E001530BA /* Utils.m */; };
+		58E65FDE1110E6E9006AC2C7 /* OBConnector.m in Sources */ = {isa = PBXBuildFile; fileRef = 58E65FC41110E6E9006AC2C7 /* OBConnector.m */; };
+		58E65FDF1110E6E9006AC2C7 /* OBMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 58E65FC61110E6E9006AC2C7 /* OBMessage.m */; };
+		58E65FE01110E6E9006AC2C7 /* OBRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 58E65FC81110E6E9006AC2C7 /* OBRequest.m */; };
+		58E65FE11110E6E9006AC2C7 /* OBURLConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 58E65FCA1110E6E9006AC2C7 /* OBURLConnection.m */; };
+		58E65FE21110E6E9006AC2C7 /* OBUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 58E65FCC1110E6E9006AC2C7 /* OBUtils.m */; };
+		58E65FE41110E6E9006AC2C7 /* NSArray+BSJSONAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 58E65FD31110E6E9006AC2C7 /* NSArray+BSJSONAdditions.m */; };
+		58E65FE51110E6E9006AC2C7 /* NSDictionary+BSJSONAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 58E65FD51110E6E9006AC2C7 /* NSDictionary+BSJSONAdditions.m */; };
+		58E65FE61110E6E9006AC2C7 /* NSScanner+BSJSONAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 58E65FD71110E6E9006AC2C7 /* NSScanner+BSJSONAdditions.m */; };
+		58E65FE71110E6E9006AC2C7 /* NSString+BSJSONAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 58E65FD91110E6E9006AC2C7 /* NSString+BSJSONAdditions.m */; };
+		58E65FE81110E6E9006AC2C7 /* NSDataMBBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = 58E65FDB1110E6E9006AC2C7 /* NSDataMBBase64.m */; };
+		58E65FE91110E6E9006AC2C7 /* MIT-LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = 58E65FDC1110E6E9006AC2C7 /* MIT-LICENSE.txt */; };
+		58E65FEA1110E6E9006AC2C7 /* README.markdown in Resources */ = {isa = PBXBuildFile; fileRef = 58E65FDD1110E6E9006AC2C7 /* README.markdown */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,37 +49,39 @@
 		28D7ACF70DDB3853001CB0EB /* XBlipViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XBlipViewController.m; sourceTree = "<group>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		32CA4F630368D1EE00C91783 /* XBlip_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XBlip_Prefix.pch; sourceTree = "<group>"; };
-		582852350F767ABB003559EE /* NSDictionary+BSJSONAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+BSJSONAdditions.h"; sourceTree = "<group>"; };
-		582852360F767ABB003559EE /* NSDictionary+BSJSONAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+BSJSONAdditions.m"; sourceTree = "<group>"; };
-		582852370F767ABB003559EE /* NSScanner+BSJSONAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSScanner+BSJSONAdditions.h"; sourceTree = "<group>"; };
-		582852380F767ABB003559EE /* NSScanner+BSJSONAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSScanner+BSJSONAdditions.m"; sourceTree = "<group>"; };
-		582852570F767E84003559EE /* NSArray+BSJSONAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+BSJSONAdditions.h"; sourceTree = "<group>"; };
-		582852580F767E84003559EE /* NSArray+BSJSONAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+BSJSONAdditions.m"; sourceTree = "<group>"; };
 		582852700F7687E1003559EE /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
-		582852D00F769DB1003559EE /* OBConnector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OBConnector.h; sourceTree = "<group>"; };
-		582852D10F769DB1003559EE /* OBConnector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OBConnector.m; sourceTree = "<group>"; };
-		582852D20F769DB1003559EE /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
-		582852D30F769DB1003559EE /* NSDataMBBase64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSDataMBBase64.h; sourceTree = "<group>"; };
-		582852D40F769DB1003559EE /* NSDataMBBase64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSDataMBBase64.m; sourceTree = "<group>"; };
 		5828530D0F76CBC1003559EE /* LoginDialogController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginDialogController.h; sourceTree = "<group>"; };
 		5828530E0F76CBC1003559EE /* LoginDialogController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginDialogController.m; sourceTree = "<group>"; };
 		582853100F76CC12003559EE /* LoginDialog.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoginDialog.xib; sourceTree = "<group>"; };
-		5841BA5F0F879F16007DE38D /* NSString+BSJSONAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+BSJSONAdditions.h"; sourceTree = "<group>"; };
-		5841BA600F879F22007DE38D /* NSString+BSJSONAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+BSJSONAdditions.m"; sourceTree = "<group>"; };
-		5841BAB40F87D452007DE38D /* OBUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OBUtils.h; sourceTree = "<group>"; };
-		5841BAB50F87D452007DE38D /* OBUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OBUtils.m; sourceTree = "<group>"; };
 		584587030FAD996D00832C66 /* MIT-LICENSE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "MIT-LICENSE.txt"; sourceTree = "<group>"; };
 		588ED0640F8D17E300BCE1FA /* MessageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MessageCell.xib; sourceTree = "<group>"; };
 		588ED0670F8D1E7500BCE1FA /* MessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageCell.h; sourceTree = "<group>"; };
 		588ED0680F8D1E7500BCE1FA /* MessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageCell.m; sourceTree = "<group>"; };
-		588ED0700F8D239100BCE1FA /* OBMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OBMessage.h; sourceTree = "<group>"; };
-		588ED0710F8D239100BCE1FA /* OBMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OBMessage.m; sourceTree = "<group>"; };
-		58E1952B0F97B32B001530BA /* OBRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OBRequest.h; sourceTree = "<group>"; };
-		58E1952C0F97B32B001530BA /* OBRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OBRequest.m; sourceTree = "<group>"; };
-		58E1960C0F990BC2001530BA /* OBURLConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OBURLConnection.h; sourceTree = "<group>"; };
-		58E1960D0F990BC2001530BA /* OBURLConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OBURLConnection.m; sourceTree = "<group>"; };
 		58E196890F99E54E001530BA /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
 		58E1968A0F99E54E001530BA /* Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utils.m; sourceTree = "<group>"; };
+		58E65FC31110E6E9006AC2C7 /* OBConnector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OBConnector.h; sourceTree = "<group>"; };
+		58E65FC41110E6E9006AC2C7 /* OBConnector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OBConnector.m; sourceTree = "<group>"; };
+		58E65FC51110E6E9006AC2C7 /* OBMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OBMessage.h; sourceTree = "<group>"; };
+		58E65FC61110E6E9006AC2C7 /* OBMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OBMessage.m; sourceTree = "<group>"; };
+		58E65FC71110E6E9006AC2C7 /* OBRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OBRequest.h; sourceTree = "<group>"; };
+		58E65FC81110E6E9006AC2C7 /* OBRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OBRequest.m; sourceTree = "<group>"; };
+		58E65FC91110E6E9006AC2C7 /* OBURLConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OBURLConnection.h; sourceTree = "<group>"; };
+		58E65FCA1110E6E9006AC2C7 /* OBURLConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OBURLConnection.m; sourceTree = "<group>"; };
+		58E65FCB1110E6E9006AC2C7 /* OBUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OBUtils.h; sourceTree = "<group>"; };
+		58E65FCC1110E6E9006AC2C7 /* OBUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OBUtils.m; sourceTree = "<group>"; };
+		58E65FCD1110E6E9006AC2C7 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
+		58E65FD21110E6E9006AC2C7 /* NSArray+BSJSONAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+BSJSONAdditions.h"; sourceTree = "<group>"; };
+		58E65FD31110E6E9006AC2C7 /* NSArray+BSJSONAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+BSJSONAdditions.m"; sourceTree = "<group>"; };
+		58E65FD41110E6E9006AC2C7 /* NSDictionary+BSJSONAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+BSJSONAdditions.h"; sourceTree = "<group>"; };
+		58E65FD51110E6E9006AC2C7 /* NSDictionary+BSJSONAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+BSJSONAdditions.m"; sourceTree = "<group>"; };
+		58E65FD61110E6E9006AC2C7 /* NSScanner+BSJSONAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSScanner+BSJSONAdditions.h"; sourceTree = "<group>"; };
+		58E65FD71110E6E9006AC2C7 /* NSScanner+BSJSONAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSScanner+BSJSONAdditions.m"; sourceTree = "<group>"; };
+		58E65FD81110E6E9006AC2C7 /* NSString+BSJSONAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+BSJSONAdditions.h"; sourceTree = "<group>"; };
+		58E65FD91110E6E9006AC2C7 /* NSString+BSJSONAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+BSJSONAdditions.m"; sourceTree = "<group>"; };
+		58E65FDA1110E6E9006AC2C7 /* NSDataMBBase64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSDataMBBase64.h; sourceTree = "<group>"; };
+		58E65FDB1110E6E9006AC2C7 /* NSDataMBBase64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSDataMBBase64.m; sourceTree = "<group>"; };
+		58E65FDC1110E6E9006AC2C7 /* MIT-LICENSE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "MIT-LICENSE.txt"; sourceTree = "<group>"; };
+		58E65FDD1110E6E9006AC2C7 /* README.markdown */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.markdown; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -123,8 +127,7 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
-				582852CA0F769D2C003559EE /* ObjectiveBlip */,
-				582852340F767A2A003559EE /* BSJSONAdditions */,
+				58E65FC11110E6C1006AC2C7 /* ObjectiveBlip */,
 				080E96DDFE201D6D7F000001 /* Classes */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
@@ -167,39 +170,58 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		582852340F767A2A003559EE /* BSJSONAdditions */ = {
+		58E65FC11110E6C1006AC2C7 /* ObjectiveBlip */ = {
 			isa = PBXGroup;
 			children = (
-				5841BA600F879F22007DE38D /* NSString+BSJSONAdditions.m */,
-				5841BA5F0F879F16007DE38D /* NSString+BSJSONAdditions.h */,
-				582852350F767ABB003559EE /* NSDictionary+BSJSONAdditions.h */,
-				582852360F767ABB003559EE /* NSDictionary+BSJSONAdditions.m */,
-				582852370F767ABB003559EE /* NSScanner+BSJSONAdditions.h */,
-				582852380F767ABB003559EE /* NSScanner+BSJSONAdditions.m */,
-				582852570F767E84003559EE /* NSArray+BSJSONAdditions.h */,
-				582852580F767E84003559EE /* NSArray+BSJSONAdditions.m */,
-			);
-			path = BSJSONAdditions;
-			sourceTree = "<group>";
-		};
-		582852CA0F769D2C003559EE /* ObjectiveBlip */ = {
-			isa = PBXGroup;
-			children = (
-				588ED0700F8D239100BCE1FA /* OBMessage.h */,
-				588ED0710F8D239100BCE1FA /* OBMessage.m */,
-				582852D00F769DB1003559EE /* OBConnector.h */,
-				582852D10F769DB1003559EE /* OBConnector.m */,
-				582852D20F769DB1003559EE /* Constants.h */,
-				582852D30F769DB1003559EE /* NSDataMBBase64.h */,
-				582852D40F769DB1003559EE /* NSDataMBBase64.m */,
-				5841BAB40F87D452007DE38D /* OBUtils.h */,
-				5841BAB50F87D452007DE38D /* OBUtils.m */,
-				58E1952B0F97B32B001530BA /* OBRequest.h */,
-				58E1952C0F97B32B001530BA /* OBRequest.m */,
-				58E1960C0F990BC2001530BA /* OBURLConnection.h */,
-				58E1960D0F990BC2001530BA /* OBURLConnection.m */,
+				58E65FC21110E6E9006AC2C7 /* Classes */,
+				58E65FCD1110E6E9006AC2C7 /* Constants.h */,
+				58E65FCE1110E6E9006AC2C7 /* Lib */,
+				58E65FDC1110E6E9006AC2C7 /* MIT-LICENSE.txt */,
+				58E65FDD1110E6E9006AC2C7 /* README.markdown */,
 			);
 			path = ObjectiveBlip;
+			sourceTree = "<group>";
+		};
+		58E65FC21110E6E9006AC2C7 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				58E65FC31110E6E9006AC2C7 /* OBConnector.h */,
+				58E65FC41110E6E9006AC2C7 /* OBConnector.m */,
+				58E65FC51110E6E9006AC2C7 /* OBMessage.h */,
+				58E65FC61110E6E9006AC2C7 /* OBMessage.m */,
+				58E65FC71110E6E9006AC2C7 /* OBRequest.h */,
+				58E65FC81110E6E9006AC2C7 /* OBRequest.m */,
+				58E65FC91110E6E9006AC2C7 /* OBURLConnection.h */,
+				58E65FCA1110E6E9006AC2C7 /* OBURLConnection.m */,
+				58E65FCB1110E6E9006AC2C7 /* OBUtils.h */,
+				58E65FCC1110E6E9006AC2C7 /* OBUtils.m */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		58E65FCE1110E6E9006AC2C7 /* Lib */ = {
+			isa = PBXGroup;
+			children = (
+				58E65FCF1110E6E9006AC2C7 /* BSJSONAdditions */,
+				58E65FDA1110E6E9006AC2C7 /* NSDataMBBase64.h */,
+				58E65FDB1110E6E9006AC2C7 /* NSDataMBBase64.m */,
+			);
+			path = Lib;
+			sourceTree = "<group>";
+		};
+		58E65FCF1110E6E9006AC2C7 /* BSJSONAdditions */ = {
+			isa = PBXGroup;
+			children = (
+				58E65FD21110E6E9006AC2C7 /* NSArray+BSJSONAdditions.h */,
+				58E65FD31110E6E9006AC2C7 /* NSArray+BSJSONAdditions.m */,
+				58E65FD41110E6E9006AC2C7 /* NSDictionary+BSJSONAdditions.h */,
+				58E65FD51110E6E9006AC2C7 /* NSDictionary+BSJSONAdditions.m */,
+				58E65FD61110E6E9006AC2C7 /* NSScanner+BSJSONAdditions.h */,
+				58E65FD71110E6E9006AC2C7 /* NSScanner+BSJSONAdditions.m */,
+				58E65FD81110E6E9006AC2C7 /* NSString+BSJSONAdditions.h */,
+				58E65FD91110E6E9006AC2C7 /* NSString+BSJSONAdditions.m */,
+			);
+			path = BSJSONAdditions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -250,6 +272,8 @@
 				582853110F76CC12003559EE /* LoginDialog.xib in Resources */,
 				588ED0650F8D17E300BCE1FA /* MessageCell.xib in Resources */,
 				584587040FAD996D00832C66 /* MIT-LICENSE.txt in Resources */,
+				58E65FE91110E6E9006AC2C7 /* MIT-LICENSE.txt in Resources */,
+				58E65FEA1110E6E9006AC2C7 /* README.markdown in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -263,19 +287,19 @@
 				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
 				1D3623260D0F684500981E51 /* XBlipAppDelegate.m in Sources */,
 				28D7ACF80DDB3853001CB0EB /* XBlipViewController.m in Sources */,
-				582852390F767ABB003559EE /* NSDictionary+BSJSONAdditions.m in Sources */,
-				5828523A0F767ABB003559EE /* NSScanner+BSJSONAdditions.m in Sources */,
-				582852590F767E84003559EE /* NSArray+BSJSONAdditions.m in Sources */,
-				582852D50F769DB1003559EE /* OBConnector.m in Sources */,
-				582852D60F769DB1003559EE /* NSDataMBBase64.m in Sources */,
 				5828530F0F76CBC1003559EE /* LoginDialogController.m in Sources */,
-				5841BA610F879F22007DE38D /* NSString+BSJSONAdditions.m in Sources */,
-				5841BAB60F87D452007DE38D /* OBUtils.m in Sources */,
 				588ED0690F8D1E7500BCE1FA /* MessageCell.m in Sources */,
-				588ED0720F8D239100BCE1FA /* OBMessage.m in Sources */,
-				58E1952D0F97B32B001530BA /* OBRequest.m in Sources */,
-				58E1960E0F990BC2001530BA /* OBURLConnection.m in Sources */,
 				58E1968B0F99E54E001530BA /* Utils.m in Sources */,
+				58E65FDE1110E6E9006AC2C7 /* OBConnector.m in Sources */,
+				58E65FDF1110E6E9006AC2C7 /* OBMessage.m in Sources */,
+				58E65FE01110E6E9006AC2C7 /* OBRequest.m in Sources */,
+				58E65FE11110E6E9006AC2C7 /* OBURLConnection.m in Sources */,
+				58E65FE21110E6E9006AC2C7 /* OBUtils.m in Sources */,
+				58E65FE41110E6E9006AC2C7 /* NSArray+BSJSONAdditions.m in Sources */,
+				58E65FE51110E6E9006AC2C7 /* NSDictionary+BSJSONAdditions.m in Sources */,
+				58E65FE61110E6E9006AC2C7 /* NSScanner+BSJSONAdditions.m in Sources */,
+				58E65FE71110E6E9006AC2C7 /* NSString+BSJSONAdditions.m in Sources */,
+				58E65FE81110E6E9006AC2C7 /* NSDataMBBase64.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
