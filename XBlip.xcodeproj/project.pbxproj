@@ -34,6 +34,7 @@
 		58E65FE81110E6E9006AC2C7 /* NSDataMBBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = 58E65FDB1110E6E9006AC2C7 /* NSDataMBBase64.m */; };
 		58E65FE91110E6E9006AC2C7 /* MIT-LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = 58E65FDC1110E6E9006AC2C7 /* MIT-LICENSE.txt */; };
 		58E65FEA1110E6E9006AC2C7 /* README.markdown in Resources */ = {isa = PBXBuildFile; fileRef = 58E65FDD1110E6E9006AC2C7 /* README.markdown */; };
+		58E65FED1110E73D006AC2C7 /* BSJSONEncoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 58E65FEC1110E73D006AC2C7 /* BSJSONEncoder.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -82,6 +83,8 @@
 		58E65FDB1110E6E9006AC2C7 /* NSDataMBBase64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSDataMBBase64.m; sourceTree = "<group>"; };
 		58E65FDC1110E6E9006AC2C7 /* MIT-LICENSE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "MIT-LICENSE.txt"; sourceTree = "<group>"; };
 		58E65FDD1110E6E9006AC2C7 /* README.markdown */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.markdown; sourceTree = "<group>"; };
+		58E65FEB1110E73D006AC2C7 /* BSJSONEncoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSJSONEncoder.h; sourceTree = "<group>"; };
+		58E65FEC1110E73D006AC2C7 /* BSJSONEncoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BSJSONEncoder.m; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -212,6 +215,8 @@
 		58E65FCF1110E6E9006AC2C7 /* BSJSONAdditions */ = {
 			isa = PBXGroup;
 			children = (
+				58E65FEB1110E73D006AC2C7 /* BSJSONEncoder.h */,
+				58E65FEC1110E73D006AC2C7 /* BSJSONEncoder.m */,
 				58E65FD21110E6E9006AC2C7 /* NSArray+BSJSONAdditions.h */,
 				58E65FD31110E6E9006AC2C7 /* NSArray+BSJSONAdditions.m */,
 				58E65FD41110E6E9006AC2C7 /* NSDictionary+BSJSONAdditions.h */,
@@ -300,6 +305,7 @@
 				58E65FE61110E6E9006AC2C7 /* NSScanner+BSJSONAdditions.m in Sources */,
 				58E65FE71110E6E9006AC2C7 /* NSString+BSJSONAdditions.m in Sources */,
 				58E65FE81110E6E9006AC2C7 /* NSDataMBBase64.m in Sources */,
+				58E65FED1110E73D006AC2C7 /* BSJSONEncoder.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
