@@ -29,8 +29,8 @@
 }
 
 @property (nonatomic) BOOL loggedIn;
-@property (nonatomic, readonly) NSString *username;
-@property (nonatomic, readonly) NSString *password;
+@property (nonatomic, copy) NSString *username;
+@property (nonatomic, copy) NSString *password;
 
 - (id) init;
 - (id) initWithUsername: (NSString *) username password: (NSString *) password;
@@ -41,6 +41,5 @@
 
 - (void) startMonitoringDashboard;
 - (void) stopMonitoringDashboard;
-- (void) setUsername: (NSString *) aUsername password: (NSString *) aPassword;
 
 @end

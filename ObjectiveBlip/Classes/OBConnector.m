@@ -28,7 +28,8 @@
 
 - (id) initWithUsername: (NSString *) aUsername password: (NSString *) aPassword {
   if (self = [super init]) {
-    [self setUsername: aUsername password: aPassword];
+    username = aUsername;
+    password = aPassword;
     lastMessageId = -1;
     loggedIn = NO;
     isSendingDashboardRequest = NO;
@@ -43,13 +44,6 @@
 
 // -------------------------------------------------------------------------------------------
 #pragma mark Instance methods
-
-- (void) setUsername: (NSString *) aUsername password: (NSString *) aPassword {
-  [username autorelease];
-  [password autorelease];
-  username = [aUsername copy];
-  password = [aPassword copy];
-}
 
 - (void) startMonitoringDashboard {
   [self stopMonitoringDashboard];

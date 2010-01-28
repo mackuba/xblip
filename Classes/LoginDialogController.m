@@ -63,7 +63,8 @@
   if (usernameField.text.length > 0 && passwordField.text.length > 0) {
     [usernameField resignFirstResponder];
     [passwordField resignFirstResponder];
-    [blip setUsername: usernameField.text password: passwordField.text];
+    blip.username = usernameField.text;
+    blip.password = passwordField.text;
     [[blip authenticateRequest] sendFor: self];
     [spinner startAnimating];
     incorrectLoginLabel.hidden = YES;
