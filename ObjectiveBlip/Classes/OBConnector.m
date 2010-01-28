@@ -12,11 +12,6 @@
 #import "OBUtils.h"
 #import "NSString+BSJSONAdditions.h"
 
-@interface NSObject (OBConnectorDelegate)
-- authenticationFailed;
-- requestFailedWithError: (NSError *) error;
-@end
-
 @interface OBConnector ()
 - (OBRequest *) requestWithPath: (NSString *) path
                          method: (NSString *) method
@@ -126,7 +121,7 @@
 - (void) authenticationSuccessful: (id) request {
   [self handleFinishedRequest: request];
   loggedIn = YES;
-  [[request target] performSelector: [request action]];
+  [[request target] authenticationSuccessful];
 }
 
 - (void) dashboardUpdated: (id) request {
@@ -139,13 +134,13 @@
       lastMessageId = [[messages objectAtIndex: 0] messageId];
     }
     isSendingDashboardRequest = NO;
-    [[request target] performSelector: [request action] withObject: messages];
+    [[request target] dashboardUpdatedWithMessages: messages];
   }
 }
 
 - (void) messageSent: (id) request {
   [self handleFinishedRequest: request];
-  [[request target] performSelector: [request action]];
+  [[request target] messageSent];
 }
 
 - (void) requestFailed: (id) request {

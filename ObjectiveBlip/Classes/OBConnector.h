@@ -9,6 +9,15 @@
 
 @class OBRequest;
 
+// these callback methods will be called on objects that created the request
+@interface NSObject (OBConnectorDelegate)
+- (void) authenticationSuccessful;
+- (void) authenticationFailed;
+- (void) messageSent;
+- (void) dashboardUpdatedWithMessages: (NSArray *) messages;
+- (void) requestFailedWithError: (NSError *) error;
+@end
+
 @interface OBConnector : NSObject {
   BOOL loggedIn;
   BOOL isSendingDashboardRequest;

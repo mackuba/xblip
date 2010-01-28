@@ -44,7 +44,7 @@
     blip = [[OBConnector alloc] initWithUsername: username password: password];
     // check if the password is still OK
     firstConnection = YES;
-    [[blip authenticateRequest] sendFor: self onSuccess: @selector(loginSuccessful)];
+    [[blip authenticateRequest] sendFor: self];
   } else {
     blip = [[OBConnector alloc] init];
     firstConnection = NO;
@@ -100,7 +100,7 @@
     [self saveLoginAndPassword];
   }
   // TODO: show "loading" while loading dashboard for the first time
-  [[blip dashboardRequest] sendFor: self onSuccess: @selector(messagesReceived:)];
+  [[blip dashboardRequest] sendFor: self];
   [blip startMonitoringDashboard];
 }
 
@@ -174,7 +174,7 @@
 #pragma mark OBConnector delegate callbacks
 
 // TODO: display sent message after a response to send request, not when it comes back in messagesReceived
-- (void) messagesReceived: (NSArray *) receivedMessages {
+- (void) dashboardUpdatedWithMessages: (NSArray *) receivedMessages {
   NSLog(@"received %d messages", receivedMessages.count);
   if (receivedMessages.count > 0) {
     [self scrollTextViewToTop];

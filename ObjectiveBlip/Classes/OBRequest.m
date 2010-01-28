@@ -10,7 +10,7 @@
 
 @implementation OBRequest
 
-@synthesize target, action;
+@synthesize target;
 
 - (id) initWithPath: (NSString *) path
              method: (NSString *) method
@@ -31,9 +31,8 @@
   return self;
 }
 
-- (void) sendFor: (id) t onSuccess: (SEL) a {
-  target = t;
-  action = a;
+- (void) sendFor: (id) tgt {
+  target = tgt;
   [self startAsynchronous];
 }
 

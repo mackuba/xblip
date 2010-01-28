@@ -64,7 +64,7 @@
     [usernameField resignFirstResponder];
     [passwordField resignFirstResponder];
     [blip setUsername: usernameField.text password: passwordField.text];
-    [[blip authenticateRequest] sendFor: self onSuccess: @selector(authenticationSuccessful)];
+    [[blip authenticateRequest] sendFor: self];
     [spinner startAnimating];
     incorrectLoginLabel.hidden = YES;
     connectingLabel.hidden = NO;
