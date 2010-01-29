@@ -159,7 +159,7 @@
 }
 
 - (CGFloat) tableView: (UITableView *) table heightForRowAtIndexPath: (NSIndexPath *) path {
-  NSString *text = [[messages objectAtIndex: path.row] content];
+  NSString *text = [[messages objectAtIndex: path.row] body];
   UIFont *font = [UIFont fontWithName: @"Helvetica" size: 13]; // TODO: read all attributes from NIB
   CGSize r = [text sizeWithFont: font
                    constrainedToSize: CGSizeMake(227, 10000)
@@ -179,7 +179,7 @@
   }
   // first message in the array is the latest one, so we want it to be added as the last one
   for (OBMessage *message in [receivedMessages reverseObjectEnumerator]) {
-    NSLog(@"message %@ from %@", message.content, message.username);
+    NSLog(@"message %@ from %@", message.body, message.username);
     [self prependMessageToLog: message];
   }
 }

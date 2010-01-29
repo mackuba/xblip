@@ -6,23 +6,16 @@
 // -------------------------------------------------------
 
 #import <Foundation/Foundation.h>
+#import "OBModel.h"
 
-@interface OBMessage : NSObject {
-  NSInteger messageId;
-  NSString *content;
+@interface OBMessage : OBModel {
+  NSString *body;
   NSString *username;
+  NSString *userPath;
 }
 
-@property (nonatomic) NSInteger messageId;
-@property (nonatomic, copy) NSString *content;
+@property (nonatomic, copy) NSString *body;
 @property (nonatomic, copy) NSString *username;
-
-+ (NSArray *) messagesFromJSONString: (NSString *) json;
-
-- (id) initWithId: (NSInteger) messageId
-          content: (NSString *) content
-         fromUser: (NSString *) username;
-
-- (id) initWithJSON: (NSDictionary *) json;
+@property (nonatomic, copy) NSString *userPath;
 
 @end

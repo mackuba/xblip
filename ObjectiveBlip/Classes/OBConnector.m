@@ -109,10 +109,10 @@
   [self handleFinishedRequest: request];
   NSString *trimmedString = [[request responseString] trimmedString];
   if (trimmedString.length > 0) {
-    NSArray *messages = [OBMessage messagesFromJSONString: trimmedString];
+    NSArray *messages = [OBMessage objectsFromJSONString: trimmedString];
     if (messages.count > 0) {
       // msgs are coming in the order from newest to oldest
-      lastMessageId = [[messages objectAtIndex: 0] messageId];
+      lastMessageId = [[messages objectAtIndex: 0] recordId];
     }
     [[request target] dashboardUpdatedWithMessages: messages];
   }

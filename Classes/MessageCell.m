@@ -15,7 +15,7 @@
 OnDeallocRelease(contentLabel, usernameLabel);
 
 - (void) displayMessage: (OBMessage *) message {
-  contentLabel.text = message.content;
+  contentLabel.text = message.body;
   usernameLabel.text = [message.username stringByAppendingString: @":"];
 }
 

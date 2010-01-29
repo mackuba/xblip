@@ -46,6 +46,7 @@
 
 - (void) dashboardTimerFired: (NSTimer *) timer {
   if (!isSendingDashboardRequest) {
+    // TODO: if a request is waiting too long, kill it and try again
     isSendingDashboardRequest = YES;
     [[connector dashboardRequest] sendFor: self];
   }

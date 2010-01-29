@@ -3,4 +3,6 @@
 #import "OBDashboardMonitor.h"
 #import "OBRequest.h"
 #import "OBMessage.h"
+#import "OBModel.h"
+#import "OBModelManager.h"
 #import "OBUtils.h"
