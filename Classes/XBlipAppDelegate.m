@@ -5,9 +5,9 @@
 // Licensed under MIT license
 // -------------------------------------------------------
 
+#import "ObjectiveBlip.h"
 #import "XBlipAppDelegate.h"
 #import "XBlipViewController.h"
-#import "OBUtils.h"
 
 @implementation XBlipAppDelegate
 

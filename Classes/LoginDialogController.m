@@ -6,11 +6,8 @@
 // -------------------------------------------------------
 
 #import "LoginDialogController.h"
+#import "ObjectiveBlip.h"
 #import "XBlipViewController.h"
-#import "OBAccount.h"
-#import "OBConnector.h"
-#import "OBRequest.h"
-#import "OBUtils.h"
 
 @implementation LoginDialogController
 

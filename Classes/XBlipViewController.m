@@ -5,16 +5,11 @@
 // Licensed under MIT license
 // -------------------------------------------------------
 
-#import "OBAccount.h"
-#import "OBMessage.h"
-#import "OBConnector.h"
-#import "OBDashboardMonitor.h"
-#import "OBRequest.h"
-#import "OBUtils.h"
 #import "Utils.h"
-#import "XBlipViewController.h"
 #import "LoginDialogController.h"
 #import "MessageCell.h"
+#import "ObjectiveBlip.h"
+#import "XBlipViewController.h"
 
 #define USERNAME_KEY @"blipUsername"
 #define PASSWORD_KEY @"blipPassword"

@@ -109,6 +109,7 @@
 		58E661C611123A3D006AC2C7 /* OBDashboardMonitor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OBDashboardMonitor.m; sourceTree = "<group>"; };
 		58E6626D11136DF4006AC2C7 /* OBAccount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OBAccount.h; sourceTree = "<group>"; };
 		58E6626E11136DF4006AC2C7 /* OBAccount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OBAccount.m; sourceTree = "<group>"; };
+		58E6629E11137011006AC2C7 /* ObjectiveBlip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjectiveBlip.h; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -206,6 +207,7 @@
 		58E65FC11110E6C1006AC2C7 /* ObjectiveBlip */ = {
 			isa = PBXGroup;
 			children = (
+				58E6629E11137011006AC2C7 /* ObjectiveBlip.h */,
 				58E65FC21110E6E9006AC2C7 /* Classes */,
 				58E65FCD1110E6E9006AC2C7 /* Constants.h */,
 				58E65FCE1110E6E9006AC2C7 /* Lib */,
