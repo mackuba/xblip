@@ -20,6 +20,25 @@
     [super dealloc]; \
   }
 
+#define Observe(sender, notification, callback) \
+  [[NSNotificationCenter defaultCenter] addObserver: self \
+                                           selector: @selector(callback) \
+                                               name: (notification) \
+                                             object: (sender)]
+
+#define StopObservingAll() [[NSNotificationCenter defaultCenter] removeObserver: self]
+#define StopObserving(sender, notification) \
+  [[NSNotificationCenter defaultCenter] removeObserver: self \
+                                                  name: (notification) \
+                                                object: (sender)]
+
+#define NotifyWithData(notification, data) \
+  [[NSNotificationCenter defaultCenter] postNotificationName: (notification) \
+                                                      object: self \
+                                                    userInfo: (data)]
+
+#define Notify(notification) NotifyWithData((notification), nil)
+
 #define OBArray(...) [NSArray arrayWithObjects: __VA_ARGS__, nil]
 #define OBDict(...) [NSDictionary dictionaryWithObjectsAndKeys: __VA_ARGS__, nil]
 #define OBFormat(...) [NSString stringWithFormat: __VA_ARGS__]

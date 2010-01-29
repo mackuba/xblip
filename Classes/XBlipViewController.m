@@ -7,6 +7,7 @@
 
 #import "OBMessage.h"
 #import "OBConnector.h"
+#import "OBDashboardMonitor.h"
 #import "OBRequest.h"
 #import "OBUtils.h"
 #import "Utils.h"
@@ -100,8 +101,8 @@
     [self saveLoginAndPassword];
   }
   // TODO: show "loading" while loading dashboard for the first time
-  [[blip dashboardRequest] sendFor: self];
-  [blip startMonitoringDashboard];
+  Observe(blip.dashboardMonitor, OBDashboardUpdatedNotification, dashboardUpdatedWithMessages:);
+  [blip.dashboardMonitor startMonitoring];
 }
 
 - (void) saveLoginAndPassword {
@@ -174,7 +175,8 @@
 #pragma mark OBConnector delegate callbacks
 
 // TODO: display sent message after a response to send request, not when it comes back in messagesReceived
-- (void) dashboardUpdatedWithMessages: (NSArray *) receivedMessages {
+- (void) dashboardUpdatedWithMessages: (NSNotification *) notification {
+  NSArray *receivedMessages = [notification.userInfo objectForKey: @"messages"];
   NSLog(@"received %d messages", receivedMessages.count);
   if (receivedMessages.count > 0) {
     [self scrollTextViewToTop];

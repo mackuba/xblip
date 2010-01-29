@@ -7,6 +7,7 @@
 
 #import "Constants.h"
 #import "OBConnector.h"
+#import "OBDashboardMonitor.h"
 #import "OBRequest.h"
 #import "OBMessage.h"
 #import "OBUtils.h"
@@ -32,7 +33,6 @@
     password = aPassword;
     lastMessageId = -1;
     loggedIn = NO;
-    isSendingDashboardRequest = NO;
     currentRequests = [[NSMutableArray alloc] initWithCapacity: 5];
   }
   return self;
@@ -42,29 +42,11 @@
   return [self initWithUsername: nil password: nil];
 }
 
-// -------------------------------------------------------------------------------------------
-#pragma mark Instance methods
-
-- (void) startMonitoringDashboard {
-  [self stopMonitoringDashboard];
-  monitorTimer = [NSTimer scheduledTimerWithTimeInterval: 10
-                                                  target: self
-                                                selector: @selector(dashboardTimerFired:)
-                                                userInfo: nil
-                                                 repeats: YES];
-  [monitorTimer retain];
-}
-
-- (void) stopMonitoringDashboard {
-  [monitorTimer invalidate];
-  monitorTimer = nil;
-}
-
-- (void) dashboardTimerFired: (NSTimer *) timer {
-  if (!isSendingDashboardRequest) {
-    isSendingDashboardRequest = YES;
-    [[self dashboardRequest] send];
+- (OBDashboardMonitor *) dashboardMonitor {
+  if (!dashboardMonitor) {
+    dashboardMonitor = [[OBDashboardMonitor alloc] initWithConnector: self];
   }
+  return dashboardMonitor;
 }
 
 // -------------------------------------------------------------------------------------------
@@ -122,12 +104,11 @@
   [self handleFinishedRequest: request];
   NSString *trimmedString = [[request responseString] trimmedString];
   if (trimmedString.length > 0) {
-    // msgs are coming in the order from newest to oldest
     NSArray *messages = [OBMessage messagesFromJSONString: trimmedString];
     if (messages.count > 0) {
+      // msgs are coming in the order from newest to oldest
       lastMessageId = [[messages objectAtIndex: 0] messageId];
     }
-    isSendingDashboardRequest = NO;
     [[request target] dashboardUpdatedWithMessages: messages];
   }
 }
@@ -138,9 +119,6 @@
 }
 
 - (void) requestFailed: (id) request {
-  if ([[request error] domain] == NSURLErrorDomain && [[request error] code] == NSURLErrorTimedOut) {
-    [self stopMonitoringDashboard];
-  }
   [[request target] requestFailedWithError: [request error]];
   [currentRequests removeObject: request];
 }
@@ -164,7 +142,7 @@
 
 - (void) dealloc {
   [self cancelAllRequests];
-  ReleaseAll(username, password, currentRequests, monitorTimer);
+  ReleaseAll(username, password, currentRequests, dashboardMonitor);
   [super dealloc];
 }
 

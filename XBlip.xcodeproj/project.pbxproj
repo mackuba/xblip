@@ -41,6 +41,7 @@
 		58E660621110EBE7006AC2C7 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58E660611110EBE7006AC2C7 /* SystemConfiguration.framework */; };
 		58E660641110EBF4006AC2C7 /* libz.1.2.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 58E660631110EBF4006AC2C7 /* libz.1.2.3.dylib */; };
 		58E660661110EC07006AC2C7 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58E660651110EC07006AC2C7 /* CFNetwork.framework */; };
+		58E661C711123A3D006AC2C7 /* OBDashboardMonitor.m in Sources */ = {isa = PBXBuildFile; fileRef = 58E661C611123A3D006AC2C7 /* OBDashboardMonitor.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -103,6 +104,8 @@
 		58E660611110EBE7006AC2C7 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		58E660631110EBF4006AC2C7 /* libz.1.2.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.3.dylib; path = usr/lib/libz.1.2.3.dylib; sourceTree = SDKROOT; };
 		58E660651110EC07006AC2C7 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		58E661C511123A3D006AC2C7 /* OBDashboardMonitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OBDashboardMonitor.h; sourceTree = "<group>"; };
+		58E661C611123A3D006AC2C7 /* OBDashboardMonitor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OBDashboardMonitor.m; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -218,6 +221,8 @@
 				58E65FC81110E6E9006AC2C7 /* OBRequest.m */,
 				58E65FCB1110E6E9006AC2C7 /* OBUtils.h */,
 				58E65FCC1110E6E9006AC2C7 /* OBUtils.m */,
+				58E661C511123A3D006AC2C7 /* OBDashboardMonitor.h */,
+				58E661C611123A3D006AC2C7 /* OBDashboardMonitor.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -350,6 +355,7 @@
 				58E6605A1110EBD7006AC2C7 /* ASINetworkQueue.m in Sources */,
 				58E6605B1110EBD7006AC2C7 /* ASINSStringAdditions.m in Sources */,
 				58E6605C1110EBD7006AC2C7 /* Reachability.m in Sources */,
+				58E661C711123A3D006AC2C7 /* OBDashboardMonitor.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

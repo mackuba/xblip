@@ -8,9 +8,10 @@
 #import <Foundation/Foundation.h>
 
 @class OBRequest;
+@class OBDashboardMonitor;
 
 // these callback methods will be called on objects that created the request
-@interface NSObject (OBConnectorDelegate)
+@protocol OBConnectorDelegate
 - (void) authenticationSuccessful;
 - (void) authenticationFailed;
 - (void) messageSent;
@@ -20,17 +21,17 @@
 
 @interface OBConnector : NSObject {
   BOOL loggedIn;
-  BOOL isSendingDashboardRequest;
   NSString *username;
   NSString *password;
   NSInteger lastMessageId;
   NSMutableArray *currentRequests;
-  NSTimer *monitorTimer;
+  OBDashboardMonitor *dashboardMonitor;
 }
 
 @property (nonatomic) BOOL loggedIn;
 @property (nonatomic, copy) NSString *username;
 @property (nonatomic, copy) NSString *password;
+@property (nonatomic, readonly) OBDashboardMonitor *dashboardMonitor;
 
 - (id) init;
 - (id) initWithUsername: (NSString *) username password: (NSString *) password;
@@ -38,8 +39,5 @@
 - (OBRequest *) authenticateRequest;
 - (OBRequest *) dashboardRequest;
 - (OBRequest *) sendMessageRequest: (NSString *) message;
-
-- (void) startMonitoringDashboard;
-- (void) stopMonitoringDashboard;
 
 @end
