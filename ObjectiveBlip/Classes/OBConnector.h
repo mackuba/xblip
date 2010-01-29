@@ -7,6 +7,7 @@
 
 #import <Foundation/Foundation.h>
 
+@class OBAccount;
 @class OBRequest;
 @class OBDashboardMonitor;
 
@@ -20,17 +21,13 @@
 @end
 
 @interface OBConnector : NSObject {
-  BOOL loggedIn;
-  NSString *username;
-  NSString *password;
   NSInteger lastMessageId;
   NSMutableArray *currentRequests;
   OBDashboardMonitor *dashboardMonitor;
+  OBAccount *account;
 }
 
-@property (nonatomic) BOOL loggedIn;
-@property (nonatomic, copy) NSString *username;
-@property (nonatomic, copy) NSString *password;
+@property (nonatomic, retain) OBAccount *account;
 @property (nonatomic, readonly) OBDashboardMonitor *dashboardMonitor;
 
 - (id) init;

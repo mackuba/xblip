@@ -7,6 +7,7 @@
 
 #import "LoginDialogController.h"
 #import "XBlipViewController.h"
+#import "OBAccount.h"
 #import "OBConnector.h"
 #import "OBRequest.h"
 #import "OBUtils.h"
@@ -63,8 +64,8 @@
   if (usernameField.text.length > 0 && passwordField.text.length > 0) {
     [usernameField resignFirstResponder];
     [passwordField resignFirstResponder];
-    blip.username = usernameField.text;
-    blip.password = passwordField.text;
+    blip.account.username = usernameField.text;
+    blip.account.password = passwordField.text;
     [[blip authenticateRequest] sendFor: self];
     [spinner startAnimating];
     incorrectLoginLabel.hidden = YES;

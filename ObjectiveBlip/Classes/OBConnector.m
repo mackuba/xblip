@@ -6,6 +6,7 @@
 // -------------------------------------------------------
 
 #import "Constants.h"
+#import "OBAccount.h"
 #import "OBConnector.h"
 #import "OBDashboardMonitor.h"
 #import "OBRequest.h"
@@ -22,24 +23,28 @@
 
 @implementation OBConnector
 
-@synthesize username, loggedIn, password;
+@synthesize account;
 
 // -------------------------------------------------------------------------------------------
 #pragma mark Initializers
 
-- (id) initWithUsername: (NSString *) aUsername password: (NSString *) aPassword {
-  if (self = [super init]) {
-    username = aUsername;
-    password = aPassword;
-    lastMessageId = -1;
-    loggedIn = NO;
+- (id) init {
+  self = [super init];
+  if (self) {
     currentRequests = [[NSMutableArray alloc] initWithCapacity: 5];
+    account = [[OBAccount alloc] init];
+    lastMessageId = -1;
   }
   return self;
 }
 
-- (id) init {
-  return [self initWithUsername: nil password: nil];
+- (id) initWithUsername: (NSString *) aUsername password: (NSString *) aPassword {
+  self = [self init];
+  if (self) {
+    account.username = aUsername;
+    account.password = aPassword;
+  }
+  return self;
 }
 
 - (OBDashboardMonitor *) dashboardMonitor {
@@ -76,7 +81,7 @@
                          method: (NSString *) method
                            text: (NSString *) text {
   OBRequest *request = [[OBRequest alloc] initWithPath: path method: method text: text];
-  [request addBasicAuthenticationHeaderWithUsername: username andPassword: password];
+  [request addBasicAuthenticationHeaderWithUsername: account.username andPassword: account.password];
   [request setDelegate: self];
   [request autorelease];
   [currentRequests addObject: request];
@@ -96,7 +101,7 @@
 
 - (void) authenticationSuccessful: (id) request {
   [self handleFinishedRequest: request];
-  loggedIn = YES;
+  account.loggedIn = YES;
   [[request target] authenticationSuccessful];
 }
 
@@ -142,7 +147,7 @@
 
 - (void) dealloc {
   [self cancelAllRequests];
-  ReleaseAll(username, password, currentRequests, dashboardMonitor);
+  ReleaseAll(currentRequests, dashboardMonitor, account);
   [super dealloc];
 }
 

@@ -5,6 +5,7 @@
 // Licensed under MIT license
 // -------------------------------------------------------
 
+#import "OBAccount.h"
 #import "OBMessage.h"
 #import "OBConnector.h"
 #import "OBDashboardMonitor.h"
@@ -69,7 +70,7 @@
 */
 
 - (void) viewDidAppear: (BOOL) animated {
-  if (!blip.loggedIn && !firstConnection) {
+  if (!blip.account.loggedIn && !firstConnection) {
     [self showLoginDialog];
   }
 }
@@ -107,8 +108,8 @@
 
 - (void) saveLoginAndPassword {
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
-  [settings setObject: blip.username forKey: USERNAME_KEY];
-  [settings setObject: blip.password forKey: PASSWORD_KEY];
+  [settings setObject: blip.account.username forKey: USERNAME_KEY];
+  [settings setObject: blip.account.password forKey: PASSWORD_KEY];
   [settings synchronize];
 }
 
