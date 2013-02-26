@@ -8,7 +8,7 @@ project last year (2009), when there was no Blip client for iPhone, but right no
 lost motivation. I'm leaving the project here as an example of using the iPhone SDK, maybe it will help someone...
 
 The ObjectiveBlip directory contains the backend code that handles the connection to Blip API. It's a separate
-subproject, available at [http://github.com/psionides/ObjectiveBlip](http://github.com/psionides/ObjectiveBlip), and you
+subproject, available at [http://github.com/jsuder/ObjectiveBlip](http://github.com/jsuder/ObjectiveBlip), and you
 can use it to create your own Blip clients in ObjectiveC/Cocoa if you want.
 
 ## Requirements
@@ -25,7 +25,7 @@ To install and run on an iPhone, you need additionally:
 
 ## Screenshots
 
-<a href="http://psionides.github.com/xblip/xblip_screen_login_24.05.2009.png"><img src="http://psionides.github.com/xblip/xblip_screen_login_24.05.2009.png" width="225" /></a> <a href="http://psionides.github.com/xblip/xblip_screen_dashboard_24.05.2009.png"><img src="http://psionides.github.com/xblip/xblip_screen_dashboard_24.05.2009.png" width="225" /></a>
+<a href="http://jsuder.github.com/xblip/xblip_screen_login_24.05.2009.png"><img src="http://jsuder.github.com/xblip/xblip_screen_login_24.05.2009.png" width="225" /></a> <a href="http://jsuder.github.com/xblip/xblip_screen_dashboard_24.05.2009.png"><img src="http://jsuder.github.com/xblip/xblip_screen_dashboard_24.05.2009.png" width="225" /></a>
 
 ## License
 
